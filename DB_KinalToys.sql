@@ -20,3 +20,12 @@ create table Facturas (
 	constraint FK_Factura_Usuario foreign key (codigoUsuario)
 		references Usuarios (codigoUsuario)
 );
+
+create table Noticias (
+	codigoNoticia int,
+    encabezado varchar(100),
+    informacion varchar(250),
+    categoria varchar(50),
+    fechaNoticia datetime,
+    primary key PK_codigoNoticia (codigoNoticia)
+);
