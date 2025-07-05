@@ -65,3 +65,14 @@ create table Compras (
 	constraint FK_Compra_Proveedor foreign key (codigoProveedor) 
 		references Proveedores (codigoProveedor)
 );
+
+create table Carritos (
+	codigoCarrito int,
+    fecha_creacion datetime,
+    estado enum('Activo', 'Comprado'),
+	total decimal(10,2),
+    codigoUsuario int,
+    primary key PK_codigoCarrito (codigoCarrito),
+	constraint FK_Carrito_Usuario foreign key (codigoUsuario) 
+		references Usuarios (codigoUsuario)
+);
