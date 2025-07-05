@@ -29,3 +29,12 @@ create table Noticias (
     fechaNoticia datetime,
     primary key PK_codigoNoticia (codigoNoticia)
 );
+
+create table Proveedores (
+	codigoProveedor int,
+    nombreProveedor varchar(50),
+    telefonoProveedor varchar(9),
+    correoProveedor varchar(100),
+    direccionProveedor varchar(125),
+    primary key PK_codigoProveedor (codigoProveedor)
+);
