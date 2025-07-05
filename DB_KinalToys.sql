@@ -213,3 +213,64 @@ begin
 end$$
 Delimiter ;
 call sp_EditarFactura(1, '2023-06-15 12:00:00', 'Credito', 275.00, 1);
+
+-- PROCEDIMIENTOS ALMACENADOS (NOTICIAS) -------------------------
+-- AGREGAR NOTICIA
+Delimiter $$
+create procedure sp_AgregarNoticia (
+	in encabezadoNot varchar(100),
+	in info varchar(250),
+	in categoriaNot varchar(50),
+	in fecha datetime)
+begin
+	insert into Noticias (encabezado, informacion, categoria, fechaNoticia)
+	values (encabezadoNot, info, categoriaNot, fecha);
+end$$
+Delimiter ;
+call sp_AgregarNoticia('Nueva colección de juguetes', 'La nueva colección incluye figuras exclusivas.', 'Novedades', '2023-06-01 08:00:00');
+call sp_AgregarNoticia('Descuentos especiales', 'Aprovecha los descuentos del 20% en compras mayores a Q500.', 'Promoción', '2023-06-02 09:30:00');
+ 
+-- LISTAR NOTICIAS
+Delimiter $$
+create procedure sp_ListarNoticias ()
+begin
+	select * from Noticias;
+end$$
+Delimiter ;
+call sp_ListarNoticias();
+ 
+-- ELIMINAR NOTICIA
+Delimiter $$
+create procedure sp_EliminarNoticia (
+	in codNoticia int)
+begin
+	delete from Noticias where codigoNoticia = codNoticia;
+end$$
+Delimiter ;
+call sp_EliminarNoticia(2);
+ 
+-- BUSCAR NOTICIA
+Delimiter $$
+create procedure sp_BuscarNoticia (
+	in codNoticia int)
+begin
+	select * from Noticias where codigoNoticia = codNoticia;
+end$$
+Delimiter ;
+call sp_BuscarNoticia(1);
+ 
+-- EDITAR NOTICIA
+Delimiter $$
+create procedure sp_EditarNoticia (
+	in codNoticia int,
+	in encabezadoNot varchar(100),
+	in info varchar(250),
+	in categoriaNot varchar(50),
+	in fecha datetime)
+begin
+	update Noticias set encabezado = encabezadoNot, informacion = info,
+		categoria = categoriaNot, fechaNoticia = fecha
+	where codigoNoticia = codNoticia;
+end$$
+Delimiter ;
+call sp_EditarNoticia(1, 'Colección actualizada', 'Ahora con más figuras disponibles.', 'Novedades', '2023-06-03 10:00:00');
