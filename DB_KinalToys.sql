@@ -38,3 +38,16 @@ create table Proveedores (
     direccionProveedor varchar(125),
     primary key PK_codigoProveedor (codigoProveedor)
 );
+
+create table Juguetes (
+	codigoJuguete int,
+	nombreJuguete varchar(50),
+    precio decimal(10,2),
+    categoria varchar(50),
+    marca varchar(50),
+    stock int,
+	codigoNoticia int,
+    primary key PK_codigoJuguete (codigoJuguete),
+	constraint FK_Juguete_Noticia foreign key (codigoNoticia)
+		references Noticias (codigoNoticia)
+);
