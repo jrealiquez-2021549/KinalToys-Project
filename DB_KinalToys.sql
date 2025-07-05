@@ -76,3 +76,18 @@ create table Carritos (
 	constraint FK_Carrito_Usuario foreign key (codigoUsuario) 
 		references Usuarios (codigoUsuario)
 );
+
+
+create table DetallesCarritos (
+	codigoDetalleC int,
+    cantidad int,
+	subTotal decimal(10,2),
+    descuentoAplicado decimal(10,2),
+    codigoCarrito int,
+    codigoJuguete int,
+    primary key PK_codigoDetalleC (codigoDetalleC),
+    constraint FK_DetalleC_Carrito foreign key (codigoCarrito) 
+		references Carritos (codigoCarrito),
+	constraint FK_DetalleC_Juguete foreign key (codigoJuguete) 
+		references Juguetes (codigoJuguete)
+);
