@@ -20,3 +20,17 @@ create table Facturas (
 	constraint FK_Factura_Usuario foreign key (codigoUsuario)
 		references Usuarios (codigoUsuario)
 );
+
+create table Compras (
+	codigoCompra int,
+    fechaCompra datetime,
+    cantidad int,
+    precioUnitario decimal(10,2),
+    codigoJuguete int,
+    codigoProveedor int,
+    primary key PK_codigoCompra (codigoCompra),
+    constraint FK_Compra_Juguete foreign key (codigoJuguete) 
+		references Juguetes (codigoJuguete),
+	constraint FK_Compra_Proveedor foreign key (codigoProveedor) 
+		references Proveedores (codigoProveedor)
+);
