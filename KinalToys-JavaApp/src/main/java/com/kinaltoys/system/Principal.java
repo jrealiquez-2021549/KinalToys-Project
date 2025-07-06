@@ -1,6 +1,7 @@
 
 package com.kinaltoys.system;
 import com.kinaltoys.controlador.ControladorUsuarios;
+import com.kinaltoys.controlador.ControladorNoticias;
 import java.util.Scanner;
 
 public class Principal {
@@ -30,9 +31,8 @@ public class Principal {
                     // controladorProductos.menu();
                     break;
                 case 3:
-                    System.out.println("Funcionalidad de Noticias aún no implementada.");
-                    // ControladorClientes controladorClientes = new ControladorClientes();
-                    // controladorClientes.menu();
+                    ControladorNoticias controladorNoticias = new ControladorNoticias();
+                    controladorNoticias.menu();
                     break;
                 case 0:
                     System.out.println("Cerrando aplicación...");

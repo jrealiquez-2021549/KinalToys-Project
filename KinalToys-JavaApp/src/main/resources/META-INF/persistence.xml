@@ -9,6 +9,9 @@ http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
       <class>
           org.jrealiquez.dominio.usuarios
       </class>
+      <class>
+          org.jrealiquez.dominio.noticias
+      </class>
     
     <properties>
       <!-- Configuring JDBC properties -->
