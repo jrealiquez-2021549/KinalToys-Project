@@ -53,7 +53,7 @@
                         <li><a href="principal-admin.jsp">Inicio</a></li>
                         <li><a href="usuario.jsp">Usuarios</a></li>
                         <li><a href="factura.jsp">Facturas</a></li>
-                        <li><a href="noticia.jsp">Noticias</a></li>
+                        <li><a href="">Noticias</a></li>
                         <li><a href="#">Proveedores</a></li>
                         <li><a href="juguete.jsp">Juguetes</a></li>
                         <li><a href="cuenta.jsp">Cuentas</a></li>
@@ -70,74 +70,74 @@
                 </nav>
             </div>
         </header>
-        
+
         <main class="main-users">
-            <section class="users-section container">
-                <h1 class="users-title">Cuentas</h1>
-
-                <form class="users-form">
-                    <div class="form-group">
-                        <label for="nombre-cuenta"><strong>Nombre de Cuenta:</strong></label>
-                        <input type="text" id="nombre-cuenta" name="nombre-cuenta" placeholder="Ej. cuenta_admin" required />
-                    </div>
-
-                    <div class="form-group">
-                        <label for="correo-cuenta"><strong>Correo de Cuenta:</strong></label>
-                        <input type="email" id="correo-cuenta" name="correo-cuenta" placeholder="ejemplo@correo.com" required />
-                    </div>
-
-                    <div class="form-group">
-                        <label for="contrasena-cuenta"><strong>Contraseña:</strong></label>
-                        <input type="password" id="contrasena-cuenta" name="contrasena-cuenta" placeholder="Ej. miClave123" required />
-                    </div>
-
-                    <div class="form-group">
-                        <label for="codigo-usuario"><strong>Código de Usuario:</strong></label>
-                        <input type="number" id="codigo-usuario" name="codigo-usuario" placeholder="Ej. 1" required />
-                    </div>
-                </form>
-
-                <div class="table-wrapper">
-                    <table class="users-table">
-                        <thead>
-                            <tr>
-                                <th>Código Cuenta</th>
-                                <th>Nombre Cuenta</th>
-                                <th>Correo</th>
-                                <th>Contraseña</th>
-                                <th>Código Usuario</th>
-                            </tr>
-                        </thead>
-                        <tbody id="detalle-cuenta">
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                        </tbody>
-                    </table>
+        <section class="users-section container">
+            <h1 class="users-title">Noticias</h1>
+ 
+            <form class="users-form">
+                <div class="form-group">
+                    <label for="encabezado-noticia"><strong>Encabezado:</strong></label>
+                    <input type="text" id="encabezado-noticia" name="encabezado-noticia" placeholder="Ej. Nueva .." required />
                 </div>
-
-                <div class="crud-buttons">
-                    <button class="btn-crud">Agregar</button>
-                    <button class="btn-crud">Listar</button>
-                    <button class="btn-crud">Buscar</button>
-                    <input type="text" class="input-search" placeholder="Ingrese búsqueda" />
-                    <button class="btn-crud">Eliminar</button>
-                    <button class="btn-crud">Actualizar</button>
+ 
+                <div class="form-group">
+                    <label for="informacion-noticia"><strong>Información:</strong></label>
+                    <input type="text" id="informacion-noticia" name="informacion-noticia" placeholder="Ej. La nueva .." required />
                 </div>
-            </section>
-        </main>
-        
+ 
+                <div class="form-group">
+                    <label for="categoria-noticia"><strong>Categoría:</strong></label>
+                    <input type="text" id="categoria-noticia" name="categoria-noticia" placeholder="Ej. Novedades" required />
+                </div>
+ 
+                <div class="form-group">
+                    <label for="fecha-noticia"><strong>Fecha Noticia:</strong></label>
+                    <input type="date" id="fecha-noticia" name="fecha-noticia" required />
+                </div>
+            </form>
+ 
+            <div class="table-wrapper">
+                <table class="users-table">
+                    <thead>
+                        <tr>
+                            <th>Código Noticia</th>
+                            <th>Encabezado</th>
+                            <th>Información</th>
+                            <th>Categoría</th>
+                            <th>Fecha Noticia</th>
+                        </tr>
+                    </thead>
+                    <tbody id="detalle-cuenta">
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+ 
+            <div class="crud-buttons">
+                <button class="btn-crud">Agregar</button>
+                <button class="btn-crud">Listar</button>
+                <button class="btn-crud">Buscar</button>
+                <input type="text" class="input-search" placeholder="Ingrese búsqueda" />
+                <button class="btn-crud">Eliminar</button>
+                <button class="btn-crud">Actualizar</button>
+            </div>
+        </section>
+    </main>
+
         <footer class="footer">
             <div class="container container-footer">
                 <div class="menu-footer">
@@ -217,7 +217,7 @@
                 </div>
             </div>
         </footer>
-
+        
         <script>
             document.addEventListener('DOMContentLoaded', () => {
                 const checkboxes = document.querySelectorAll('.task-checkbox');
@@ -238,6 +238,6 @@
                 });
             });
         </script>
-
+        
     </body>
 </html>
