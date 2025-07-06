@@ -45,14 +45,11 @@
                     <i class="fa-solid fa-bars"></i>
                     <ul class="menu">
                         <li><a href="principal.jsp">Inicio</a></li>
-                        <li><a href="usuario.jsp">Usuario</a></li>
-                        <li><a href="factura.jsp">Factura</a></li>
-                        <li><a href="#">Noticias</a></li>
-                        <li><a href="#">Proveedor</a></li>
-                        <li><a href="#">Juguete</a></li>
-                        <li><a href="#">Cuenta</a></li>
-                        <li><a href="#">Carrito</a></li>
-                        <li><a href="#">Detalle Carrito</a></li>
+                        <li><a href="categorias.jsp">Catalogo</a></li>
+                        <li><a href="noticia-user.jsp">Noticias</a></li>
+                        <li><a href="#">Pre-Orden</a></li>
+                        <li><a href="#">Nuevos Productos</a></li>
+                        <li><a href="#">Categorias</a></li>
                     </ul>
 
                     <form class="search-form">
