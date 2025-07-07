@@ -152,3 +152,64 @@ begin
 end$$
 Delimiter ;
 call sp_EditarUsuario(1, 'Carlos', 'Mejía', 'Zona 14, Guatemala', '12345678');
+
+-- PROCEDIMIENTOS ALMACENADOS (FACTURAS) -------------------------
+-- AGREGAR FACTURA
+Delimiter $$
+create procedure sp_AgregarFactura (
+	in fecha datetime,
+	in metodo enum('Efectivo', 'Credito'),
+	in totalFactura decimal(10,2),
+	in codUsuario int)
+begin
+	insert into Facturas (fechaEmision, metodo_pago, total, codigoUsuario)
+	values (fecha, metodo, totalFactura, codUsuario);
+end$$
+Delimiter ;
+call sp_AgregarFactura('2023-06-15 11:30:00', 'Efectivo', 250.75, 1);
+call sp_AgregarFactura('2023-06-16 09:15:00', 'Credito', 450.00, 1);
+ 
+-- LISTAR FACTURAS
+Delimiter $$
+create procedure sp_ListarFacturas ()
+begin
+	select * from Facturas;
+end$$
+Delimiter ;
+call sp_ListarFacturas();
+ 
+-- ELIMINAR FACTURA
+Delimiter $$
+create procedure sp_EliminarFactura (
+	in codFactura int)
+begin
+	delete from Facturas where codigoFactura = codFactura;
+end$$
+Delimiter ;
+call sp_EliminarFactura(2);
+ 
+-- BUSCAR FACTURA
+Delimiter $$
+create procedure sp_BuscarFactura (
+	in codFactura int)
+begin
+	select * from Facturas where codigoFactura = codFactura;
+end$$
+Delimiter ;
+call sp_BuscarFactura(1);
+ 
+-- EDITAR FACTURA
+Delimiter $$
+create procedure sp_EditarFactura (
+	in codFactura int,
+	in fecha datetime,
+	in metodo enum('Efectivo', 'Credito'),
+	in totalFactura decimal(10,2),
+	in codUsuario int)
+begin
+	update Facturas set fechaEmision = fecha, metodo_pago = metodo,
+		total = totalFactura, codigoUsuario = codUsuario
+	where codigoFactura = codFactura;
+end$$
+Delimiter ;
+call sp_EditarFactura(1, '2023-06-15 12:00:00', 'Credito', 275.00, 1);
