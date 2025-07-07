@@ -274,3 +274,65 @@ begin
 end$$
 Delimiter ;
 call sp_EditarNoticia(1, 'Colección actualizada', 'Ahora con más figuras disponibles.', 'Novedades', '2023-06-03 10:00:00');
+
+-- PROCEDIMIENTOS ALMACENADOS (PROVEEDORES) -------------------------
+-- AGREGAR PROVEEDOR
+Delimiter $$
+create procedure sp_AgregarProveedor (
+	in nombreProv varchar(50),
+	in telefonoProv varchar(9),
+	in correoProv varchar(100),
+	in direccionProv varchar(125))
+begin
+	insert into Proveedores (nombreProveedor, telefonoProveedor, correoProveedor, direccionProveedor)
+	values (nombreProv, telefonoProv, correoProv, direccionProv);
+end$$
+Delimiter ;
+call sp_AgregarProveedor('Distribuciones GT', '78451230', 'contacto@gt.com', 'Zona 1, Guatemala');
+call sp_AgregarProveedor('Juguetón', '45678912', 'ventas@jugueton.com', 'Zona 12, Guatemala');
+ 
+-- LISTAR PROVEEDORES
+Delimiter $$
+create procedure sp_ListarProveedores ()
+begin
+	select * from Proveedores;
+end$$
+Delimiter ;
+call sp_ListarProveedores();
+ 
+-- ELIMINAR PROVEEDOR
+Delimiter $$
+create procedure sp_EliminarProveedor (
+	in codProveedor int)
+begin
+	delete from Proveedores where codigoProveedor = codProveedor;
+end$$
+Delimiter ;
+call sp_EliminarProveedor(2);
+ 
+-- BUSCAR PROVEEDOR
+Delimiter $$
+create procedure sp_BuscarProveedor (
+	in codProveedor int)
+begin
+	select * from Proveedores where codigoProveedor = codProveedor;
+end$$
+Delimiter ;
+call sp_BuscarProveedor(1);
+ 
+-- EDITAR PROVEEDOR
+Delimiter $$
+create procedure sp_EditarProveedor (
+	in codProveedor int,
+	in nombreProv varchar(50),
+	in telefonoProv varchar(9),
+	in correoProv varchar(100),
+	in direccionProv varchar(125))
+begin
+	update Proveedores set nombreProveedor = nombreProv,
+		telefonoProveedor = telefonoProv, correoProveedor = correoProv,
+		direccionProveedor = direccionProv
+	where codigoProveedor = codProveedor;
+end$$
+Delimiter ;
+call sp_EditarProveedor(1, 'Distribuciones GT', '12345678', 'nuevo@gt.com', 'Zona 10, Guatemala');
