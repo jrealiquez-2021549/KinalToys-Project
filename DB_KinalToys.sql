@@ -529,3 +529,73 @@ begin
 end$$
 Delimiter ;
 call sp_EditarCarrito(1, '2023-06-20 09:30:00', 'Comprado', 320.00, 1);
+
+-- PROCEDIMIENTOS ALMACENADOS (DETALLESCARRITOS) -------------------------
+-- AGREGAR DETALLE CARRITO
+Delimiter $$
+create procedure sp_AgregarDetalleCarrito (
+	in cantidad int,
+	in subTotal decimal(10,2),
+	in descuento decimal(10,2),
+	in codCarrito int,
+	in codJuguete int)
+begin
+	insert into DetallesCarritos (cantidad, subTotal, descuentoAplicado, codigoCarrito, codigoJuguete)
+	values (cantidad, subTotal, descuento, codCarrito, codJuguete);
+end$$
+Delimiter ;
+call sp_AgregarDetalleCarrito(2, 300.00, 20.00, 1, 1);
+call sp_AgregarDetalleCarrito(1, 150.00, 0.00, 1, 1);
+ 
+-- LISTAR DETALLES CARRITOS
+Delimiter $$
+create procedure sp_ListarDetallesCarritos ()
+begin
+	select codigoDetalleC,
+		cantidad,
+        subTotal,
+        descuentoAplicado,
+        codigoCarrito,
+        codigoJuguete
+        from DetallesCarritos;
+end$$
+Delimiter ;
+call sp_ListarDetallesCarritos();
+ 
+-- ELIMINAR DETALLE CARRITO
+Delimiter $$
+create procedure sp_EliminarDetalleCarrito (
+	in codDetalle int)
+begin
+	delete from DetallesCarritos where codigoDetalleC = codDetalle;
+end$$
+Delimiter ;
+call sp_EliminarDetalleCarrito(2);
+ 
+-- BUSCAR DETALLE CARRITO
+Delimiter $$
+create procedure sp_BuscarDetalleCarrito (
+	in codDetalle int)
+begin
+	select * from DetallesCarritos where codigoDetalleC = codDetalle;
+end$$
+Delimiter ;
+call sp_BuscarDetalleCarrito(1);
+ 
+-- EDITAR DETALLE CARRITO
+Delimiter $$
+create procedure sp_EditarDetalleCarrito (
+	in codDetalle int,
+	in cantidad int,
+	in subTotal decimal(10,2),
+	in descuento decimal(10,2),
+	in codCarrito int,
+	in codJuguete int)
+begin
+	update DetallesCarritos set cantidad = cantidad,
+		subTotal = subTotal, descuentoAplicado = descuento,
+		codigoCarrito = codCarrito, codigoJuguete = codJuguete
+	where codigoDetalleC = codDetalle;
+end$$
+Delimiter ;
+call sp_EditarDetalleCarrito(1, 3, 450.00, 30.00, 1, 1);
