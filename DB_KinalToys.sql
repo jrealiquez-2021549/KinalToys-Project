@@ -6,7 +6,7 @@ create table Usuarios (
 	nombreUsuario varchar(50),
 	apellidoUsuario varchar(60),
 	direccionUsuario varchar(100),
-	telefonoProveedor varchar(9),
+	telefonoUsuario varchar(9),
 	primary key PK_codigoUsuario (codigoUsuario)
 );
 
@@ -91,3 +91,64 @@ create table DetallesCarritos (
 	constraint FK_DetalleC_Juguete foreign key (codigoJuguete) 
 		references Juguetes (codigoJuguete)
 );
+
+-- PROCEDIMIENTOS ALMACENADOS (USUARIOS) -------------------------
+-- AGREGAR USUARIO
+Delimiter $$
+create procedure sp_AgregarUsuario (
+	in nombre varchar(50),
+	in apellido varchar(60),
+	in direccion varchar(100),
+	in telefono varchar(9))
+begin
+	insert into Usuarios (nombreUsuario, apellidoUsuario, direccionUsuario, telefonoUsuario)
+	values (nombre, apellido, direccion, telefono);
+end$$
+Delimiter ;
+call sp_AgregarUsuario('Carlos', 'Mejía', 'Zona 10, Guatemala', '45981230');
+call sp_AgregarUsuario('Andrea', 'Gómez', 'Zona 5, Guatemala', '55678921');
+
+-- LISTAR USUARIOS
+Delimiter $$
+create procedure sp_ListarUsuarios ()
+begin
+	select * from Usuarios;
+end$$
+Delimiter ;
+call sp_ListarUsuarios();
+
+-- ELIMINAR USUARIO
+Delimiter $$
+create procedure sp_EliminarUsuario (
+	in codUsuario int)
+begin
+	delete from Usuarios where codigoUsuario = codUsuario;
+end$$
+Delimiter ;
+call sp_EliminarUsuario(2);
+
+-- BUSCAR USUARIO
+Delimiter $$
+create procedure sp_BuscarUsuario (
+	in codUsuario int)
+begin
+	select * from Usuarios where codigoUsuario = codUsuario;
+end$$
+Delimiter ;
+call sp_BuscarUsuario(1);
+
+-- EDITAR USUARIO
+Delimiter $$
+create procedure sp_EditarUsuario (
+	in codUsuario int,
+	in nombre varchar(50),
+	in apellido varchar(60),
+	in direccion varchar(100),
+	in telefono varchar(9))
+begin
+	update Usuarios set nombreUsuario = nombre, apellidoUsuario = apellido,
+		direccionUsuario = direccion, telefonoUsuario = telefono
+			where codigoUsuario = codUsuario;
+end$$
+Delimiter ;
+call sp_EditarUsuario(1, 'Carlos', 'Mejía', 'Zona 14, Guatemala', '12345678');
