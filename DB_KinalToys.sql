@@ -466,3 +466,66 @@ begin
 end$$
 Delimiter ;
 call sp_EditarCompra(1, '2023-06-10 11:00:00', 40, 72, 1, 1);
+
+
+-- PROCEDIMIENTOS ALMACENADOS (CARRITOS) -------------------------
+-- AGREGAR CARRITO
+Delimiter $$
+create procedure sp_AgregarCarrito (
+	in fecha datetime,
+	in estadoCarrito enum('Activo', 'Comprado'),
+	in totalCarrito decimal(10,2),
+	in codUsuario int)
+begin
+	insert into Carritos (fecha_creacion, estado, total, codigoUsuario)
+	values (fecha, estadoCarrito, totalCarrito, codUsuario);
+end$$
+Delimiter ;
+call sp_AgregarCarrito('2023-06-20 09:00:00', 'Activo', 300.00, 1);
+call sp_AgregarCarrito('2023-06-21 10:30:00', 'Comprado', 450.00, 1);
+ 
+-- LISTAR CARRITOS
+Delimiter $$
+create procedure sp_ListarCarritos ()
+begin
+	select * from Carritos;
+end$$
+Delimiter ;
+call sp_ListarCarritos();
+
+-- ELIMINAR CARRITO
+Delimiter $$
+create procedure sp_EliminarCarrito (
+	in codCarrito int)
+begin
+	delete from Carritos where codigoCarrito = codCarrito;
+end$$
+Delimiter ;
+call sp_EliminarCarrito(2);
+ 
+-- BUSCAR CARRITO
+Delimiter $$
+create procedure sp_BuscarCarrito (
+	in codCarrito int)
+begin
+	select * from Carritos where codigoCarrito = codCarrito;
+end$$
+Delimiter ;
+call sp_BuscarCarrito(1);
+ 
+-- EDITAR CARRITO
+Delimiter $$
+create procedure sp_EditarCarrito (
+	in codCarrito int,
+	in fecha datetime,
+	in estadoCarrito enum('Activo', 'Comprado'),
+	in totalCarrito decimal(10,2),
+	in codUsuario int)
+begin
+	update Carritos set fecha_creacion = fecha,
+		estado = estadoCarrito, total = totalCarrito,
+		codigoUsuario = codUsuario
+	where codigoCarrito = codCarrito;
+end$$
+Delimiter ;
+call sp_EditarCarrito(1, '2023-06-20 09:30:00', 'Comprado', 320.00, 1);
