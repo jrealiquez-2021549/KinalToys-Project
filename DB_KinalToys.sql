@@ -402,4 +402,67 @@ begin
 end$$
 Delimiter ;
 call sp_EditarJuguete(1, 'Batman Deluxe', 160.00, 'Figuras', 'DC Comics', 25, 1);
- 
+
+-- PROCEDIMIENTOS ALMACENADOS (COMPRAS) -------------------------
+-- AGREGAR COMPRA
+Delimiter $$
+create procedure sp_AgregarCompra (
+	in fecha datetime,
+	in cantidadCompra int,
+	in precioUnit decimal(10,2),
+	in codJuguete int,
+	in codProveedor int)
+begin
+	insert into Compras (fechaCompra, cantidad, precioUnitario, codigoJuguete, codigoProveedor)
+	values (fecha, cantidadCompra, precioUnit, codJuguete, codProveedor);
+end$$
+Delimiter ;
+call sp_AgregarCompra('2023-06-10 10:00:00', 30, 75.00, 1, 1);
+call sp_AgregarCompra('2023-06-11 14:30:00', 20, 90.00, 1, 1);
+
+-- LISTAR COMPRAS
+Delimiter $$
+create procedure sp_ListarCompras ()
+begin
+	select * from Compras;
+end$$
+Delimiter ;
+call sp_ListarCompras();
+
+-- ELIMINAR COMPRA
+Delimiter $$
+create procedure sp_EliminarCompra (
+	in codCompra int)
+begin
+	delete from Compras where codigoCompra = codCompra;
+end$$
+Delimiter ;
+call sp_EliminarCompra(2);
+
+-- BUSCAR COMPRA
+Delimiter $$
+create procedure sp_BuscarCompra (
+	in codCompra int)
+begin
+	select * from Compras where codigoCompra = codCompra;
+end$$
+Delimiter ;
+call sp_BuscarCompra(1);
+
+-- EDITAR COMPRA
+Delimiter $$
+create procedure sp_EditarCompra (
+	in codCompra int,
+	in fecha datetime,
+	in cantidadCompra int,
+	in precioUnit decimal(10,2),
+	in codJuguete int,
+	in codProveedor int)
+begin
+	update Compras set fechaCompra = fecha, cantidad = cantidadCompra,
+		precioUnitario = precioUnit, codigoJuguete = codJuguete,
+		codigoProveedor = codProveedor
+	where codigoCompra = codCompra;
+end$$
+Delimiter ;
+call sp_EditarCompra(1, '2023-06-10 11:00:00', 40, 72, 1, 1);
