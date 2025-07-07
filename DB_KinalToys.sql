@@ -336,3 +336,70 @@ begin
 end$$
 Delimiter ;
 call sp_EditarProveedor(1, 'Distribuciones GT', '12345678', 'nuevo@gt.com', 'Zona 10, Guatemala');
+
+-- PROCEDIMIENTOS ALMACENADOS (JUGUETES) -------------------------
+-- AGREGAR JUGUETE
+Delimiter $$
+create procedure sp_AgregarJuguete (
+	in nombreJuguete varchar(50),
+	in precioJuguete decimal(10,2),
+	in categoriaJuguete varchar(50),
+	in marcaJuguete varchar(50),
+	in stockJuguete int,
+	in codNoticia int)
+begin
+	insert into Juguetes (nombreJuguete, precio, categoria, marca, stock, codigoNoticia)
+	values (nombreJuguete, precioJuguete, categoriaJuguete, marcaJuguete, stockJuguete, codNoticia);
+end$$
+Delimiter ;
+call sp_AgregarJuguete('Batman', 150.00, 'Figuras', 'DC', 20, 1);
+call sp_AgregarJuguete('Buzz Lightyear', 180.00, 'Figuras', 'Pixar', 15, 1);
+ 
+-- LISTAR JUGUETES
+Delimiter $$
+create procedure sp_ListarJuguetes ()
+begin
+	select * from Juguetes;
+end$$
+Delimiter ;
+call sp_ListarJuguetes();
+ 
+-- ELIMINAR JUGUETE
+Delimiter $$
+create procedure sp_EliminarJuguete (
+	in codJuguete int)
+begin
+	delete from Juguetes where codigoJuguete = codJuguete;
+end$$
+Delimiter ;
+call sp_EliminarJuguete(2);
+ 
+-- BUSCAR JUGUETE
+Delimiter $$
+create procedure sp_BuscarJuguete (
+	in codJuguete int)
+begin
+	select * from Juguetes where codigoJuguete = codJuguete;
+end$$
+Delimiter ;
+call sp_BuscarJuguete(1);
+ 
+-- EDITAR JUGUETE
+Delimiter $$
+create procedure sp_EditarJuguete (
+	in codJuguete int,
+	in nombreJuguete varchar(50),
+	in precioJuguete decimal(10,2),
+	in categoriaJuguete varchar(50),
+	in marcaJuguete varchar(50),
+	in stockJuguete int,
+	in codNoticia int)
+begin
+	update Juguetes set nombreJuguete = nombreJuguete, precio = precioJuguete,
+		categoria = categoriaJuguete, marca = marcaJuguete, stock = stockJuguete,
+		codigoNoticia = codNoticia
+	where codigoJuguete = codJuguete;
+end$$
+Delimiter ;
+call sp_EditarJuguete(1, 'Batman Deluxe', 160.00, 'Figuras', 'DC Comics', 25, 1);
+ 
