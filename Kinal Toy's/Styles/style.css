@@ -251,3 +251,65 @@ p {
 .right-panel-active .overlay-left {
     transform: translateX(25%);
 }
+
+.right-panel-active .overlay-right {
+    transform: translateX(35%);
+}
+ 
+.container.right-panel-active .sign-in-container {
+    transform: translateX(100%);
+    opacity: 0;
+    z-index: 1;
+}
+ 
+.container.right-panel-active .sign-up-container {
+    transform: translateX(100%);
+    opacity: 1;
+    z-index: 5;
+}
+ 
+@keyframes show {
+    0%, 50% {
+        opacity: 0;
+        z-index: 1;
+    }
+    50.1%, 100% {
+        opacity: 1;
+        z-index: 5;
+    }
+}
+ 
+.btnScaled {
+    animation: scaleBtn 0.6s;
+}
+ 
+@keyframes scaleBtn {
+    0% {
+        width: 143.67px;
+    }
+    50% {
+        width: 250px;
+    }
+    100% {
+        width: 143.67px;
+    }
+}
+ 
+footer {
+    position: absolute;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%);
+}
+ 
+footer mark {
+    padding: 8px 30px;
+    border-radius: 7px;
+}
+ 
+footer a {
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    color: #003;
+}
