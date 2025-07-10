@@ -217,3 +217,37 @@ button {
     right: 62.5%;
     transform: translateX(-12%);
 }
+
+.overlay-right {
+    right: 0;
+    transform: translateX(0%);
+}
+ 
+.overlay-panel h1 {
+    color: #FFF;
+}
+ 
+p {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 20px;
+    letter-spacing: 0.5px;
+    margin: 25px 0px 35px;
+}
+ 
+.overlay-panel button {
+    border: none;
+    background-color: transparent;
+}
+ 
+.right-panel-active .overlay-container {
+    transform: translateX(-150%);
+}
+ 
+.right-panel-active .overlay {
+    transform: translateX(50%);
+}
+ 
+.right-panel-active .overlay-left {
+    transform: translateX(25%);
+}
