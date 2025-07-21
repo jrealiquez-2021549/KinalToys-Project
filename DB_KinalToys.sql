@@ -1,8 +1,9 @@
+-- Drop database if exists DB_KinalToys;
 create database DB_KinalToys;
 use DB_KinalToys;
 
 create table Usuarios (
-	codigoUsuario int,
+	codigoUsuario int auto_increment,
 	nombreUsuario varchar(50),
 	apellidoUsuario varchar(60),
 	direccionUsuario varchar(100),
@@ -11,9 +12,9 @@ create table Usuarios (
 );
 
 create table Facturas (
-	codigoFactura int,
+	codigoFactura int auto_increment,
 	fechaEmision datetime,
-    metodo_pago enum('Efectivo', 'Credito'),
+    metodoPago enum('Efectivo', 'Credito'),
     total decimal(10,2),
 	codigoUsuario int,
 	primary key PK_codigoFactura (codigoFactura),
@@ -22,7 +23,7 @@ create table Facturas (
 );
 
 create table Noticias (
-	codigoNoticia int,
+	codigoNoticia int auto_increment,
     encabezado varchar(100),
     informacion varchar(250),
     categoria varchar(50),
@@ -31,7 +32,7 @@ create table Noticias (
 );
 
 create table Proveedores (
-	codigoProveedor int,
+	codigoProveedor int auto_increment,
     nombreProveedor varchar(50),
     telefonoProveedor varchar(9),
     correoProveedor varchar(100),
@@ -40,7 +41,7 @@ create table Proveedores (
 );
 
 create table Juguetes (
-	codigoJuguete int,
+	codigoJuguete int auto_increment,
 	nombreJuguete varchar(50),
     precio decimal(10,2),
     categoria varchar(50),
@@ -52,23 +53,20 @@ create table Juguetes (
 		references Noticias (codigoNoticia)
 );
 
-create table Compras (
-	codigoCompra int,
-    fechaCompra datetime,
-    cantidad int,
-    precioUnitario decimal(10,2),
-    codigoJuguete int,
-    codigoProveedor int,
-    primary key PK_codigoCompra (codigoCompra),
-    constraint FK_Compra_Juguete foreign key (codigoJuguete) 
-		references Juguetes (codigoJuguete),
-	constraint FK_Compra_Proveedor foreign key (codigoProveedor) 
-		references Proveedores (codigoProveedor)
+create table Cuentas (
+	codigoCuenta int auto_increment,
+    nombreCuenta varchar(50),
+    correoCuenta varchar(100),
+    contrasenaCuenta varchar(50),
+    codigoUsuario int,
+    primary key PK_codigoCuenta (codigoCuenta),
+    constraint FK_Cuenta_Usuario foreign key (codigoUsuario)
+		references Usuarios (codigoUsuario)
 );
 
 create table Carritos (
-	codigoCarrito int,
-    fecha_creacion datetime,
+	codigoCarrito int auto_increment,
+    fechaCreacion datetime,
     estado enum('Activo', 'Comprado'),
 	total decimal(10,2),
     codigoUsuario int,
@@ -79,7 +77,7 @@ create table Carritos (
 
 
 create table DetallesCarritos (
-	codigoDetalleC int,
+	codigoDetalleC int auto_increment,
     cantidad int,
 	subTotal decimal(10,2),
     descuentoAplicado decimal(10,2),
@@ -162,7 +160,7 @@ create procedure sp_AgregarFactura (
 	in totalFactura decimal(10,2),
 	in codUsuario int)
 begin
-	insert into Facturas (fechaEmision, metodo_pago, total, codigoUsuario)
+	insert into Facturas (fechaEmision, metodoPago, total, codigoUsuario)
 	values (fecha, metodo, totalFactura, codUsuario);
 end$$
 Delimiter ;
@@ -207,7 +205,7 @@ create procedure sp_EditarFactura (
 	in totalFactura decimal(10,2),
 	in codUsuario int)
 begin
-	update Facturas set fechaEmision = fecha, metodo_pago = metodo,
+	update Facturas set fechaEmision = fecha, metodoPago = metodo,
 		total = totalFactura, codigoUsuario = codUsuario
 	where codigoFactura = codFactura;
 end$$
@@ -403,70 +401,69 @@ end$$
 Delimiter ;
 call sp_EditarJuguete(1, 'Batman Deluxe', 160.00, 'Figuras', 'DC Comics', 25, 1);
 
--- PROCEDIMIENTOS ALMACENADOS (COMPRAS) -------------------------
--- AGREGAR COMPRA
+-- PROCEDIMIENTOS ALMACENADOS (CUENTAS) -------------------------
+-- AGREGAR CUENTA
 Delimiter $$
-create procedure sp_AgregarCompra (
-	in fecha datetime,
-	in cantidadCompra int,
-	in precioUnit decimal(10,2),
-	in codJuguete int,
-	in codProveedor int)
+create procedure sp_AgregarCuenta (
+	in nombre varchar(50),
+	in correo varchar(100),
+	in contrasena varchar(50),
+	in codUsuario int)
 begin
-	insert into Compras (fechaCompra, cantidad, precioUnitario, codigoJuguete, codigoProveedor)
-	values (fecha, cantidadCompra, precioUnit, codJuguete, codProveedor);
+	insert into Cuentas (nombreCuenta, correoCuenta, contrasenaCuenta, codigoUsuario)
+	values (nombre, correo, contrasena, codUsuario);
 end$$
 Delimiter ;
-call sp_AgregarCompra('2023-06-10 10:00:00', 30, 75.00, 1, 1);
-call sp_AgregarCompra('2023-06-11 14:30:00', 20, 90.00, 1, 1);
+call sp_AgregarCuenta('Proxy549', 'proxy549@gmail.com', 'admin', 1);
+call sp_AgregarCuenta('Aquino', 'jaquino@gmail.com', '123', 1);
 
--- LISTAR COMPRAS
+-- LISTAR CUENTAS
 Delimiter $$
-create procedure sp_ListarCompras ()
+create procedure sp_ListarCuentas ()
 begin
-	select * from Compras;
+	select * from Cuentas;
 end$$
 Delimiter ;
-call sp_ListarCompras();
+call sp_ListarCuentas();
 
--- ELIMINAR COMPRA
+-- ELIMINAR CUENTA
 Delimiter $$
-create procedure sp_EliminarCompra (
-	in codCompra int)
+create procedure sp_EliminarCuenta (
+	in codCuenta int)
 begin
-	delete from Compras where codigoCompra = codCompra;
+	delete from Cuentas where codigoCuenta = codCuenta;
 end$$
 Delimiter ;
-call sp_EliminarCompra(2);
+call sp_EliminarCuenta(2);
 
 -- BUSCAR COMPRA
 Delimiter $$
-create procedure sp_BuscarCompra (
-	in codCompra int)
+create procedure sp_BuscarCuenta (
+	in codCuenta int)
 begin
-	select * from Compras where codigoCompra = codCompra;
+	select * from Cuentas where codigoCuenta = codCuenta;
 end$$
 Delimiter ;
-call sp_BuscarCompra(1);
+call sp_BuscarCuenta(1);
 
--- EDITAR COMPRA
+-- EDITAR CUENTA
 Delimiter $$
-create procedure sp_EditarCompra (
-	in codCompra int,
-	in fecha datetime,
-	in cantidadCompra int,
-	in precioUnit decimal(10,2),
-	in codJuguete int,
-	in codProveedor int)
+create procedure sp_EditarCuenta (
+	in codCuenta int,
+	in nombre varchar(50),
+	in correo varchar(100),
+	in contrasena varchar(50),
+	in codUsuario int)
 begin
-	update Compras set fechaCompra = fecha, cantidad = cantidadCompra,
-		precioUnitario = precioUnit, codigoJuguete = codJuguete,
-		codigoProveedor = codProveedor
-	where codigoCompra = codCompra;
+	update Cuentas 
+	set nombreCuenta = nombre, 
+		correoCuenta = correo, 
+		contrasenaCuenta = contrasena, 
+		codigoUsuario = codUsuario
+	where codigoCuenta = codCuenta;
 end$$
 Delimiter ;
-call sp_EditarCompra(1, '2023-06-10 11:00:00', 40, 72, 1, 1);
-
+call sp_EditarCuenta(1, 'Realiquez', 'jrealiquez@gmail.com', '1980', 1);
 
 -- PROCEDIMIENTOS ALMACENADOS (CARRITOS) -------------------------
 -- AGREGAR CARRITO
@@ -477,7 +474,7 @@ create procedure sp_AgregarCarrito (
 	in totalCarrito decimal(10,2),
 	in codUsuario int)
 begin
-	insert into Carritos (fecha_creacion, estado, total, codigoUsuario)
+	insert into Carritos (fechaCreacion, estado, total, codigoUsuario)
 	values (fecha, estadoCarrito, totalCarrito, codUsuario);
 end$$
 Delimiter ;
@@ -522,7 +519,7 @@ create procedure sp_EditarCarrito (
 	in totalCarrito decimal(10,2),
 	in codUsuario int)
 begin
-	update Carritos set fecha_creacion = fecha,
+	update Carritos set fechaCreacion = fecha,
 		estado = estadoCarrito, total = totalCarrito,
 		codigoUsuario = codUsuario
 	where codigoCarrito = codCarrito;
