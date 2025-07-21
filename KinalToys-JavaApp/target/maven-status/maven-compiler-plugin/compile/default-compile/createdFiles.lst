@@ -1,4 +1,7 @@
+com\kinaltoys\controlador\ControladorNoticias.class
+com\kinaltoys\dominio\Noticias_.class
 com\kinaltoys\controlador\ControladorUsuarios.class
 com\kinaltoys\dominio\Usuarios.class
 com\kinaltoys\system\Principal.class
+com\kinaltoys\dominio\Noticias.class
 com\kinaltoys\dominio\Usuarios_.class
