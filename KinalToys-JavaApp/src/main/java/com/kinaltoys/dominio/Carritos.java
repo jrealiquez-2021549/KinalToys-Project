@@ -1,5 +1,5 @@
-package com.kinaltoys.dominio;
 
+package com.kinaltoys.dominio;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
