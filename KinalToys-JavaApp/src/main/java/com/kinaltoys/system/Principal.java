@@ -6,6 +6,7 @@ import com.kinaltoys.controlador.ControladorNoticias;
 import com.kinaltoys.controlador.ControladorProveedores;
 import com.kinaltoys.controlador.ControladorFacturas;
 import com.kinaltoys.controlador.ControladorCuentas;
+import com.kinaltoys.controlador.ControladorCarritos;
 import java.util.Scanner;
 
 public class Principal {
@@ -22,6 +23,7 @@ public class Principal {
             System.out.println("4. Gestion de Proveedores");
             System.out.println("5. Gestion de Juguetes");
             System.out.println("6. Gestion de Cuentas");
+            System.out.println("7. Gestion de Carritos");
             System.out.println("0. Salir de aplicación");
             System.out.print("Seleccione una opción: ");
             opcion = scanner.nextInt();
@@ -51,6 +53,10 @@ public class Principal {
                 case 6:
                     ControladorCuentas controladorCuentas = new ControladorCuentas();
                     controladorCuentas.menu();
+                    break;
+                case 7:
+                    ControladorCarritos controladorCarritos = new ControladorCarritos();
+                    controladorCarritos.menu();
                     break;
                 case 0:
                     System.out.println("Cerrando aplicación...");

@@ -24,7 +24,10 @@ http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
       <class>
           org.kinaltoys.dominio.cuentas
       </class>
-      
+      <class>
+          org.kinaltoys.dominio.carritos
+      </class>
+
     <properties>
       <!-- Configuring JDBC properties -->
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/DB_KinalToys?useSSL=false" />
