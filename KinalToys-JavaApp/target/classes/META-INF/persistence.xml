@@ -27,6 +27,9 @@ http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
       <class>
           org.kinaltoys.dominio.carritos
       </class>
+      <class>
+          org.kinaltoys.dominio.detallescarritos
+      </class>
 
     <properties>
       <!-- Configuring JDBC properties -->
