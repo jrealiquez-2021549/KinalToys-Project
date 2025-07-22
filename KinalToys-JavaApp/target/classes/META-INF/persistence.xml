@@ -15,6 +15,9 @@ http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
       <class>
           org.kinaltoys.dominio.proveedores
       </class>
+      <class>
+          org.kinaltoys.dominio.juguetes
+      </class>
     
     <properties>
       <!-- Configuring JDBC properties -->
