@@ -723,6 +723,7 @@ html {
     font-weight: 600;
     font-size: 1.6rem;
     text-transform: uppercase;
+    color: #fff;
 }
 
 .contact-info,
@@ -863,6 +864,7 @@ html {
 .copyright p {
     font-weight: 400;
     font-size: 1.6rem;
+    color: #fff;
 }
 
 /* ********************************** */
