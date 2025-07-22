@@ -966,6 +966,11 @@ html {
         align-items: center;
         gap: 1.5rem;
     }
+
+    .container-options button {
+        text-align: center;
+        padding: 1rem 2rem;
+    }
 }
  
 /* ********************************** */
@@ -1069,4 +1074,36 @@ html {
     .content p{
         font-size: 1.6rem;
     }
+
+    .container-options button {
+        font-size: 1.8rem;
+        padding: 1rem 1.5rem;
+        font-weight: 500;
+    }
+}
+
+.container-products {
+    transition: opacity 0.3s ease-in-out;
+}
+
+.container-options button {
+    margin: 0;
+    color: #777;
+    background-color: #fff;
+    padding: 0.7rem 3rem;
+    font-size: 1.4rem;
+    text-transform: capitalize;
+    border-radius: 2rem;
+    cursor: pointer;
+    border: none;
+}
+
+.container-options button:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.container-options button.active {
+    background-color: var(--primary-color);
+    color: #fff;
 }
