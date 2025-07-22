@@ -1,5 +1,6 @@
 
 package com.kinaltoys.system;
+import com.kinaltoys.controlador.ControladorJuguetes;
 import com.kinaltoys.controlador.ControladorUsuarios;
 import com.kinaltoys.controlador.ControladorNoticias;
 import com.kinaltoys.controlador.ControladorProveedores;
@@ -17,6 +18,7 @@ public class Principal {
             System.out.println("2. Gestión de Facturas");
             System.out.println("3. Gestión de Noticias");
             System.out.println("4. Gestion de Proveedores");
+            System.out.println("5. Gestion de Juguetes");
             System.out.println("0. Salir de aplicación");
             System.out.print("Seleccione una opción: ");
             opcion = scanner.nextInt();
@@ -39,6 +41,10 @@ public class Principal {
                 case 4:
                     ControladorProveedores controladorProveedores = new ControladorProveedores();
                     controladorProveedores.menu();
+                    break;
+                case 5:
+                    ControladorJuguetes controladorJuguetes = new ControladorJuguetes();
+                    controladorJuguetes.menu();
                     break;
                 case 0:
                     System.out.println("Cerrando aplicación...");
