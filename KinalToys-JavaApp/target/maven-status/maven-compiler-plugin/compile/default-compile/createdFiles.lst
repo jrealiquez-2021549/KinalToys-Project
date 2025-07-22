@@ -5,6 +5,7 @@ com\kinaltoys\dominio\Facturas.class
 com\kinaltoys\dominio\Proveedores.class
 com\kinaltoys\controlador\ControladorJuguetes.class
 com\kinaltoys\controlador\ControladorUsuarios.class
+com\kinaltoys\dominio\Carritos.class
 com\kinaltoys\dominio\Usuarios_.class
 com\kinaltoys\controlador\ControladorFacturas.class
 com\kinaltoys\controlador\ControladorCuentas.class
@@ -12,6 +13,8 @@ com\kinaltoys\dominio\Cuentas_.class
 com\kinaltoys\dominio\Facturas_.class
 com\kinaltoys\dominio\Noticias_.class
 com\kinaltoys\dominio\Juguetes_.class
+com\kinaltoys\dominio\Carritos_.class
+com\kinaltoys\controlador\ControladorCarritos.class
 com\kinaltoys\dominio\Usuarios.class
 com\kinaltoys\dominio\Cuentas.class
 com\kinaltoys\dominio\Juguetes.class
