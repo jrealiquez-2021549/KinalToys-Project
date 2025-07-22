@@ -4,6 +4,7 @@ import com.kinaltoys.controlador.ControladorJuguetes;
 import com.kinaltoys.controlador.ControladorUsuarios;
 import com.kinaltoys.controlador.ControladorNoticias;
 import com.kinaltoys.controlador.ControladorProveedores;
+import com.kinaltoys.controlador.ControladorFacturas;
 import java.util.Scanner;
 
 public class Principal {
@@ -30,9 +31,8 @@ public class Principal {
                     controladorUsuarios.menu(); // Llama al menú de usuarios
                     break;
                 case 2:
-                    System.out.println("Funcionalidad de Facturas aún no implementada.");
-                    // ControladorProductos controladorProductos = new ControladorProductos();
-                    // controladorProductos.menu();
+                    ControladorFacturas ControladorFacturas = new ControladorFacturas();
+                    ControladorFacturas.menu();
                     break;
                 case 3:
                     ControladorNoticias controladorNoticias = new ControladorNoticias();
