@@ -44,12 +44,15 @@
                 <nav class="navbar container">
                     <i class="fa-solid fa-bars"></i>
                     <ul class="menu">
-                        <li><a href="#">Inicio</a></li>
-                        <li><a href="#">Model Kits</a></li>
-                        <li><a href="#">Action Figures</a></li>
-                        <li><a href="#">Static Figures</a></li>
-                        <li><a href="#">Custom & DIY</a></li>
-                        <li><a href="#">Por Escala</a></li>
+                        <li><a href="principal.jsp">Inicio</a></li>
+                        <li><a href="usuario.jsp">Usuario</a></li>
+                        <li><a href="#">Factura</a></li>
+                        <li><a href="#">Noticias</a></li>
+                        <li><a href="#">Proveedor</a></li>
+                        <li><a href="#">Juguete</a></li>
+                        <li><a href="#">Cuenta</a></li>
+                        <li><a href="#">Carrito</a></li>
+                        <li><a href="#">Detalle Carrito</a></li>
                     </ul>
 
                     <form class="search-form">
@@ -569,9 +572,9 @@
 
                         <div class="content">
                             <p>
-                    Suscríbete a nuestros boletines ahora y mantente al
+                                Suscríbete a nuestros boletines ahora y mantente al
                                 día con nuevas colecciones y ofertas exclusivas.
-                </p>
+                            </p>
                             <input type="email" placeholder="Ingresa el correo aquí...">
                             <button>Suscríbete</button>
                         </div>
@@ -583,85 +586,85 @@
 
                     <img src="img/payment.png" alt="Pagos">
                 </div>
-                </div>
+            </div>
         </footer>
         <script>
-document.addEventListener("DOMContentLoaded", () => {
-const buttons = document.querySelectorAll(".btn-category");
-            const productsContainer = document.querySelector(".container-products");
+                    document.addEventListener("DOMContentLoaded", () => {
+                const buttons = document.querySelectorAll(".btn-category");
+                    const productsContainer = document.querySelector(".container-products");
             // Aquí defines tus productos por categoría (puedes personalizarlos)
             const productsByCategory = {                 featured: `
             <!-- Producto 1 -->
-            <div class="card-product">
+                            <div class="card-product">
             <div class="container-img">
-        <img src="img/rem.jpg" alt="Re Zero Starting Life in Another World Rem Figma Figura" />
-        <span class="discount">-10%</span>
-<div class="button-group">                             <span>
-            <i class="fa-regular fa-eye"></i>
-        </span>
-            <span>                                         <i class="fa-regular fa-heart"></i>
-    </span>
-            <span>
-                <i class="fa-solid fa-code-compare"></i>
-            </span>
-        </div>
-</div>
-            <div class="content-card-product">
-<div class="stars">
-        <i class="fa-solid fa-star"></i>
-        <i class="fa-solid fa-star"></i>
-<i class="fa-solid fa-star"></i>
-<i class="fa-solid fa-star"></i>
-            <i class="fa-regular fa-star"></i>
-            </div>
-            <h3>Rem Figma Figure</h3>
-            <span class="add-cart">
-            <i class="fa-solid fa-basket-shopping"></i>
-                </span>
-            <p class="price">$125.73 <span>$139.70</span></p>
-        </div>
-                                                                 </div>
-            <!-- Producto 2 -->
-                                                         <div class="card-product">
-            <div class="container-img">
-                                                         <img
-                                                         src="img/bell.jpg"
-alt="Toy bell.jpg"
-/>
-         <span class="discount">-17%</span>
-                                                 <div class="button-group">
-            <span>
-<i class="fa-regular fa-eye"></i>
-            </span>
-        <span>
-                                                                 <i class="fa-regular fa-heart"></i>
-            </span>
-                                                                 <span>
-                                                         <i class="fa-solid fa-code-compare"></i>
-                                                         </span>
-</div>
-                                                         </div>
-         <div class="content-card-product">
-                                                 <div class="stars">
-<i class="fa-solid fa-star"></i>
-     <i class="fa-solid fa-star"></i>
-                                                                 <i class="fa-solid fa-star"></i>
-                                                                 <i class="fa-solid fa-star"></i>
-                                                                 <i class="fa-regular fa-star"></i>
-                                                         </div>
-                                                         <h3>Belle Good Smile</h3>
-                                                         <span class="add-cart">
-                                                                 <i class="fa-solid fa-basket-shopping"></i>
-                                                         </span>
-                                                         <p class="price">$118.85 <span>$143.20</span></p>
-                                                 </div>
-                                         </div>
-                                         <!--  -->
-                                         <div class="card-product">
-                                                 <div class="container-img">
-                                                         <img
-                                                                 src="img/link.jpg"
-                                                                 alt="Toy link"
+                            <img src="img/rem.jpg" alt="Re Zero Starting Life in Another World Rem Figma Figura" />
+                                <span class="discount">-10%</span>
+                                <div class="button-group">                             <span>
+                                <i class="fa-regular fa-eye"></i>
+                                </span>
+                                <span>                                         <i class="fa-regular fa-heart"></i>
+                                </span>
+                                <span>
+                                <i class="fa-solid fa-code-compare"></i>
+                            </span>
+                            </div>
+                            </div>
+                    <div class="content-card-product">
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                    <i class="fa-regular fa-star"></i>
+                                </div>
+                                <h3>Rem Figma Figure</h3>
+                                    <span class="add-cart">
+                        <i class="fa-solid fa-basket-shopping"></i>
+                        </span>
+                        <p class="price">$125.73 <span>$139.70</span></p>
+                            </div>
+                            </div>
+                            <!-- Producto 2 -->
+                                <div class="card-product">
+                                <div class="container-img">
+                            <img
+                                src="img/bell.jpg"
+                                alt="Toy bell.jpg"
+                            />
+                                <span class="discount">-17%</span>
+                                <div class="button-group">
+                                <span>
+                                <i class="fa-regular fa-eye"></i>
+                                </span>
+                            <span>
+                        <i class="fa-regular fa-heart"></i>
+                    </span>
+                <span>
+                                <i class="fa-solid fa-code-compare"></i>
+                            </span>
+                    </div>
+                            </div>
+                    <div class="content-card-product">
+                                <div class="stars">
+                                <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                        </div>
+                        <h3>Belle Good Smile</h3>
+                            <span class="add-cart">
+                            <i class="fa-solid fa-basket-shopping"></i>
+                                    </span>
+                                    <p class="price">$118.85 <span>$143.20</span></p>
+                                </div>
+                                    </div>
+                                    <!--  -->
+                                <div class="card-product">
+                                    <div class="container-img">
+                                <img
+                            src="img/link.jpg"
+                        alt="Toy link"
                                                          />
                                                          <div class="button-group">
                                                                  <span>

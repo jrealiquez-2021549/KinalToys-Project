@@ -40,12 +40,15 @@
                 <nav class="navbar container">
                     <i class="fa-solid fa-bars"></i>
                     <ul class="menu">
-                        <li><a href="#">Inicio</a></li>
-                        <li><a href="#">Model Kits</a></li>
-                        <li><a href="#">Action Figures</a></li>
-                        <li><a href="#">Static Figures</a></li>
-                        <li><a href="#">Custom & DIY</a></li>
-                        <li><a href="#">Por Escala</a></li>
+                        <li><a href="principal.jsp">Inicio</a></li>
+                        <li><a href="usuario.jsp">Usuario</a></li>
+                        <li><a href="#">Factura</a></li>
+                        <li><a href="#">Noticias</a></li>
+                        <li><a href="#">Proveedor</a></li>
+                        <li><a href="#">Juguete</a></li>
+                        <li><a href="#">Cuenta</a></li>
+                        <li><a href="#">Carrito</a></li>
+                        <li><a href="#">Detalle Carrito</a></li>
                     </ul>
 
                     <form class="search-form">

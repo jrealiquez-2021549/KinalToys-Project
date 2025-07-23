@@ -1,0 +1,110 @@
+/* ===== MAIN USERS SECTION ===== */
+.main-users {
+    background-color: #f9f9f9;
+    padding: 5rem 0;
+}
+
+.users-title {
+    font-size: 3.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 3rem;
+    text-shadow: 1px 1px 5px rgba(36, 59, 85, 0.2);
+}
+
+/* Formulario */
+.users-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.form-group input {
+    padding: 0.8rem 1rem;
+    font-size: 1.5rem;
+    border: 1.5px solid #ccc;
+    border-radius: 0.6rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 5px var(--primary-color);
+}
+
+/* Tabla */
+.table-wrapper {
+    overflow-x: auto;
+    margin-bottom: 4rem;
+}
+
+.users-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    box-shadow: 0 8px 24px rgba(36, 59, 85, 0.15);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.users-table thead {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.users-table th,
+.users-table td {
+    padding: 1.5rem 2rem;
+    text-align: left;
+}
+
+.users-table tbody tr {
+    border-bottom: 1px solid #e2e2e2;
+    transition: background-color 0.3s ease;
+}
+
+.users-table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* CRUD Buttons */
+.crud-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.btn-crud {
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-crud:hover {
+    background-color: #141E30;
+}
+
+.input-search {
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
+    border: 1.5px solid #ccc;
+    border-radius: 1rem;
+}
