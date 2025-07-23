@@ -77,7 +77,7 @@
                     <ul class="menu">
                         <li><a href="principal.jsp">Inicio</a></li>
                         <li><a href="usuario.jsp">Usuario</a></li>
-                        <li><a href="#">Factura</a></li>
+                        <li><a href="factura.jsp">Factura</a></li>
                         <li><a href="#">Noticias</a></li>
                         <li><a href="#">Proveedor</a></li>
                         <li><a href="#">Juguete</a></li>
