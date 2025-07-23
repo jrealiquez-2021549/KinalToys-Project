@@ -28,7 +28,9 @@
                     </div>
 
                     <div class="container-user">
-                        <i class="fa-solid fa-user"></i>
+                        <a href="cuenta.jsp" title="Mi Cuenta">
+                            <i class="fa-solid fa-user"></i>
+                        </a>
                         <i class="fa-solid fa-basket-shopping"></i>
                         <div class="content-shopping-cart">
                             <span class="text">Carrito</span>
@@ -567,446 +569,445 @@
 
                         <div class="content">
                             <p>
-                                Suscríbete a nuestros boletines ahora y mantente al
+                    Suscríbete a nuestros boletines ahora y mantente al
                                 día con nuevas colecciones y ofertas exclusivas.
-                            </p>
-                    <input type="email" placeholder="Ingresa el correo aquí...">
-                                <button>Suscríbete</button>
-                    </div>
-                </div>                     </div> 
-            <div class="copyright">
-            <p>
-            Kinal Toy's &copy; 2025
-            </p>
+                </p>
+                            <input type="email" placeholder="Ingresa el correo aquí...">
+                            <button>Suscríbete</button>
+                        </div>
+                    </div>                     </div> 
+                <div class="copyright">
+                    <p>
+                        Kinal Toy's &copy; 2025
+                    </p>
 
-            <img src="img/payment.png" alt="Pagos">
+                    <img src="img/payment.png" alt="Pagos">
+                </div>
+                </div>
+        </footer>
+        <script>
+document.addEventListener("DOMContentLoaded", () => {
+const buttons = document.querySelectorAll(".btn-category");
+            const productsContainer = document.querySelector(".container-products");
+            // Aquí defines tus productos por categoría (puedes personalizarlos)
+            const productsByCategory = {                 featured: `
+            <!-- Producto 1 -->
+            <div class="card-product">
+            <div class="container-img">
+        <img src="img/rem.jpg" alt="Re Zero Starting Life in Another World Rem Figma Figura" />
+        <span class="discount">-10%</span>
+<div class="button-group">                             <span>
+            <i class="fa-regular fa-eye"></i>
+        </span>
+            <span>                                         <i class="fa-regular fa-heart"></i>
+    </span>
+            <span>
+                <i class="fa-solid fa-code-compare"></i>
+            </span>
+        </div>
+</div>
+            <div class="content-card-product">
+<div class="stars">
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+            <i class="fa-regular fa-star"></i>
             </div>
-            </div>
-                    </footer>
-            <script>
-                             document.addEventListener("DOMContentLoaded", () => {
-                             const buttons = document.querySelectorAll(".btn-category");
-                         const productsContainer = document.querySelector(".container-products");
-                         // Aquí defines tus productos por categoría (puedes personalizarlos)
-     const productsByCategory = {
-         featured: `
-         <!-- Producto 1 -->
-             <div class="card-product">
-                 <div class="container-img">
-                     <img src="img/rem.jpg" alt="Re Zero Starting Life in Another World Rem Figma Figura" />
-                                                                     <span class="discount">-10%</span>
-                 <div class="button-group">                             <span>
-         <i class="fa-regular fa-eye"></i>
-                             </span>
-         <span>                                         <i class="fa-regular fa-heart"></i>
-         </span>
-                 <span>
-                         <i class="fa-solid fa-code-compare"></i>
-                 </span>
-                             </div>
-                             </div>
-                         <div class="content-card-product">
-                 <div class="stars">
-                         <i class="fa-solid fa-star"></i>
-                     <i class="fa-solid fa-star"></i>
+            <h3>Rem Figma Figure</h3>
+            <span class="add-cart">
+            <i class="fa-solid fa-basket-shopping"></i>
+                </span>
+            <p class="price">$125.73 <span>$139.70</span></p>
+        </div>
+                                                                 </div>
+            <!-- Producto 2 -->
+                                                         <div class="card-product">
+            <div class="container-img">
+                                                         <img
+                                                         src="img/bell.jpg"
+alt="Toy bell.jpg"
+/>
+         <span class="discount">-17%</span>
+                                                 <div class="button-group">
+            <span>
+<i class="fa-regular fa-eye"></i>
+            </span>
+        <span>
+                                                                 <i class="fa-regular fa-heart"></i>
+            </span>
+                                                                 <span>
+                                                         <i class="fa-solid fa-code-compare"></i>
+                                                         </span>
+</div>
+                                                         </div>
+         <div class="content-card-product">
+                                                 <div class="stars">
+<i class="fa-solid fa-star"></i>
      <i class="fa-solid fa-star"></i>
-                         <i class="fa-solid fa-star"></i>
-                     <i class="fa-regular fa-star"></i>
-                             </div>
-                     <h3>Rem Figma Figure</h3>
-         <span class="add-cart">
-                         <i class="fa-solid fa-basket-shopping"></i>
-             </span>
-                         <p class="price">$125.73 <span>$139.70</span></p>
-                                                                                     </div>
-                                                                                     </div>
-                                                                                     <!-- Producto 2 -->
-                                                                                     <div class="card-product">
-                                                                                     <div class="container-img">
-                 <img
-                                                                                     src="img/bell.jpg"
-                                                                                     alt="Toy bell.jpg"
-                                                                                     />
-                                                                             <span class="discount">-17%</span>
-                                                                             <div class="button-group">
-                         <span>
-                                                                             <i class="fa-regular fa-eye"></i>
-                                                                             </span>
-                                                                             <span>
-                                                                                     <i class="fa-regular fa-heart"></i>
-                                                                                     </span>
-                                                                                     <span>
-                                                                             <i class="fa-solid fa-code-compare"></i>
-                                                                             </span>
-         </div>
-                                                                             </div>
-                             <div class="content-card-product">
-                                                                     <div class="stars">
-             <i class="fa-solid fa-star"></i>
-                         <i class="fa-solid fa-star"></i>
-                                                                                     <i class="fa-solid fa-star"></i>
-                                                                                     <i class="fa-solid fa-star"></i>
-                                                                                     <i class="fa-regular fa-star"></i>
-                                                                             </div>
-                                                                             <h3>Belle Good Smile</h3>
-                                                                             <span class="add-cart">
-                                                                                     <i class="fa-solid fa-basket-shopping"></i>
-                                                                             </span>
-                                                                             <p class="price">$118.85 <span>$143.20</span></p>
-                                                                     </div>
-                                                             </div>
-                                                             <!--  -->
-                                                             <div class="card-product">
-                                                                     <div class="container-img">
-                                                                             <img
-                                                                                     src="img/link.jpg"
-                                                                                     alt="Toy link"
-                                                                             />
-                                                                             <div class="button-group">
-                                                                                     <span>
-                                                                                             <i class="fa-regular fa-eye"></i>
-                                                                                     </span>
-                                                                                     <span>
-                                                                                             <i class="fa-regular fa-heart"></i>
-                                                                                     </span>
-                                                                                     <span>
-                                                                                             <i class="fa-solid fa-code-compare"></i>
-                                                                                     </span>
-                                                                             </div>
-                                                                     </div>
-                                                                     <div class="content-card-product">
-                                                                             <div class="stars">
-                                                                                     <i class="fa-solid fa-star"></i>
-                                                                                     <i class="fa-solid fa-star"></i>
-                                                                                     <i class="fa-solid fa-star"></i>
-                                                                                     <i class="fa-solid fa-star"></i>
-                                                                                     <i class="fa-solid fa-star"></i>
-                                                                             </div>
-                                                                             <h3>Link Figma Figure</h3>
-                                                                             <span class="add-cart">
-                                                                                     <i class="fa-solid fa-basket-shopping"></i>
-                                                                             </span>
-                                                                             <p class="price">$137.80</p>
-                                                                     </div>
-                                                             </div>
-                                                             <!--  -->
-                                                             <div class="card-product">
-                                                             <div class="container-img">
-                                                                     <img src="img/frieren.jpg" alt="Toy frieren" />
-                                                                     <div class="button-group">
-                                                             <span>
-                                                                     <i class="fa-regular fa-eye"></i>
-                                                             </span>
-                                                             <span>
-                                                                     <i class="fa-regular fa-heart"></i>
-                                                             </span>
-                                                             <span>
-                                                                     <i class="fa-solid fa-code-compare"></i>
-                                                             </span>
-                                                             </div>
-                                                     </div>
-                                                     <div class="content-card-product">
-                                                     <div class="stars">
-                                                             <i class="fa-solid fa-star"></i>
-                                                             <i class="fa-solid fa-star"></i>
-                                                             <i class="fa-solid fa-star"></i>
-                                                             <i class="fa-solid fa-star"></i>
-                                                             <i class="fa-regular fa-star"></i>
-                                                     </div>
-                                                     <h3>Frieren Nendoroid</h3>
-                                                     <span class="add-cart">
-                                                             <i class="fa-solid fa-basket-shopping"></i>
-                                                     </span>
-                                                     <p class="price">$132.20</p>
-                                             </div>
-                                     </div>
-                             `,
-                             latest: `
-                                     <!-- Producto 1 -->
-                                     <div class="card-product">
-                                             <div class="container-img">
-                                                     <img src="img/frieren-figma.jpg" alt="Sousou no Frieren Frieren Figma Figura" />
-                                                     <div class="button-group">
-                                                             <span>
-                                                                     <i class="fa-regular fa-eye"></i>
-                                                             </span>
-                                                             <span>
-                                                                     <i class="fa-regular fa-heart"></i>
-                                                             </span>
-                                                             <span>
-                                                             <i class="fa-solid fa-code-compare"></i>
-                                                             </span>
-                                                                     </div>
-                                                             </div>
-                                                             <div class="content-card-product">
-                                                                     <div class="stars">
-                                                                             <i class="fa-solid fa-star"></i>
-                                                                             <i class="fa-solid fa-star"></i>
-                                                                             <i class="fa-solid fa-star"></i>
-                                                                             <i class="fa-solid fa-star"></i>
-                                                                             <i class="fa-solid fa-star"></i>
-                                                                     </div>
-                                                                     <h3>Frieren Figma Figure</h3>
-                                                                     <span class="add-cart">
-                                                                             <i class="fa-solid fa-basket-shopping"></i>
-                                                                     </span>
-                                                                     <p class="price">$124.45</p>
-                                                             </div>
-                                                             </div>
-                                                             <!-- Producto 2 -->
-                                                             <div class="card-product">
-                                                                     <div class="container-img">
-                                                                             <img
-                                                                                     src="img/lufi.jpg"
-                                                                                     alt="Toy lufi.jpg"
-                                                                             />
-                                                                             <span class="discount">-10%</span>
-                                                                             <div class="button-group">
-                                                                                     <span>
-                                                                                             <i class="fa-regular fa-eye"></i>
-                                                                                     </span>
-                                                                                     <span>
-                                                                                             <i class="fa-regular fa-heart"></i>
-                                                                                     </span>
-                                                                                     <span>
-                                                                                             <i class="fa-solid fa-code-compare"></i>
-                                                                                     </span>
-                                                                             </div>
-                                                                     </div>
-                                                                     <div class="content-card-product">
-                                                                             <div class="stars">
-                                                                                     <i class="fa-solid fa-star"></i>
-                                                                                     <i class="fa-solid fa-star"></i>
-                                                                                     <i class="fa-solid fa-star"></i>
-                                                                                     <i class="fa-solid fa-star"></i>
-                                                                                     <i class="fa-regular fa-star"></i>
-                                                                             </div>
-                                                                             <h3>Luffy Mafex</h3>
-                                                                             <span class="add-cart">
-                                                                                     <i class="fa-solid fa-basket-shopping"></i>
-                                                                             </span>
-                                                                             <p class="price">$114.65 <span>$129.43</span></p>
-                                                                     </div>
-                                                             </div>
-                                                             <!--  -->
-                                                             <div class="card-product">
-                                                                     <div class="container-img">
-                                                                             <img
-                                                                                     src="img/captain-america.jpg"
-                                                                                     alt="Toy Captain"
-                                                                             />
-                                                                             <div class="button-group">
-                                                                                     <span>
-                                                                                             <i class="fa-regular fa-eye"></i>
-                                                                                     </span>
-                                                                                     <span>
-                                                                                             <i class="fa-regular fa-heart"></i>
-                                                                                     </span>
-                                                                                     <span>
-                                                                                             <i class="fa-solid fa-code-compare"></i>
-                                                                                     </span>
-                                                                             </div>
-                                                                     </div>
-                                                                     <div class="content-card-product">
-                                                                             <div class="stars">
-                                                                                     <i class="fa-solid fa-star"></i>
-                                                                                     <i class="fa-solid fa-star"></i>
-                                                                                     <i class="fa-solid fa-star"></i>
-                                                                                     <i class="fa-solid fa-star"></i>
-                                                                                     <i class="fa-solid fa-star"></i>
-                                                                             </div>
-                                                                             <h3>Captain America Mafex</h3>
-                                                                             <span class="add-cart">
-                                                                                     <i class="fa-solid fa-basket-shopping"></i>
-                                                                             </span>
-                                                                             <p class="price">$128.75</p>
-                                                                     </div>
-                                                             </div>
-                                                             <!--  -->
-                                                             <div class="card-product">
-                                                             <div class="container-img">
-                                                                     <img src="img/wolverine.jpg" alt="Toy Wolverine" />
-                                                                     <div class="button-group">
-                                                             <span>
-                                                                     <i class="fa-regular fa-eye"></i>
-                                                             </span>
-                                                             <span>
-                                                                     <i class="fa-regular fa-heart"></i>
-                                                             </span>
-                                                             <span>
-                                                                     <i class="fa-solid fa-code-compare"></i>
-                                                             </span>
-                                                             </div>
-                                                     </div>
-                                                     <div class="content-card-product">
-                                                     <div class="stars">
-                                                             <i class="fa-solid fa-star"></i>
-                                                             <i class="fa-solid fa-star"></i>
-                                                             <i class="fa-solid fa-star"></i>
-                                                             <i class="fa-solid fa-star"></i>
-                                                             <i class="fa-solid fa-star"></i>
-                                                     </div>
-                                                     <h3>Wolverine Mafex Figure</h3>
-                                                     <span class="add-cart">
-                                                             <i class="fa-solid fa-basket-shopping"></i>
-                                                     </span>
-                                                     <p class="price">$143.15</p>
-                                             </div>
-                                     </div>
-                             `,
-                             best: `
-                                     <!-- Producto 1 -->
-                                     <div class="card-product">
-                                             <div class="container-img">
-                                                     <img src="img/laios.jpg" alt="Dungeon Meshi Laios Figma Figura" />
-                                                     <div class="button-group">
-                                                             <span>
-                                                                     <i class="fa-regular fa-eye"></i>
-                                                             </span>
-                                                             <span>
-                                                                     <i class="fa-regular fa-heart"></i>
-                                                             </span>
-                                                             <span>
-                                                             <i class="fa-solid fa-code-compare"></i>
-                                                             </span>
-                                                                     </div>
-                                                             </div>
-                                                             <div class="content-card-product">
-                                                                     <div class="stars">
-                                                                             <i class="fa-solid fa-star"></i>
-                                                                             <i class="fa-solid fa-star"></i>
-                                                                             <i class="fa-solid fa-star"></i>
-                                                                             <i class="fa-solid fa-star"></i>
-                                                                             <i class="fa-solid fa-star"></i>
-                                                                     </div>
-                                                                     <h3>Rem Figma Figure</h3>
-                                                                     <span class="add-cart">
-                                                                             <i class="fa-solid fa-basket-shopping"></i>
-                                                                     </span>
-                                                                     <p class="price">$110.48</p>
-                                                             </div>
-                                                             </div>
-                                                             <!-- Producto 2 -->
-                                                             <div class="card-product">
-                                                                     <div class="container-img">
-                                                                             <img
-                                                                                     src="img/keibol.jpg"
-                                                                                     alt="Toy Keibol.jpg"
-                                                                             />
-                                                                             <div class="button-group">
-                                                                                     <span>
-                                                                                             <i class="fa-regular fa-eye"></i>
-                                                                                     </span>
-                                                                                     <span>
-                                                                                             <i class="fa-regular fa-heart"></i>
-                                                                                     </span>
-                                                                                     <span>
-                                                                                             <i class="fa-solid fa-code-compare"></i>
-                                                                                     </span>
-                                                                             </div>
-                                                                     </div>
-                                                                     <div class="content-card-product">
-                                                                             <div class="stars">
-                                                                                     <i class="fa-solid fa-star"></i>
-                                                                                     <i class="fa-solid fa-star"></i>
-                                                                                     <i class="fa-solid fa-star"></i>
-                                                                                     <i class="fa-solid fa-star"></i>
-                                                                                     <i class="fa-solid fa-star"></i>
-                                                                             </div>
-                                                                             <h3>Keibol Yamaguchi</h3>
-                                                                             <span class="add-cart">
-                                                                                     <i class="fa-solid fa-basket-shopping"></i>
-                                                                             </span>
-                                                                             <p class="price">$150.99</p>
-                                                                     </div>
-                                                             </div>
-                                                             <!--  -->
-                                                             <div class="card-product">
-                                                                     <div class="container-img">
-                                                                             <img
-                                                                                     src="img/samus.jpg"
-                                                                                     alt="Toy Samus"
-                                                                             />
-                                                                             <div class="button-group">
-                                                                                     <span>
-                                                                                             <i class="fa-regular fa-eye"></i>
-                                                                                     </span>
-                                                                                     <span>
-                                                                                             <i class="fa-regular fa-heart"></i>
-                                                                                     </span>
-                                                                                     <span>
-                                                                                             <i class="fa-solid fa-code-compare"></i>
-                                                                                     </span>
-                                                                             </div>
-                                                                     </div>
-                                                                     <div class="content-card-product">
-                                                                             <div class="stars">
-                                                                                     <i class="fa-solid fa-star"></i>
-                                                                                     <i class="fa-solid fa-star"></i>
-                                                                                     <i class="fa-solid fa-star"></i>
-                                                                                     <i class="fa-solid fa-star"></i>
-                                                                                     <i class="fa-solid fa-star"></i>
-                                                                             </div>
-                                                                             <h3>Samus Figma Figure</h3>
-                                                                             <span class="add-cart">
-                                                                                     <i class="fa-solid fa-basket-shopping"></i>
-                                                                             </span>
-                                                                             <p class="price">$137.87</p>
-                                                                     </div>
-                                                             </div>
-                                                             <!--  -->
-                                                             <div class="card-product">
-                                                             <div class="container-img">
-                                                                     <img src="img/bell-nendo.jpg" alt="Toy Bell Nendo" />
-                                                                     <div class="button-group">
-                                                             <span>
-                                                                     <i class="fa-regular fa-eye"></i>
-                                                             </span>
-                                                             <span>
-                                                                     <i class="fa-regular fa-heart"></i>
-                                                             </span>
-                                                             <span>
-                                                                     <i class="fa-solid fa-code-compare"></i>
-                                                             </span>
-                                                             </div>
-                                                     </div>
-                                                     <div class="content-card-product">
-                                                     <div class="stars">
-                                                             <i class="fa-solid fa-star"></i>
-                                                             <i class="fa-solid fa-star"></i>
-                                                             <i class="fa-solid fa-star"></i>
-                                                             <i class="fa-solid fa-star"></i>
-                                                             <i class="fa-solid fa-star"></i>
-                                                     </div>
-                                                     <h3>Bell Nendoroid</h3>
-                                                     <span class="add-cart">
-                                                             <i class="fa-solid fa-basket-shopping"></i>
-                                                     </span>
-                                                     <p class="price">$121.30</p>
-                                             </div>
-                                     </div>
-                             `
-                             };
+                                                                 <i class="fa-solid fa-star"></i>
+                                                                 <i class="fa-solid fa-star"></i>
+                                                                 <i class="fa-regular fa-star"></i>
+                                                         </div>
+                                                         <h3>Belle Good Smile</h3>
+                                                         <span class="add-cart">
+                                                                 <i class="fa-solid fa-basket-shopping"></i>
+                                                         </span>
+                                                         <p class="price">$118.85 <span>$143.20</span></p>
+                                                 </div>
+                                         </div>
+                                         <!--  -->
+                                         <div class="card-product">
+                                                 <div class="container-img">
+                                                         <img
+                                                                 src="img/link.jpg"
+                                                                 alt="Toy link"
+                                                         />
+                                                         <div class="button-group">
+                                                                 <span>
+                                                                         <i class="fa-regular fa-eye"></i>
+                                                                 </span>
+                                                                 <span>
+                                                                         <i class="fa-regular fa-heart"></i>
+                                                                 </span>
+                                                                 <span>
+                                                                         <i class="fa-solid fa-code-compare"></i>
+                                                                 </span>
+                                                         </div>
+                                                 </div>
+                                                 <div class="content-card-product">
+                                                         <div class="stars">
+                                                                 <i class="fa-solid fa-star"></i>
+                                                                 <i class="fa-solid fa-star"></i>
+                                                                 <i class="fa-solid fa-star"></i>
+                                                                 <i class="fa-solid fa-star"></i>
+                                                                 <i class="fa-solid fa-star"></i>
+                                                         </div>
+                                                         <h3>Link Figma Figure</h3>
+                                                         <span class="add-cart">
+                                                                 <i class="fa-solid fa-basket-shopping"></i>
+                                                         </span>
+                                                         <p class="price">$137.80</p>
+                                                 </div>
+                                         </div>
+                                         <!--  -->
+                                         <div class="card-product">
+                                         <div class="container-img">
+                                                 <img src="img/frieren.jpg" alt="Toy frieren" />
+                                                 <div class="button-group">
+                                         <span>
+                                                 <i class="fa-regular fa-eye"></i>
+                                         </span>
+                                         <span>
+                                                 <i class="fa-regular fa-heart"></i>
+                                         </span>
+                                         <span>
+                                                 <i class="fa-solid fa-code-compare"></i>
+                                         </span>
+                                         </div>
+                                 </div>
+                                 <div class="content-card-product">
+                                 <div class="stars">
+                                         <i class="fa-solid fa-star"></i>
+                                         <i class="fa-solid fa-star"></i>
+                                         <i class="fa-solid fa-star"></i>
+                                         <i class="fa-solid fa-star"></i>
+                                         <i class="fa-regular fa-star"></i>
+                                 </div>
+                                 <h3>Frieren Nendoroid</h3>
+                                 <span class="add-cart">
+                                         <i class="fa-solid fa-basket-shopping"></i>
+                                 </span>
+                                 <p class="price">$132.20</p>
+                         </div>
+                 </div>
+         `,
+         latest: `
+                 <!-- Producto 1 -->
+                 <div class="card-product">
+                         <div class="container-img">
+                                 <img src="img/frieren-figma.jpg" alt="Sousou no Frieren Frieren Figma Figura" />
+                                 <div class="button-group">
+                                         <span>
+                                                 <i class="fa-regular fa-eye"></i>
+                                         </span>
+                                         <span>
+                                                 <i class="fa-regular fa-heart"></i>
+                                         </span>
+                                         <span>
+                                         <i class="fa-solid fa-code-compare"></i>
+                                         </span>
+                                                 </div>
+                                         </div>
+                                         <div class="content-card-product">
+                                                 <div class="stars">
+                                                         <i class="fa-solid fa-star"></i>
+                                                         <i class="fa-solid fa-star"></i>
+                                                         <i class="fa-solid fa-star"></i>
+                                                         <i class="fa-solid fa-star"></i>
+                                                         <i class="fa-solid fa-star"></i>
+                                                 </div>
+                                                 <h3>Frieren Figma Figure</h3>
+                                                 <span class="add-cart">
+                                                         <i class="fa-solid fa-basket-shopping"></i>
+                                                 </span>
+                                                 <p class="price">$124.45</p>
+                                         </div>
+                                         </div>
+                                         <!-- Producto 2 -->
+                                         <div class="card-product">
+                                                 <div class="container-img">
+                                                         <img
+                                                                 src="img/lufi.jpg"
+                                                                 alt="Toy lufi.jpg"
+                                                         />
+                                                         <span class="discount">-10%</span>
+                                                         <div class="button-group">
+                                                                 <span>
+                                                                         <i class="fa-regular fa-eye"></i>
+                                                                 </span>
+                                                                 <span>
+                                                                         <i class="fa-regular fa-heart"></i>
+                                                                 </span>
+                                                                 <span>
+                                                                         <i class="fa-solid fa-code-compare"></i>
+                                                                 </span>
+                                                         </div>
+                                                 </div>
+                                                 <div class="content-card-product">
+                                                         <div class="stars">
+                                                                 <i class="fa-solid fa-star"></i>
+                                                                 <i class="fa-solid fa-star"></i>
+                                                                 <i class="fa-solid fa-star"></i>
+                                                                 <i class="fa-solid fa-star"></i>
+                                                                 <i class="fa-regular fa-star"></i>
+                                                         </div>
+                                                         <h3>Luffy Mafex</h3>
+                                                         <span class="add-cart">
+                                                                 <i class="fa-solid fa-basket-shopping"></i>
+                                                         </span>
+                                                         <p class="price">$114.65 <span>$129.43</span></p>
+                                                 </div>
+                                         </div>
+                                         <!--  -->
+                                         <div class="card-product">
+                                                 <div class="container-img">
+                                                         <img
+                                                                 src="img/captain-america.jpg"
+                                                                 alt="Toy Captain"
+                                                         />
+                                                         <div class="button-group">
+                                                                 <span>
+                                                                         <i class="fa-regular fa-eye"></i>
+                                                                 </span>
+                                                                 <span>
+                                                                         <i class="fa-regular fa-heart"></i>
+                                                                 </span>
+                                                                 <span>
+                                                                         <i class="fa-solid fa-code-compare"></i>
+                                                                 </span>
+                                                         </div>
+                                                 </div>
+                                                 <div class="content-card-product">
+                                                         <div class="stars">
+                                                                 <i class="fa-solid fa-star"></i>
+                                                                 <i class="fa-solid fa-star"></i>
+                                                                 <i class="fa-solid fa-star"></i>
+                                                                 <i class="fa-solid fa-star"></i>
+                                                                 <i class="fa-solid fa-star"></i>
+                                                         </div>
+                                                         <h3>Captain America Mafex</h3>
+                                                         <span class="add-cart">
+                                                                 <i class="fa-solid fa-basket-shopping"></i>
+                                                         </span>
+                                                         <p class="price">$128.75</p>
+                                                 </div>
+                                         </div>
+                                         <!--  -->
+                                         <div class="card-product">
+                                         <div class="container-img">
+                                                 <img src="img/wolverine.jpg" alt="Toy Wolverine" />
+                                                 <div class="button-group">
+                                         <span>
+                                                 <i class="fa-regular fa-eye"></i>
+                                         </span>
+                                         <span>
+                                                 <i class="fa-regular fa-heart"></i>
+                                         </span>
+                                         <span>
+                                                 <i class="fa-solid fa-code-compare"></i>
+                                         </span>
+                                         </div>
+                                 </div>
+                                 <div class="content-card-product">
+                                 <div class="stars">
+                                         <i class="fa-solid fa-star"></i>
+                                         <i class="fa-solid fa-star"></i>
+                                         <i class="fa-solid fa-star"></i>
+                                         <i class="fa-solid fa-star"></i>
+                                         <i class="fa-solid fa-star"></i>
+                                 </div>
+                                 <h3>Wolverine Mafex Figure</h3>
+                                 <span class="add-cart">
+                                         <i class="fa-solid fa-basket-shopping"></i>
+                                 </span>
+                                 <p class="price">$143.15</p>
+                         </div>
+                 </div>
+         `,
+         best: `
+                 <!-- Producto 1 -->
+                 <div class="card-product">
+                         <div class="container-img">
+                                 <img src="img/laios.jpg" alt="Dungeon Meshi Laios Figma Figura" />
+                                 <div class="button-group">
+                                         <span>
+                                                 <i class="fa-regular fa-eye"></i>
+                                         </span>
+                                         <span>
+                                                 <i class="fa-regular fa-heart"></i>
+                                         </span>
+                                         <span>
+                                         <i class="fa-solid fa-code-compare"></i>
+                                         </span>
+                                                 </div>
+                                         </div>
+                                         <div class="content-card-product">
+                                                 <div class="stars">
+                                                         <i class="fa-solid fa-star"></i>
+                                                         <i class="fa-solid fa-star"></i>
+                                                         <i class="fa-solid fa-star"></i>
+                                                         <i class="fa-solid fa-star"></i>
+                                                         <i class="fa-solid fa-star"></i>
+                                                 </div>
+                                                 <h3>Rem Figma Figure</h3>
+                                                 <span class="add-cart">
+                                                         <i class="fa-solid fa-basket-shopping"></i>
+                                                 </span>
+                                                 <p class="price">$110.48</p>
+                                         </div>
+                                         </div>
+                                         <!-- Producto 2 -->
+                                         <div class="card-product">
+                                                 <div class="container-img">
+                                                         <img
+                                                                 src="img/keibol.jpg"
+                                                                 alt="Toy Keibol.jpg"
+                                                         />
+                                                         <div class="button-group">
+                                                                 <span>
+                                                                         <i class="fa-regular fa-eye"></i>
+                                                                 </span>
+                                                                 <span>
+                                                                         <i class="fa-regular fa-heart"></i>
+                                                                 </span>
+                                                                 <span>
+                                                                         <i class="fa-solid fa-code-compare"></i>
+                                                                 </span>
+                                                         </div>
+                                                 </div>
+                                                 <div class="content-card-product">
+                                                         <div class="stars">
+                                                                 <i class="fa-solid fa-star"></i>
+                                                                 <i class="fa-solid fa-star"></i>
+                                                                 <i class="fa-solid fa-star"></i>
+                                                                 <i class="fa-solid fa-star"></i>
+                                                                 <i class="fa-solid fa-star"></i>
+                                                         </div>
+                                                         <h3>Keibol Yamaguchi</h3>
+                                                         <span class="add-cart">
+                                                                 <i class="fa-solid fa-basket-shopping"></i>
+                                                         </span>
+                                                         <p class="price">$150.99</p>
+                                                 </div>
+                                         </div>
+                                         <!--  -->
+                                         <div class="card-product">
+                                                 <div class="container-img">
+                                                         <img
+                                                                 src="img/samus.jpg"
+                                                                 alt="Toy Samus"
+                                                         />
+                                                         <div class="button-group">
+                                                                 <span>
+                                                                         <i class="fa-regular fa-eye"></i>
+                                                                 </span>
+                                                                 <span>
+                                                                         <i class="fa-regular fa-heart"></i>
+                                                                 </span>
+                                                                 <span>
+                                                                         <i class="fa-solid fa-code-compare"></i>
+                                                                 </span>
+                                                         </div>
+                                                 </div>
+                                                 <div class="content-card-product">
+                                                         <div class="stars">
+                                                                 <i class="fa-solid fa-star"></i>
+                                                                 <i class="fa-solid fa-star"></i>
+                                                                 <i class="fa-solid fa-star"></i>
+                                                                 <i class="fa-solid fa-star"></i>
+                                                                 <i class="fa-solid fa-star"></i>
+                                                         </div>
+                                                         <h3>Samus Figma Figure</h3>
+                                                         <span class="add-cart">
+                                                                 <i class="fa-solid fa-basket-shopping"></i>
+                                                         </span>
+                                                         <p class="price">$137.87</p>
+                                                 </div>
+                                         </div>
+                                         <!--  -->
+                                         <div class="card-product">
+                                         <div class="container-img">
+                                                 <img src="img/bell-nendo.jpg" alt="Toy Bell Nendo" />
+                                                 <div class="button-group">
+                                         <span>
+                                                 <i class="fa-regular fa-eye"></i>
+                                         </span>
+                                         <span>
+                                                 <i class="fa-regular fa-heart"></i>
+                                         </span>
+                                         <span>
+                                                 <i class="fa-solid fa-code-compare"></i>
+                                         </span>
+                                         </div>
+                                 </div>
+                                 <div class="content-card-product">
+                                 <div class="stars">
+                                         <i class="fa-solid fa-star"></i>
+                                         <i class="fa-solid fa-star"></i>
+                                         <i class="fa-solid fa-star"></i>
+                                         <i class="fa-solid fa-star"></i>
+                                         <i class="fa-solid fa-star"></i>
+                                 </div>
+                                 <h3>Bell Nendoroid</h3>
+                                 <span class="add-cart">
+                                         <i class="fa-solid fa-basket-shopping"></i>
+                                 </span>
+                                 <p class="price">$121.30</p>
+                         </div>
+                 </div>
+         `
+         };
 
-                             buttons.forEach(button => {
-                             button.addEventListener("click", () => {
-                                     // 1. Activar botón seleccionado
-                                     buttons.forEach(btn => btn.classList.remove("active"));
-                                     button.classList.add("active");
+         buttons.forEach(button => {
+         button.addEventListener("click", () => {
+                 // 1. Activar botón seleccionado
+                 buttons.forEach(btn => btn.classList.remove("active"));
+                 button.classList.add("active");
 
-                                     // 2. Leer categoría desde el atributo data-category
-                                     const category = button.getAttribute("data-category");
+                 // 2. Leer categoría desde el atributo data-category
+                 const category = button.getAttribute("data-category");
 
-                                     // 3. Animación de fade out -> cambio -> fade in
-                                     productsContainer.style.opacity = 0;
+                 // 3. Animación de fade out -> cambio -> fade in
+                 productsContainer.style.opacity = 0;
 
-                                     setTimeout(() => {
-                                     productsContainer.innerHTML = productsByCategory[category] || "<p>No products available</p>";
-                                     productsContainer.style.opacity = 1;
-                                     }, 300); // tiempo igual a la transición CSS
-                             });
-                             });
-                     });
+                 setTimeout(() => {
+                 productsContainer.innerHTML = productsByCategory[category] || "<p>No products available</p>";
+                 productsContainer.style.opacity = 1;
+                 }, 300); // tiempo igual a la transición CSS
+         });
+         });
+ });
         </script>
     </body>
 </html>
