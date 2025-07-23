@@ -1,0 +1,174 @@
+/* Contenedor principal de la sección "Mi Cuenta" */
+.main-content {
+  padding: 3rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #003366;
+  background-color: #f8faff;
+}
+
+/* Título principal "Mi Cuenta" */
+.heading-1 {
+  font-size: 3.2rem;
+  font-weight: 700;
+  color: #002244;
+  margin-bottom: 1.8rem;
+}
+
+/* Contenedor flex de toda la sección Mi Cuenta */
+.mi-cuenta {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 3rem;
+  margin-top: 3rem;
+  align-items: stretch; /* Para que ambas columnas tengan igual altura */
+}
+
+/* CUADRO de Detalles de la cuenta - lado izquierdo */
+.detalles-cuenta {
+  flex: 1 1 40%;
+  min-width: 350px;
+  max-width: 500px;
+  background-color: #d9ecff; /* celeste claro */
+  border-left: 8px solid #007bff;
+  border-radius: 14px;
+  padding: 2.5rem 3rem;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+  font-size: 1.25rem;  /* letra más grande */
+  line-height: 1.8;
+  color: #003366; /* texto azul oscuro */
+  height: 100%; /* toma toda la altura disponible */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+/* Titulos dentro de detalles de cuenta */
+.detalles-cuenta h3 {
+  font-size: 2.2rem;
+  margin-bottom: 1.5rem;
+  color: #002244;
+}
+
+/* Párrafos dentro de detalles */
+.detalles-cuenta p {
+  margin-bottom: 1.3rem;
+}
+
+/* Botón negro para detalles de cuenta (lado izquierdo) */
+.detalles-cuenta button,
+.detalles-cuenta .btn-dark {
+  background-color: #111111;
+  color: #f0f0f0;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1.8rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 1.5rem;
+  align-self: flex-start;
+}
+
+.detalles-cuenta button:hover,
+.detalles-cuenta .btn-dark:hover {
+  background-color: #333333;
+}
+
+/* Contenedor derecho con los 3 cuadros (Pedidos, carrito, crédito) */
+.mi-cuenta-right {
+  flex: 1 1 55%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  min-width: 350px;
+}
+
+/* Estilo general para cada tarjeta en la derecha */
+.mi-cuenta-card {
+  background-color: #ffffff;
+  border-radius: 14px;
+  padding: 2rem 2.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  font-size: 1.2rem;
+  color: #003366;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Títulos dentro de las tarjetas derecha */
+.mi-cuenta-card h3 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #004080;
+}
+
+/* Párrafos dentro de las tarjetas */
+.mi-cuenta-card p {
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+}
+
+/* Convertir enlaces dentro de .mi-cuenta-card en botones visuales */
+.mi-cuenta-card a {
+  display: inline-block;
+  background-color: #243B55;
+  color: white;
+  padding: 0.75rem 1.8rem;
+  border-radius: 8px;
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: background-color 0.3s ease;
+  text-align: center;
+  border: none;
+}
+
+.mi-cuenta-card a:hover {
+  background-color: #1d2c44; /* tono más oscuro al hacer hover */
+}
+
+/* Opcional: para que los enlaces no cambien color por defecto en otros contextos */
+.container-user a {
+  color: inherit;
+  text-decoration: none;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  margin-left: 1rem;
+  cursor: pointer;
+}
+
+.container-user a:hover {
+  color: #243B55; /* Cambia color al hover, puedes modificar */
+}
+
+/* Para que el texto y número del carrito estén bien alineados */
+.content-shopping-cart {
+  margin-left: 0.5rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  display: inline-block;
+}
+
+/* Estilos para botones con clase .btn y elemento button */
+button, .btn {
+  background-color: #243B55;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1.8rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 1rem;
+  align-self: flex-start;
+}
+
+button:hover, .btn:hover {
+  background-color: #1d2c44; /* tono más oscuro al hacer hover */
+}
