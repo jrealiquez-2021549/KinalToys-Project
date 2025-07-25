@@ -3,101 +3,106 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Kinal Toy's (Menú Principal)</title>
-        <!-- Icons -->
+        <title>Kinal Toy's (Juguetes)</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <!-- Icono -->
         <link rel="icon" href="img/kinal toys.png">
-        <!-- CSS -->
         <link rel="stylesheet" href="css/principal.css">
         <link rel="stylesheet" href="css/crud.css">
         <link rel="stylesheet" href="css/administrador.css">
     </head>
     <body>
         <header>
-            <div class="container-hero">
-                <div class="container hero">
-                    <div class="customer-support">
-                        <i class="fa-solid fa-headset"></i>
-                        <div class="content-customer-support">
-                            <span class="text">Soporte al cliente</span>
-                            <span class="number">502-3110-0319</span>
+            <header>
+                <div class="container-hero">
+                    <div class="container hero">
+                        <div class="customer-support">
+                            <i class="fa-solid fa-headset"></i>
+                            <div class="content-customer-support">
+                                <span class="text">Soporte al cliente</span>
+                                <span class="number">502-3110-0319</span>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="container-logo">
-                        <h1 class="logo"><a href="/">Kinal Toy's</a></h1>
-                    </div>
+                        <div class="container-logo">
+                            <h1 class="logo"><a href="/">Kinal Toy's</a></h1>
+                        </div>
 
-                    <div class="container-user">
-                        <div class="user-menu">
-                            <i class="fa-solid fa-user"></i>
-                            <ul class="user-dropdown">
-                                <li><a href="#">Mi cuenta</a></li>
-                                <li><a href="#">Cambiar cuenta</a></li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa-solid fa-right-from-bracket"></i> Salir
-                                    </a>
-                                </li>
-                            </ul>
+                        <div class="container-user">
+                            <div class="user-menu">
+                                <i class="fa-solid fa-user"></i>
+                                <ul class="user-dropdown">
+                                    <li><a href="#">Mi cuenta</a></li>
+                                    <li><a href="#">Cambiar cuenta</a></li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa-solid fa-right-from-bracket"></i> Salir
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="container-navbar">
-                <nav class="navbar container">
-                    <i class="fa-solid fa-bars"></i>
-                    <ul class="menu">
-                        <li><a href="principal-admin.jsp">Inicio</a></li>
-                        <li><a href="usuario.jsp">Usuarios</a></li>
-                        <li><a href="factura.jsp">Facturas</a></li>
-                        <li><a href="#">Noticias</a></li>
-                        <li><a href="#">Proveedores</a></li>
-                        <li><a href="juguete.jsp">Juguetes</a></li>
-                        <li><a href="#">Cuentas</a></li>
-                        <li><a href="#">Carritos</a></li>
-                        <li><a href="#">Datalles Carritos</a></li>
-                    </ul>
+                <div class="container-navbar">
+                    <nav class="navbar container">
+                        <i class="fa-solid fa-bars"></i>
+                        <ul class="menu">
+                            <li><a href="principal-admin.jsp">Inicio</a></li>
+                            <li><a href="usuario.jsp">Usuarios</a></li>
+                            <li><a href="factura.jsp">Facturas</a></li>
+                            <li><a href="#">Noticias</a></li>
+                            <li><a href="#">Proveedores</a></li>
+                            <li><a href="juguete.jsp">Juguetes</a></li>
+                            <li><a href="#">Cuentas</a></li>
+                            <li><a href="#">Carritos</a></li>
+                            <li><a href="#">Datalles Carritos</a></li>
+                        </ul>
 
-                    <form class="search-form">
-                        <input type="search" placeholder="Buscar..." />
-                        <button class="btn-search">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                        </button>
-                    </form>
-                </nav>
-            </div>
+                        <form class="search-form">
+                            <input type="search" placeholder="Buscar..." />
+                            <button class="btn-search">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </button>
+                        </form>
+                    </nav>
+                </div>
+            </header>
         </header>
 
         <main class="main-users">
             <section class="users-section container">
-                <h1 class="users-title">Facturas</h1>
+                <h1 class="users-title">Juguetes</h1>
 
                 <form class="users-form">
                     <div class="form-group">
-                        <label for="fecha-emision"><strong>Fecha de Emisión:</strong></label>
-                        <input type="date" id="fecha-emision" name="fecha-emision" required />
+                        <label for="nombre-juguete"><strong>Nombre Juguete:</strong></label>
+                        <input type="text" id="nombre-juguete" name="nombre-juguete" placeholder="Ej. Carrito Hot Wheels" required />
                     </div>
 
                     <div class="form-group">
-                        <label for="metodo-pago"><strong>Método de Pago:</strong></label>
-                        <select id="metodo-pago" name="metodo-pago" required>
-                            <option value="">Seleccione</option>
-                            <option value="Efectivo">Efectivo</option>
-                            <option value="Credito">Crédito</option>
-                        </select>
+                        <label for="precio-juguete"><strong>Precio:</strong></label>
+                        <input type="number" step="0.01" id="precio-juguete" name="precio-juguete" placeholder="Ej. 199.99" required />
                     </div>
 
                     <div class="form-group">
-                        <label for="total"><strong>Total:</strong></label>
-                        <input type="number" id="total" name="total" step="0.01" placeholder="Ej. 150.75" required />
+                        <label for="categoria-juguete"><strong>Categoría:</strong></label>
+                        <input type="text" id="categoria-juguete" name="categoria-juguete" placeholder="Ej. Vehículos" required />
                     </div>
 
                     <div class="form-group">
-                        <label for="codigo-usuario"><strong>Código de Usuario:</strong></label>
-                        <input type="number" id="codigo-usuario" name="codigo-usuario" placeholder="Ej. 1" required />
+                        <label for="marca-juguete"><strong>Marca:</strong></label>
+                        <input type="text" id="marca-juguete" name="marca-juguete" placeholder="Ej. Mafex" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="stock-juguete"><strong>Stock:</strong></label>
+                        <input type="number" id="stock-juguete" name="stock-juguete" placeholder="Ej. 50" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="codigo-noticia"><strong>Código Noticia:</strong></label>
+                        <input type="number" id="codigo-noticia" name="codigo-noticia" placeholder="Ej. 1" required />
                     </div>
                 </form>
 
@@ -105,27 +110,18 @@
                     <table class="users-table">
                         <thead>
                             <tr>
-                                <th>Código Factura</th>
-                                <th>Fecha Emisión</th>
-                                <th>Método de Pago</th>
-                                <th>Total</th>
-                                <th>Código Usuario</th>
+                                <th>Código Juguete</th>
+                                <th>Nombre</th>
+                                <th>Precio</th>
+                                <th>Categoría</th>
+                                <th>Marca</th>
+                                <th>Stock</th>
+                                <th>Código Noticia</th>
                             </tr>
                         </thead>
-                        <tbody id="detalle-factura">
+                        <tbody id="tabla-juguetes">
                             <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td colspan="7"></td>
                             </tr>
                         </tbody>
                     </table>
@@ -142,7 +138,7 @@
             </section>
         </main>
 
-        <footer class="footer">
+<footer class="footer">
             <div class="container container-footer">
                 <div class="menu-footer">
                     <div class="contact-info">
@@ -221,27 +217,11 @@
                 </div>
             </div>
         </footer>
-        
+
         <script>
             document.addEventListener('DOMContentLoaded', () => {
-                const checkboxes = document.querySelectorAll('.task-checkbox');
-                const completedCount = document.getElementById('completed-count');
-
-                function updateCount() {
-                    const count = Array.from(checkboxes).filter(cb => cb.checked).length;
-                    completedCount.textContent = count;
-                }
-
-                checkboxes.forEach(cb => {
-                    cb.addEventListener('change', updateCount);
-                });
-
-                document.getElementById('task-form').addEventListener('submit', function (e) {
-                    e.preventDefault();
-                    alert('Informe enviado correctamente ?');
-                });
+                // Poner la logica de juguete 
             });
         </script>
-
     </body>
 </html>
