@@ -1,67 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kinal Toy's (Menú Principal)</title>
-	<!-- Icons -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- Icono -->
-	<link rel="icon" href="img/kinal toys.png">
-	<!-- CSS -->
-    <link rel="stylesheet" href="css/principal.css">
-    <link rel="stylesheet" href="css/crud.css">
-</head>
-<body>
-    <header>
-			<div class="container-hero">
-				<div class="container hero">
-					<div class="customer-support">
-						<i class="fa-solid fa-headset"></i>
-						<div class="content-customer-support">
-							<span class="text">Soporte al cliente</span>
-							<span class="number">502-3110-0319</span>
-						</div>
-					</div>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Kinal Toy's (Menú Principal)</title>
+        <!-- Icons -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <!-- Icono -->
+        <link rel="icon" href="img/kinal toys.png">
+        <!-- CSS -->
+        <link rel="stylesheet" href="css/principal.css">
+        <link rel="stylesheet" href="css/crud.css">
+        <link rel="stylesheet" href="css/administrador.css">
+    </head>
+    <body>
+        <header>
+            <div class="container-hero">
+                <div class="container hero">
+                    <div class="customer-support">
+                        <i class="fa-solid fa-headset"></i>
+                        <div class="content-customer-support">
+                            <span class="text">Soporte al cliente</span>
+                            <span class="number">502-3110-0319</span>
+                        </div>
+                    </div>
 
-					<div class="container-logo">
-						<h1 class="logo"><a href="/">Kinal Toy's</a></h1>
-					</div>
+                    <div class="container-logo">
+                        <h1 class="logo"><a href="/">Kinal Toy's</a></h1>
+                    </div>
 
-					<div class="container-user">
-						<i class="fa-solid fa-user"></i>
-						<i class="fa-solid fa-basket-shopping"></i>
-						<div class="content-shopping-cart">
-							<span class="text">Carrito</span>
-							<span class="number">(0)</span>
-						</div>
-					</div>
-				</div>
-			</div>
+                    <div class="container-user">
+                        <div class="user-menu">
+                            <i class="fa-solid fa-user"></i>
+                            <ul class="user-dropdown">
+                                <li><a href="#">Mi cuenta</a></li>
+                                <li><a href="#">Cambiar cuenta</a></li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa-solid fa-right-from-bracket"></i> Salir
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-			<div class="container-navbar">
-				<nav class="navbar container">
-					<i class="fa-solid fa-bars"></i>
-					<ul class="menu">
-						<li><a href="principal.jsp">Inicio</a></li>
-						<li><a href="usuario.jsp">Usuario</a></li>
-						<li><a href="factura.jsp">Factura</a></li>
-						<li><a href="#">Noticias</a></li>
-						<li><a href="#">Proveedor</a></li>
-						<li><a href="#">Juguete</a></li>
-                                                <li><a href="#">Cuenta</a></li>
-                                                <li><a href="#">Carrito</a></li>
-                                                <li><a href="#">Detalle Carrito</a></li>
-					</ul>
+            <div class="container-navbar">
+                <nav class="navbar container">
+                    <i class="fa-solid fa-bars"></i>
+                    <ul class="menu">
+                        <li><a href="principal-admin.jsp">Inicio</a></li>
+                        <li><a href="usuario.jsp">Usuarios</a></li>
+                        <li><a href="factura.jsp">Facturas</a></li>
+                        <li><a href="#">Noticias</a></li>
+                        <li><a href="#">Proveedores</a></li>
+                        <li><a href="#">Juguetes</a></li>
+                        <li><a href="#">Cuentas</a></li>
+                        <li><a href="#">Carritos</a></li>
+                        <li><a href="#">Datalles Carritos</a></li>
+                    </ul>
 
-					<form class="search-form">
-						<input type="search" placeholder="Buscar..." />
-						<button class="btn-search">
-							<i class="fa-solid fa-magnifying-glass"></i>
-						</button>
-					</form>
-				</nav>
-			</div>
+                    <form class="search-form">
+                        <input type="search" placeholder="Buscar..." />
+                        <button class="btn-search">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </form>
+                </nav>
+            </div>
         </header>
 
         <main class="main-users">
@@ -128,7 +135,7 @@
             </section>
         </main>
 
-		<footer class="footer">
+        <footer class="footer">
             <div class="container container-footer">
                 <div class="menu-footer">
                     <div class="contact-info">
@@ -160,7 +167,7 @@
                             </span>
                         </div>
                     </div>
- 
+
                     <div class="information">
                         <p class="title-footer">Información</p>
                         <ul>
@@ -171,10 +178,10 @@
                             <li><a href="#">Contactános</a></li>
                         </ul>
                     </div>
- 
+
                     <div class="my-account">
                         <p class="title-footer">Mi cuenta</p>
- 
+
                         <ul>
                             <li><a href="#">Mi cuenta</a></li>
                             <li><a href="#">Historial de ordenes</a></li>
@@ -183,10 +190,10 @@
                             <li><a href="#">Reembolsos</a></li>
                         </ul>
                     </div>
- 
+
                     <div class="newsletter">
                         <p class="title-footer">Boletín informativo</p>
- 
+
                         <div class="content">
                             <p>
                                 Suscríbete a nuestros boletines ahora y mantente al
@@ -197,16 +204,37 @@
                         </div>
                     </div>
                 </div>
- 
+
                 <div class="copyright">
                     <p>
                         Kinal Toy's &copy; 2025
                     </p>
- 
+
                     <img src="../Images/payment.png" alt="Pagos">
                 </div>
             </div>
         </footer>
+        
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const checkboxes = document.querySelectorAll('.task-checkbox');
+                const completedCount = document.getElementById('completed-count');
 
-	</body>
+                function updateCount() {
+                    const count = Array.from(checkboxes).filter(cb => cb.checked).length;
+                    completedCount.textContent = count;
+                }
+
+                checkboxes.forEach(cb => {
+                    cb.addEventListener('change', updateCount);
+                });
+
+                document.getElementById('task-form').addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    alert('Informe enviado correctamente ?');
+                });
+            });
+        </script>
+        
+    </body>
 </html>

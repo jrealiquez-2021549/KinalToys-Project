@@ -10,7 +10,6 @@
         <link rel="icon" href="img/kinal toys.png">
         <!-- CSS -->
         <link rel="stylesheet" href="css/principal.css">
-        <link rel="stylesheet" href="css/crud.css">
         <link rel="stylesheet" href="css/administrador.css">
     </head>
     <body>
@@ -71,73 +70,108 @@
             </div>
         </header>
 
-        <main class="main-users">
-            <section class="users-section container">
-                <h1 class="users-title">Facturas</h1>
+        <main class="main-content">
+            <section class="container container-dashboard">
+                <!-- LADO IZQUIERDO: Lista de tareas -->
+                <div class="dashboard-left">
+                    <h2 class="heading-1">Lista de Tareas a Realizar</h2>
 
-                <form class="users-form">
-                    <div class="form-group">
-                        <label for="fecha-emision"><strong>Fecha de Emisión:</strong></label>
-                        <input type="date" id="fecha-emision" name="fecha-emision" required />
-                    </div>
+                    <form id="task-form" class="task-form">
+                        <ul class="task-list">
+                            <li>
+                                <label>
+                                    <input type="checkbox" class="task-checkbox" />
+                                    Registrar nuevo usuario
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" class="task-checkbox" />
+                                    Revisar facturas pendientes
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" class="task-checkbox" />
+                                    Publicar nueva noticia
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" class="task-checkbox" />
+                                    Actualizar stock de juguetes
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" class="task-checkbox" />
+                                    Revisar cuentas de usuarios
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" class="task-checkbox" />
+                                    Agregar proveedor nuevo
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" class="task-checkbox" />
+                                    Revisar carritos activos
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" class="task-checkbox" />
+                                    Detallar compras recientes
+                                </label>
+                            </li>
+                        </ul>
 
-                    <div class="form-group">
-                        <label for="metodo-pago"><strong>Método de Pago:</strong></label>
-                        <select id="metodo-pago" name="metodo-pago" required>
-                            <option value="">Seleccione</option>
-                            <option value="Efectivo">Efectivo</option>
-                            <option value="Credito">Crédito</option>
-                        </select>
-                    </div>
+                        <div class="task-summary">
+                            <p><strong>Tareas Completadas:</strong> <span id="completed-count">0</span> / 8</p>
+                        </div>
 
-                    <div class="form-group">
-                        <label for="total"><strong>Total:</strong></label>
-                        <input type="number" id="total" name="total" step="0.01" placeholder="Ej. 150.75" required />
-                    </div>
-
-                    <div class="form-group">
-                        <label for="codigo-usuario"><strong>Código de Usuario:</strong></label>
-                        <input type="number" id="codigo-usuario" name="codigo-usuario" placeholder="Ej. 1" required />
-                    </div>
-                </form>
-
-                <div class="table-wrapper">
-                    <table class="users-table">
-                        <thead>
-                            <tr>
-                                <th>Código Factura</th>
-                                <th>Fecha Emisión</th>
-                                <th>Método de Pago</th>
-                                <th>Total</th>
-                                <th>Código Usuario</th>
-                            </tr>
-                        </thead>
-                        <tbody id="detalle-factura">
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                        <button type="submit" class="btn-submit-report">Enviar Informe</button>
+                    </form>
                 </div>
 
-                <div class="crud-buttons">
-                    <button class="btn-crud">Agregar</button>
-                    <button class="btn-crud">Listar</button>
-                    <button class="btn-crud">Buscar</button>
-                    <input type="text" class="input-search" placeholder="Ingrese búsqueda" />
-                    <button class="btn-crud">Eliminar</button>
-                    <button class="btn-crud">Actualizar</button>
+                <!-- LADO DERECHO: Botones como categorías -->
+                <div class="dashboard-right">
+                    <div class="container-categories">
+                        <div class="card-category usuarios-bg">
+                            <p>Usuarios</p>
+                            <a href="usuario.jsp?categoria=usuarios"><span>Ingresar</span></a>
+                        </div>
+                        <div class="card-category facturas-bg">
+                            <p>Facturas</p>
+                            <a href="factura.jsp?categoria=facturas"><span>Ingresar</span></a>
+                        </div>
+                        <div class="card-category noticias-bg">
+                            <p>Noticias</p>
+                            <a href="noticia.jsp?categoria=noticias"><span>Ingresar</span></a>
+                        </div>
+                        <div class="card-category proveedores-bg">
+                            <p>Proveedores</p>
+                            <a href="proveedor.jsp?categoria=proveedores"><span>Ingresar</span></a>
+                        </div>
+                        <div class="card-category juguetes-bg">
+                            <p>Juguetes</p>
+                            <a href="juguete.jsp?categoria=juguetes"><span>Ingresar</span></a>
+                        </div>
+                        <div class="card-category cuentas-bg">
+                            <p>Cuentas</p>
+                            <a href="cuenta.jsp?categoria=cuentas"><span>Ingresar</span></a>
+                        </div>
+                        <div class="card-category carritos-bg">
+                            <p>Carritos</p>
+                            <a href="carrito.jsp?categoria=carritos"><span>Ingresar</span></a>
+                        </div>
+                        <div class="card-category detalles-bg">
+                            <p>Detalles Carritos</p>
+                            <a href="detalle.jsp?categoria=detalles"><span>Ingresar</span></a>
+                        </div>
+                    </div>
                 </div>
             </section>
         </main>
@@ -221,7 +255,7 @@
                 </div>
             </div>
         </footer>
-        
+
         <script>
             document.addEventListener('DOMContentLoaded', () => {
                 const checkboxes = document.querySelectorAll('.task-checkbox');
@@ -242,6 +276,5 @@
                 });
             });
         </script>
-
     </body>
 </html>
