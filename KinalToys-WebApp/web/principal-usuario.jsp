@@ -69,7 +69,7 @@
             <div class="content-banner">
                 <p>Kinal TOYs</p>
                 <h2>Donde la imaginación<br />cobra vida</h2>
-                <a href="#">Comprar ahora</a>
+                <a href="categorias.jsp">Comprar ahora</a>
             </div>
         </section>
 

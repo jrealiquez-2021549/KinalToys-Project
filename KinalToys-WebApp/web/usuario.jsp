@@ -55,7 +55,7 @@
                         <li><a href="factura.jsp">Facturas</a></li>
                         <li><a href="#">Noticias</a></li>
                         <li><a href="#">Proveedores</a></li>
-                        <li><a href="#">Juguetes</a></li>
+                        <li><a href="juguete.jsp">Juguetes</a></li>
                         <li><a href="#">Cuentas</a></li>
                         <li><a href="#">Carritos</a></li>
                         <li><a href="#">Datalles Carritos</a></li>
