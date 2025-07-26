@@ -1,44 +1,17 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
     <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Mi Cuenta - Kinal Toys</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Kinal Toy's (Menú Principal)</title>
         <!-- Icons -->
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-            integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-            crossorigin="anonymous"
-            referrerpolicy="no-referrer"
-            />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <!-- Icono -->
-        <link rel="icon" href="img/kinal toys.png" />
+        <link rel="icon" href="img/kinal toys.png">
         <!-- CSS -->
-        <link rel="stylesheet" href="css/principal.css" />
-        <link rel="stylesheet" href="css/cuenta.css" />
-        <style>
-            /* Opcional: para que los enlaces no cambien color por defecto */
-            .container-user a {
-                color: inherit;
-                text-decoration: none;
-                position: relative;
-                display: inline-flex;
-                align-items: center;
-                margin-left: 1rem;
-                cursor: pointer;
-            }
-            .container-user a:hover {
-                color: #007bff; /* Cambia color al hover, puedes modificar */
-            }
-            /* Para que el texto y número del carrito estén bien alineados */
-            .content-shopping-cart {
-                margin-left: 0.5rem;
-                font-weight: 600;
-                font-size: 0.9rem;
-                display: inline-block;
-            }
-        </style>
+        <link rel="stylesheet" href="css/principal.css">
+        <link rel="stylesheet" href="css/crud.css">
+        <link rel="stylesheet" href="css/administrador.css">
     </head>
     <body>
         <header>
@@ -57,16 +30,18 @@
                     </div>
 
                     <div class="container-user">
-                        <a href="cuenta.html" title="Mi Cuenta">
+                        <div class="user-menu">
                             <i class="fa-solid fa-user"></i>
-                        </a>
-                        <a href="carrito.html" title="Carrito de Compras">
-                            <i class="fa-solid fa-basket-shopping"></i>
-                            <div class="content-shopping-cart">
-                                <span class="text">Carrito</span>
-                                <span class="number">(0)</span>
-                            </div>
-                        </a>
+                            <ul class="user-dropdown">
+                                <li><a href="#">Mi cuenta</a></li>
+                                <li><a href="#">Cambiar cuenta</a></li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa-solid fa-right-from-bracket"></i> Salir
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -75,15 +50,15 @@
                 <nav class="navbar container">
                     <i class="fa-solid fa-bars"></i>
                     <ul class="menu">
-                        <li><a href="principal.jsp">Inicio</a></li>
-                        <li><a href="usuario.jsp">Usuario</a></li>
-                        <li><a href="factura.jsp">Factura</a></li>
+                        <li><a href="principal-admin.jsp">Inicio</a></li>
+                        <li><a href="usuario.jsp">Usuarios</a></li>
+                        <li><a href="factura.jsp">Facturas</a></li>
                         <li><a href="#">Noticias</a></li>
-                        <li><a href="#">Proveedor</a></li>
-                        <li><a href="#">Juguete</a></li>
-                        <li><a href="#">Cuenta</a></li>
-                        <li><a href="#">Carrito</a></li>
-                        <li><a href="#">Detalle Carrito</a></li>
+                        <li><a href="#">Proveedores</a></li>
+                        <li><a href="juguete.jsp">Juguetes</a></li>
+                        <li><a href="cuenta.jsp">Cuentas</a></li>
+                        <li><a href="#">Carritos</a></li>
+                        <li><a href="#">Datalles Carritos</a></li>
                     </ul>
 
                     <form class="search-form">
@@ -95,44 +70,74 @@
                 </nav>
             </div>
         </header>
+        
+        <main class="main-users">
+            <section class="users-section container">
+                <h1 class="users-title">Cuentas</h1>
 
-        <!-- Contenido principal -->
-        <main class="container main-content" style="padding: 3rem;">
-            <h2 class="heading-1">Mi Cuenta</h2>
+                <form class="users-form">
+                    <div class="form-group">
+                        <label for="nombre-cuenta"><strong>Nombre de Cuenta:</strong></label>
+                        <input type="text" id="nombre-cuenta" name="nombre-cuenta" placeholder="Ej. cuenta_admin" required />
+                    </div>
 
-            <section class="mi-cuenta">
-                <!-- Detalles de la cuenta a la izquierda -->
-                <div class="mi-cuenta-card detalles-cuenta">
-                    <h3>Detalles de la cuenta</h3>
-                    <p><strong>Nombre:</strong> Santiago Quezada</p>
-                    <p><strong>Correo electrónico:</strong> squezada-2021262@kin...</p>
-                    <p><strong>Dirección de envío preferida:</strong> No se seleccionó ninguna dirección de envío preferida.</p>
-                    <p><strong>Método de pago preferido:</strong> No se seleccionó ningún método de pago preferido.</p>
+                    <div class="form-group">
+                        <label for="correo-cuenta"><strong>Correo de Cuenta:</strong></label>
+                        <input type="email" id="correo-cuenta" name="correo-cuenta" placeholder="ejemplo@correo.com" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contrasena-cuenta"><strong>Contraseña:</strong></label>
+                        <input type="password" id="contrasena-cuenta" name="contrasena-cuenta" placeholder="Ej. miClave123" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="codigo-usuario"><strong>Código de Usuario:</strong></label>
+                        <input type="number" id="codigo-usuario" name="codigo-usuario" placeholder="Ej. 1" required />
+                    </div>
+                </form>
+
+                <div class="table-wrapper">
+                    <table class="users-table">
+                        <thead>
+                            <tr>
+                                <th>Código Cuenta</th>
+                                <th>Nombre Cuenta</th>
+                                <th>Correo</th>
+                                <th>Contraseña</th>
+                                <th>Código Usuario</th>
+                            </tr>
+                        </thead>
+                        <tbody id="detalle-cuenta">
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
 
-                <!-- Pedidos, carrito, crédito a la derecha -->
-                <div class="mi-cuenta-right">
-                    <div class="mi-cuenta-card pedidos-recientes">
-                        <h3>Pedidos recientes</h3>
-                        <p>Ha realizado <strong>0</strong> pedidos en los últimos 30 días.</p>
-                        <button onclick="location.href = 'historial-pedidos.html'">Ver historial de pedidos</button>
-                    </div>
-
-                    <div class="mi-cuenta-card pedidos-carrito">
-                        <h3>Pedidos en carrito</h3>
-                        <p>Tienes <strong>0</strong> artículos en carrito.</p>
-                        <button onclick="location.href = 'pedidos-anticipados.html'">Ver pedidos anticipados</button>
-                    </div>
-
-                    <div class="mi-cuenta-card credito-tienda">
-                        <h3>Crédito de la tienda</h3>
-                        <p>Actualmente tienes <strong>$0.00</strong> en crédito de la tienda BBTS.</p>
-                    </div>
+                <div class="crud-buttons">
+                    <button class="btn-crud">Agregar</button>
+                    <button class="btn-crud">Listar</button>
+                    <button class="btn-crud">Buscar</button>
+                    <input type="text" class="input-search" placeholder="Ingrese búsqueda" />
+                    <button class="btn-crud">Eliminar</button>
+                    <button class="btn-crud">Actualizar</button>
                 </div>
             </section>
         </main>
-
-        <!-- Pie de página -->
+        
         <footer class="footer">
             <div class="container container-footer">
                 <div class="menu-footer">
@@ -208,9 +213,31 @@
                         Kinal Toy's &copy; 2025
                     </p>
 
-                    <img src="img/payment.png" alt="Pagos">
+                    <img src="../Images/payment.png" alt="Pagos">
                 </div>
             </div>
         </footer>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const checkboxes = document.querySelectorAll('.task-checkbox');
+                const completedCount = document.getElementById('completed-count');
+
+                function updateCount() {
+                    const count = Array.from(checkboxes).filter(cb => cb.checked).length;
+                    completedCount.textContent = count;
+                }
+
+                checkboxes.forEach(cb => {
+                    cb.addEventListener('change', updateCount);
+                });
+
+                document.getElementById('task-form').addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    alert('Informe enviado correctamente ?');
+                });
+            });
+        </script>
+
     </body>
 </html>
