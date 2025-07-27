@@ -1,16 +1,22 @@
+<%-- 
+    Document   : DetallesCarritos
+    Created on : 26/07/2025, 19:24:27
+    Author     : leocu
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Kinal Toy's (Menú Principal)</title>
-        <!-- Icons -->
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Detalles Carrito</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <!-- Icono -->
-        <link rel="icon" href="img/kinal toys.png">
-        <!-- CSS -->
+        <link rel="stylesheet" href="css/detalle-carrito.css">
         <link rel="stylesheet" href="css/principal.css">
+        
         <link rel="stylesheet" href="css/crud.css">
+        <link rel="icon" href="img/kinal toys.png">
+        
         <link rel="stylesheet" href="css/administrador.css">
     </head>
     <body>
@@ -71,54 +77,54 @@
             </div>
         </header>
 
-        <main class="main-users">
-            <section class="users-section container">
-                <h1 class="users-title">Usuarios</h1>
+        <main>
+            <!-- Formulario de detalles -->
+            <section class="formulario-container">
+                <h1 class="users-title">Detalles de Carritos</h1>
+                
+                <form class="formulario-detalle">
+                    <div class="form-row">
+                        <label>Cantidad:
+                            <input type="number" name="cantidad" min="1"  placeholder="Ej. 1">
+                        </label>
 
-                <form class="users-form">
-                    <div class="form-group">
-                        <label for="nombre-usuario"><strong>Nombre Usuario:</strong></label>
-                        <input type="text" id="nombre-usuario" name="nombre-usuario" placeholder="Ej. Jorge" required />
+                        <label>Subtotal:
+                            <input type="number" step="0.01" name="subTotal"  placeholder="Ej. 599.99">
+                        </label>
                     </div>
 
-                    <div class="form-group">
-                        <label for="apellido-usuario"><strong>Apellido Usuario:</strong></label>
-                        <input type="text" id="apellido-usuario" name="apellido-usuario" placeholder="Ej. López" required />
+                    <div class="form-row">
+                        <label>Descuento Aplicado:
+                            <input type="number" step="0.01" name="descuento"  placeholder="Ej. 20">
+                        </label>
+
+                        <label>CÃ³digo Carrito:
+                            <input type="number" name="codigoCarrito"  placeholder="Ej. 1">
+                        </label>
                     </div>
 
-                    <div class="form-group">
-                        <label for="direccion-usuario"><strong>Dirección Usuario:</strong></label>
-                        <input type="text" id="direccion-usuario" name="direccion-usuario" placeholder="Ej. 12 avenida" required />
+                    <div class="form-row">
+                        <label>CÃ³digo Juguete:
+                            <input type="number" name="codigoJuguete"  placeholder="Ej. 1">
+                        </label>
                     </div>
 
-                    <div class="form-group">
-                        <label for="telefono-usuario"><strong>Teléfono Usuario:</strong></label>
-                        <input type="text" id="telefono-usuario" name="telefono-usuario" placeholder="Ej. 23242-34242" required />
-                    </div>
                 </form>
-
-                <div class="table-wrapper">
+                <!-- Lista de detalles -->
+            <div class="table-wrapper">
                     <table class="users-table">
                         <thead>
                             <tr>
-                                <th>Nombre</th>
-                                <th>Apellido</th>
-                                <th>Dirección</th>
-                                <th>Teléfono</th>
+                                <th>CÃ³digo Detalles Carrito</th>
+                                <th>Cantidad</th>
+                                <th>SubTotal</th>
+                                <th>Descuento Aplicado</th>
+                                <th>CÃ³digo Carrito</th>
+                                <th>CÃ³digo Juguete</th>
                             </tr>
                         </thead>
-                        <tbody id="detalle-factura">
+                        <tbody id="detalle-carrito">
                             <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
                             </tr>
                         </tbody>
                     </table>
@@ -128,24 +134,26 @@
                     <button class="btn-crud">Agregar</button>
                     <button class="btn-crud">Listar</button>
                     <button class="btn-crud">Buscar</button>
-                    <input type="text" class="input-search" placeholder="Ingrese búsqueda" />
+                    <input type="text" class="input-search" placeholder="cÃ³digo de Detalle carrito..." />
                     <button class="btn-crud">Eliminar</button>
                     <button class="btn-crud">Actualizar</button>
                 </div>
             </section>
+
+            
         </main>
 
         <footer class="footer">
             <div class="container container-footer">
                 <div class="menu-footer">
                     <div class="contact-info">
-                        <p class="title-footer">Información de Contacto</p>
+                        <p class="title-footer">InformaciÃ³n de Contacto</p>
                         <ul>
                             <li>
-                                Dirección: 71 Pennington Lane Vernon Rockville, CT
+                                DirecciÃ³n: 71 Pennington Lane Vernon Rockville, CT
                                 06066
                             </li>
-                            <li>Teléfono: 123-456-7890</li>
+                            <li>TelÃ©fono: 123-456-7890</li>
                             <li>Fax: 55555300</li>
                             <li>EmaiL: baristas@support.com</li>
                         </ul>
@@ -167,54 +175,53 @@
                             </span>
                         </div>
                     </div>
-
+ 
                     <div class="information">
-                        <p class="title-footer">Información</p>
+                        <p class="title-footer">InformaciÃ³n</p>
                         <ul>
                             <li><a href="#">Acerca de Nosotros</a></li>
-                            <li><a href="#">Información Delivery</a></li>
+                            <li><a href="#">InformaciÃ³n Delivery</a></li>
                             <li><a href="#">Politicas de Privacidad</a></li>
-                            <li><a href="#">Términos y condiciones</a></li>
-                            <li><a href="#">Contactános</a></li>
+                            <li><a href="#">TÃ©rminos y condiciones</a></li>
+                            <li><a href="#">ContactÃ¡nos</a></li>
                         </ul>
                     </div>
-
+ 
                     <div class="my-account">
                         <p class="title-footer">Mi cuenta</p>
-
+ 
                         <ul>
                             <li><a href="#">Mi cuenta</a></li>
                             <li><a href="#">Historial de ordenes</a></li>
                             <li><a href="#">Lista de deseos</a></li>
-                            <li><a href="#">Boletín</a></li>
+                            <li><a href="#">BoletÃ­n</a></li>
                             <li><a href="#">Reembolsos</a></li>
                         </ul>
                     </div>
-
+ 
                     <div class="newsletter">
-                        <p class="title-footer">Boletín informativo</p>
-
+                        <p class="title-footer">BoletÃ­n informativo</p>
+ 
                         <div class="content">
                             <p>
-                                Suscríbete a nuestros boletines ahora y mantente al
-                                día con nuevas colecciones y ofertas exclusivas.
+                                SuscrÃ­bete a nuestros boletines ahora y mantente al
+                                dÃ­a con nuevas colecciones y ofertas exclusivas.
                             </p>
-                            <input type="email" placeholder="Ingresa el correo aquí...">
-                            <button>Suscríbete</button>
+                            <input type="email" placeholder="Ingresa el correo aquÃ­...">
+                            <button>SuscrÃ­bete</button>
                         </div>
                     </div>
                 </div>
-
+ 
                 <div class="copyright">
                     <p>
                         Kinal Toy's &copy; 2025
                     </p>
-
+ 
                     <img src="img/payment.png" alt="Pagos">
                 </div>
             </div>
         </footer>
-        
         <script>
             document.addEventListener('DOMContentLoaded', () => {
                 const checkboxes = document.querySelectorAll('.task-checkbox');
@@ -235,6 +242,5 @@
                 });
             });
         </script>
-        
     </body>
 </html>
