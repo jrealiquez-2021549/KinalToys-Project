@@ -8,6 +8,8 @@
         <link rel="icon" href="img/kinal toys.png">
         <link rel="stylesheet" href="css/noticias.css">
         <link rel="stylesheet" href="css/principal.css">
+        <link rel="stylesheet" href="css/administrador.css">
+        <link rel="stylesheet" href="css/crud.css">
     </head>
     <body>
 
@@ -25,15 +27,23 @@
                     <div class="container-logo">
                         <h1 class="logo"><a href="/">Kinal Toy's</a></h1>
                     </div>
+                    
 
                     <div class="container-user">
-                        <i class="fa-solid fa-user" aria-label="Perfil de usuario"></i>
-                        <i class="fa-solid fa-basket-shopping" aria-label="Carrito de compras"></i>
-                        <div class="content-shopping-cart">
-                            <span class="text">Carrito</span>
-                            <span class="number">(0)</span>
+                        <div class="user-menu">
+                            <i class="fa-solid fa-user"></i>
+                            <ul class="user-dropdown">
+                                <li><a href="cuenta-user.jsp">Mi cuenta</a></li>
+                                <li><a href="#">Cambiar cuenta</a></li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa-solid fa-right-from-bracket"></i> Salir
+                                    </a>
+                                </li>
+                            </ul>
+                            <i class="fa-solid fa-basket-shopping"></i>
                         </div>
-                    </div>
+                    </div>
                 </div>
             </div>
 
@@ -275,7 +285,7 @@
                     <div class="my-account">
                         <p class="title-footer">Mi cuenta</p>
                         <ul>
-                            <li><a href="#">Mi cuenta</a></li>
+                            <li><a href="cuenta-user.jsp">Mi cuenta</a></li>
                             <li><a href="#">Historial de órdenes</a></li>
                             <li><a href="#">Lista de deseos</a></li>
                             <li><a href="#">Boletín</a></li>

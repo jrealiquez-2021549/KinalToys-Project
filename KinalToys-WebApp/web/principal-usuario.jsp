@@ -10,6 +10,7 @@
         <link rel="icon" href="img/kinal toys.png">
         <!-- CSS -->
         <link rel="stylesheet" href="css/principal.css">
+        <link rel="stylesheet" href="css/administrador.css">
     </head>
     <body>
         <header>
@@ -28,15 +29,20 @@
                     </div>
 
                     <div class="container-user">
-                        <a href="cuenta.jsp" title="Mi Cuenta">
+                        <div class="user-menu">
                             <i class="fa-solid fa-user"></i>
-                        </a>
-                        <i class="fa-solid fa-basket-shopping"></i>
-                        <div class="content-shopping-cart">
-                            <span class="text">Carrito</span>
-                            <span class="number">(0)</span>
+                            <ul class="user-dropdown">
+                                <li><a href="cuenta-user.jsp">Mi cuenta</a></li>
+                                <li><a href="#">Cambiar cuenta</a></li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa-solid fa-right-from-bracket"></i> Salir
+                                    </a>
+                                </li>
+                            </ul>
+                            <i class="fa-solid fa-basket-shopping"></i>
                         </div>
-                    </div>
+                    </div>
                 </div>
             </div>
 
@@ -556,7 +562,7 @@
                         <p class="title-footer">Mi cuenta</p>
 
                         <ul>
-                            <li><a href="#">Mi cuenta</a></li>
+                            <li><a href="cuenta-user.jsp">Mi cuenta</a></li>
                             <li><a href="#">Historial de ordenes</a></li>
                             <li><a href="#">Lista de deseos</a></li>
                             <li><a href="#">Boletín</a></li>
