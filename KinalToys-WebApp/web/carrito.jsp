@@ -53,11 +53,11 @@
                         <li><a href="principal-admin.jsp">Inicio</a></li>
                         <li><a href="usuario.jsp">Usuarios</a></li>
                         <li><a href="factura.jsp">Facturas</a></li>
-                        <li><a href="">Noticias</a></li>
+                        <li><a href="noticia.jsp">Noticias</a></li>
                         <li><a href="#">Proveedores</a></li>
                         <li><a href="juguete.jsp">Juguetes</a></li>
                         <li><a href="cuenta.jsp">Cuentas</a></li>
-                        <li><a href="carrito.jsp">Carritos</a></li>
+                        <li><a href="#">Carritos</a></li>
                         <li><a href="#">Datalles Carritos</a></li>
                     </ul>
 
@@ -72,71 +72,64 @@
         </header>
 
         <main class="main-users">
-        <section class="users-section container">
-            <h1 class="users-title">Noticias</h1>
- 
-            <form class="users-form">
-                <div class="form-group">
-                    <label for="encabezado-noticia"><strong>Encabezado:</strong></label>
-                    <input type="text" id="encabezado-noticia" name="encabezado-noticia" placeholder="Ej. Nueva .." required />
+            <section class="users-section container">
+                <h1 class="users-title">Carritos</h1>
+
+                <form class="users-form">
+                    <div class="form-group">
+                        <label for="fecha-creacion"> <strong> Fecha de Creación</strong></label>
+                        <input type="datetime-local" id="fecha-creacion" name="fecha-creacion" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="estado"><strong>Estado:</strong></label>
+                        <select id="estado" name="estado" required>
+                            <option value="">Seleccione</option>
+                            <option value="Activo">Activo</option>
+                            <option value="Comprado">Comprado</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="total"> <strong>Total (Q)</strong></label>
+                        <input type="number" id="total" name="total" step="0.01" min="0" placeholder="Ej. 599.99"
+                               required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="codigo-usuario"> <strong>Código de Usuario</strong></label>
+                        <input type="number" id="codigo-usuario" name="codigo-usuario" placeholder="Ej. 1" required />
+                    </div>
+                </form>
+
+                <div class="table-wrapper">
+                    <table class="users-table">
+                        <thead>
+                            <tr>
+                                <th>Código Carritos</th>
+                                <th>Fecha de Creación</th>
+                                <th>Estado</th>
+                                <th>Total (Q)</th>
+                                <th>Código Usuario</th>
+                            </tr>
+                        </thead>
+                        <tbody id="detalle-carrito">
+                            <tr>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
- 
-                <div class="form-group">
-                    <label for="informacion-noticia"><strong>Información:</strong></label>
-                    <input type="text" id="informacion-noticia" name="informacion-noticia" placeholder="Ej. La nueva .." required />
+
+                <div class="crud-buttons">
+                    <button class="btn-crud">Agregar</button>
+                    <button class="btn-crud">Listar</button>
+                    <button class="btn-crud">Buscar</button>
+                    <input type="text" class="input-search" placeholder="Ingrese código de carrito..." />
+                    <button class="btn-crud">Eliminar</button>
+                    <button class="btn-crud">Actualizar</button>
                 </div>
- 
-                <div class="form-group">
-                    <label for="categoria-noticia"><strong>Categoría:</strong></label>
-                    <input type="text" id="categoria-noticia" name="categoria-noticia" placeholder="Ej. Novedades" required />
-                </div>
- 
-                <div class="form-group">
-                    <label for="fecha-noticia"><strong>Fecha Noticia:</strong></label>
-                    <input type="date" id="fecha-noticia" name="fecha-noticia" required />
-                </div>
-            </form>
- 
-            <div class="table-wrapper">
-                <table class="users-table">
-                    <thead>
-                        <tr>
-                            <th>Código Noticia</th>
-                            <th>Encabezado</th>
-                            <th>Información</th>
-                            <th>Categoría</th>
-                            <th>Fecha Noticia</th>
-                        </tr>
-                    </thead>
-                    <tbody id="detalle-cuenta">
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
- 
-            <div class="crud-buttons">
-                <button class="btn-crud">Agregar</button>
-                <button class="btn-crud">Listar</button>
-                <button class="btn-crud">Buscar</button>
-                <input type="text" class="input-search" placeholder="Ingrese búsqueda" />
-                <button class="btn-crud">Eliminar</button>
-                <button class="btn-crud">Actualizar</button>
-            </div>
-        </section>
-    </main>
+            </section>
+        </main>
 
         <footer class="footer">
             <div class="container container-footer">
@@ -217,7 +210,7 @@
                 </div>
             </div>
         </footer>
-        
+
         <script>
             document.addEventListener('DOMContentLoaded', () => {
                 const checkboxes = document.querySelectorAll('.task-checkbox');
@@ -238,6 +231,6 @@
                 });
             });
         </script>
-        
+
     </body>
 </html>
