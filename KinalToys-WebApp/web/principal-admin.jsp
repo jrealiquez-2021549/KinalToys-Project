@@ -57,7 +57,7 @@
                         <li><a href="juguete.jsp">Juguetes</a></li>
                         <li><a href="cuenta.jsp">Cuentas</a></li>
                         <li><a href="carrito.jsp">Carritos</a></li>
-                        <li><a href="#">Datalles Carritos</a></li>
+                        <li><a href="detalles-carritos.jsp">Detalles Carritos</a></li>
                     </ul>
 
                     <form class="search-form">
