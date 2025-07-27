@@ -57,7 +57,7 @@
                         <li><a href="#">Proveedores</a></li>
                         <li><a href="juguete.jsp">Juguetes</a></li>
                         <li><a href="cuenta.jsp">Cuentas</a></li>
-                        <li><a href="#">Carritos</a></li>
+                        <li><a href="carrito.jsp">Carritos</a></li>
                         <li><a href="#">Datalles Carritos</a></li>
                     </ul>
 
@@ -213,7 +213,7 @@
                         Kinal Toy's &copy; 2025
                     </p>
 
-                    <img src="../Images/payment.png" alt="Pagos">
+                    <img src="img/payment.png" alt="Pagos">
                 </div>
             </div>
         </footer>
