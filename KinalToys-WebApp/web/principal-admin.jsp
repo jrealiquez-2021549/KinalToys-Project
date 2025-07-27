@@ -32,7 +32,7 @@
                         <div class="user-menu">
                             <i class="fa-solid fa-user"></i>
                             <ul class="user-dropdown">
-                                <li><a href="#">Mi cuenta</a></li>
+                                <li><a href="cuenta-admin.jsp">Mi cuenta</a></li>
                                 <li><a href="#">Cambiar cuenta</a></li>
                                 <li>
                                     <a href="#">
@@ -224,7 +224,7 @@
                         <p class="title-footer">Mi cuenta</p>
 
                         <ul>
-                            <li><a href="#">Mi cuenta</a></li>
+                            <li><a href="cuenta-admin.jsp">Mi cuenta</a></li>
                             <li><a href="#">Historial de ordenes</a></li>
                             <li><a href="#">Lista de deseos</a></li>
                             <li><a href="#">Boletín</a></li>

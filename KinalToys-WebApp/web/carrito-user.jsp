@@ -14,6 +14,7 @@
         <!-- CSS -->
         <link rel="stylesheet" href="css/principal.css">
         <link rel="stylesheet" href="css/carrito.css">
+        <link rel="stylesheet" href="css/administrador.css">
     </head>
 
     <body>
@@ -31,17 +32,23 @@
                     <div class="container-logo">
                         <h1 class="logo"><a href="#">Kinal Toy's</a></h1>
                     </div>
+                    
 
                     <div class="container-user">
-                        <i class="fa-solid fa-user"></i>
-                        <a href="carrito.html">
+                        <div class="user-menu">
+                            <i class="fa-solid fa-user"></i>
+                            <ul class="user-dropdown">
+                                <li><a href="cuenta-user.jsp">Mi cuenta</a></li>
+                                <li><a href="#">Cambiar cuenta</a></li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa-solid fa-right-from-bracket"></i> Salir
+                                    </a>
+                                </li>
+                            </ul>
                             <i class="fa-solid fa-basket-shopping"></i>
-                        </a>
-                        <div class="content-shopping-cart">
-                            <span class="text">Carrito</span>
-                            <span class="number">(0)</span>
                         </div>
-                    </div>
+                    </div>
                 </div>
             </div>
 
@@ -219,7 +226,7 @@
                     <p class="title-footer">Mi cuenta</p>
 
                     <ul>
-                        <li><a href="#">Mi cuenta</a></li>
+                        <li><a href="cuenta-user.jsp">Mi cuenta</a></li>
                         <li><a href="#">Historial de ordenes</a></li>
                         <li><a href="#">Lista de deseos</a></li>
                         <li><a href="#">Boletín</a></li>

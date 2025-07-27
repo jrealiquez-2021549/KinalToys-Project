@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>KinalToys - Mafex</title>
         <link rel="stylesheet" href="css/categorias.css">
+        <link rel="stylesheet" href="css/administrador.css">
         <link rel="icon" href="img/kinal toys.png">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     </head>
@@ -26,13 +27,20 @@
                     </div>
 
                     <div class="container-user">
-                        <i class="fa-solid fa-user"></i>
-                        <i class="fa-solid fa-basket-shopping"></i>
-                        <div class="content-shopping-cart">
-                            <span class="text">Carrito</span>
-                            <span class="number">(0)</span>
+                        <div class="user-menu">
+                            <i class="fa-solid fa-user"></i>
+                            <ul class="user-dropdown">
+                                <li><a href="cuenta-user.jsp">Mi cuenta</a></li>
+                                <li><a href="#">Cambiar cuenta</a></li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa-solid fa-right-from-bracket"></i> Salir
+                                    </a>
+                                </li>
+                            </ul>
+                            <i class="fa-solid fa-basket-shopping"></i>
                         </div>
-                    </div>
+                    </div>
                 </div>
             </div>
 
@@ -254,7 +262,7 @@
                         <p class="title-footer">Mi cuenta</p>
 
                         <ul>
-                            <li><a href="#">Mi cuenta</a></li>
+                            <li><a href="cuenta-user.jsp">Mi cuenta</a></li>
                             <li><a href="#">Historial de ordenes</a></li>
                             <li><a href="#">Lista de deseos</a></li>
                             <li><a href="#">Boletín</a></li>

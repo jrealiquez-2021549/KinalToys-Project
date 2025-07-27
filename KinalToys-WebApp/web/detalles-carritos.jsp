@@ -13,11 +13,10 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="css/detalle-carrito.css">
         <link rel="stylesheet" href="css/principal.css">
-        
         <link rel="stylesheet" href="css/crud.css">
         <link rel="icon" href="img/kinal toys.png">
-        
         <link rel="stylesheet" href="css/administrador.css">
+        
     </head>
     <body>
         <header>
@@ -39,7 +38,7 @@
                         <div class="user-menu">
                             <i class="fa-solid fa-user"></i>
                             <ul class="user-dropdown">
-                                <li><a href="#">Mi cuenta</a></li>
+                                <li><a href="cuenta-admin.jsp">Mi cuenta</a></li>
                                 <li><a href="#">Cambiar cuenta</a></li>
                                 <li>
                                     <a href="#">
@@ -47,8 +46,9 @@
                                     </a>
                                 </li>
                             </ul>
+                            <i class="fa-solid fa-basket-shopping"></i>
                         </div>
-                    </div>
+                    </div>
                 </div>
             </div>
 
@@ -191,7 +191,7 @@
                         <p class="title-footer">Mi cuenta</p>
  
                         <ul>
-                            <li><a href="#">Mi cuenta</a></li>
+                            <li><a href="cuenta-admin.jsp">Mi cuenta</a></li>
                             <li><a href="#">Historial de ordenes</a></li>
                             <li><a href="#">Lista de deseos</a></li>
                             <li><a href="#">Boletín</a></li>
