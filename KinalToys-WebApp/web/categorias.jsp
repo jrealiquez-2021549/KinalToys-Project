@@ -40,7 +40,7 @@
                 <nav class="navbar container">
                     <i class="fa-solid fa-bars"></i>
                     <ul class="menu">
-                        <li><a href="principal.jsp">Inicio</a></li>
+                        <li><a href="principal-usuario.jsp">Inicio</a></li>
                         <li><a href="categorias.jsp">Catalogo</a></li>
                         <li><a href="noticia-user.jsp">Noticias</a></li>
                         <li><a href="#">Pre-Orden</a></li>
