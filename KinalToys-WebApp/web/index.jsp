@@ -14,7 +14,7 @@
     <body>
         <div class="container" id="container">
             <div class="form-container sign-up-container">
-                <form action="carrito-user.jsp">
+                <form action="principal-usuario.jsp">
                     <h1>Create Account</h1>
                     <div class="social-container">
                         <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
@@ -38,7 +38,7 @@
                 </form>
             </div>
             <div class="form-container sign-in-container">
-                <form action="principal-usuario.jsp">
+                <form action="principal-admin.jsp">
                     <h1>Sign In</h1>
                     <div class="social-container">
                         <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
