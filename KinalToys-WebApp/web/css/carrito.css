@@ -1,0 +1,280 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+body {
+    font-family: "Poppins", sans-serif;
+    padding: 0;
+    margin: 0;
+    background-color: #f5f5f5;
+}
+
+/* Botón de buscar con animación */
+.btn-search:hover {
+    background-color: #4d59f9;
+    cursor: pointer;
+}
+
+/* Contenedor general del carrito */
+.carrito-container {
+    padding: 3rem 15rem;
+    margin: 0 auto;
+}
+
+/* titulos del carrito */
+.carrito-header {
+    display: grid;
+    grid-template-columns: 2.6fr 1fr 1.1fr 1fr 1fr 1fr 0.5fr;
+    padding: 1rem 1.5rem;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    font-weight: bold;
+    color: #444;
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+}
+
+/* Estilo para cada ítem en el carrito */
+.item-carrito {
+    display: flex;
+    align-items: flex-start;
+    background-color: #fff;
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    gap: 1.5rem;
+}
+
+/*Hover-efecto sobre productos (Cada producto que haya en el carrito)*/
+.item-carrito:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Imagen del producto */
+.item-carrito img {
+    width: 120px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* Estilo para el nombre del producto */
+.producto-info p {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+}
+
+/*Reestructurar .item-carrito como grid para alinear con la cabecera */
+.item-carrito {
+    display: grid;
+    grid-template-columns: 2.6fr 1fr 1.4fr 1.2fr 1fr 1fr 0fr;
+    /*Para el espaciado entre atributos*/
+    align-items: center;
+    background-color: #fff;
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    gap: 1rem;
+}
+
+.descuento {
+    color: #ae0000;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.cantidad input[type="number"] {
+    width: 90px; /* Un poco más ancho para mejor legibilidad */
+    padding: 0.5rem 0.75rem;
+    font-size: 1.6rem;
+    border: 2px solid #888;
+    border-radius: 8px;
+    text-align: center;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    outline: none;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9f9f9;
+}
+
+.cantidad input[type="number"]:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 8px rgba(74, 144, 226, 0.5);
+    background-color: #fff;
+}
+
+/* Eliminar las flechas predeterminadas de los inputs number para todos los navegadores */
+.cantidad input[type="number"]::-webkit-inner-spin-button,
+.cantidad input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Producto dentro de la columna 1 (Donde va el nombre) */
+.producto-info {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+}
+
+/* Alinear contenido de columnas siguientes */
+.item-carrito div:not(.producto-info) {
+    text-align: center;
+    font-size: 1.5rem;
+    /*Tamaño de texto de los atributos*/
+}
+
+/* Transiciones suaves */
+* {
+    transition: all 0.3s ease;
+}
+
+/* Íconos interactivos */
+.eliminar i:hover {
+    transform: scale(1.2);
+    color: #0d00c7;
+}
+
+/* Precio original tachado */
+.precio-original {
+    text-decoration: line-through;
+    color: #999;
+    font-size: 1.3rem;
+}
+
+/* Precio con color diferente */
+.precio,
+.total {
+    font-weight: bold;
+    color: #243b55;
+}
+
+/* Botón eliminar */
+.eliminar {
+    --main-focus: #2d8cf0;
+    --font-color: #dedede;
+    --bg-color-sub: #243B55;
+    --bg-color: #243B55;
+    --main-color: #dedede;
+    position: relative;
+    width: 150px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border: 2px solid var(--main-color);
+    box-shadow: 4px 4px var(--main-color);
+    background-color: var(--bg-color);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.eliminar,
+.button__icon,
+.button__text {
+    transition: all 0.3s;
+}
+
+.eliminar .button__text {
+    transform: translateX(33px);
+    color: var(--font-color);
+    font-weight: 600;
+}
+
+.eliminar .button__icon {
+    position: absolute;
+    transform: translateX(109px);
+    height: 100%;
+    width: 39px;
+    background-color: var(--bg-color-sub);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.eliminar .svg {
+    width: 20px;
+    fill: var(--main-color);
+}
+
+.eliminar:hover {
+    background: var(--bg-color);
+    box-shadow: 0px 15px 20px rgba(30, 47, 199, 0.452);
+}
+
+.eliminar:hover .button__text {
+    color: transparent;
+}
+
+.eliminar:hover .button__icon {
+    width: 148px;
+    transform: translateX(0);
+}
+
+.eliminar:active {
+    transform: translate(3px, 3px);
+    box-shadow: 0px 0px var(--main-color);
+}
+
+/* Resumen del carrito */
+.resumen-carrito {
+    padding: 2rem 15rem;
+    margin: 0 auto;
+    border-radius: 10px;
+    text-align: right;
+    font-size: 1.6rem;
+}
+
+/*Estilo para el subtotal y descuento*/
+.resumen-carrito p {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    color: #444;
+    padding: 0 1.5rem;
+}
+
+/*Estilo para el total*/
+.resumen-carrito h3 {
+    font-size: 2.2rem;
+    color: #0e4889;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    border-top: 2px solid #ccc;
+    padding: 1rem;
+}
+
+/* Botón comprar */
+.btn-comprar {
+    padding: 1rem 10rem;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    color: #000;
+    background-color: #fff;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+}
+
+.btn-comprar:hover {
+    background-color: #243b55;
+    box-shadow: 0px 15px 20px rgba(46, 64, 229, 0.4);
+    color: #fff;
+    transform: translateY(-7px);
+}
+
+.btn-comprar:active {
+    transform: translateY(-1px);
+}
+
+/*Footer animado*/
+footer:hover {
+    color: white;
+}
