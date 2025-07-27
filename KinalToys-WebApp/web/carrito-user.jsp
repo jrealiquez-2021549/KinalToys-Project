@@ -49,12 +49,12 @@
                 <nav class="navbar container">
                     <i class="fa-solid fa-bars"></i>
                     <ul class="menu">
-                        <li><a href="../Index/principal.html">Inicio</a></li>
-                        <li><a href="#">Model Kits</a></li>
-                        <li><a href="#">Action Figures</a></li>
-                        <li><a href="#">Static Figures</a></li>
-                        <li><a href="#">Custom & DIY</a></li>
-                        <li><a href="#">Por Escala</a></li>
+                        <li><a href="principal.jsp">Inicio</a></li>
+                        <li><a href="categorias.jsp">Catalogo</a></li>
+                        <li><a href="noticia-user.jsp">Noticias</a></li>
+                        <li><a href="#">Pre-Orden</a></li>
+                        <li><a href="#">Nuevos Productos</a></li>
+                        <li><a href="#">Categorias</a></li>
                     </ul>
 
                     <form class="search-form">
@@ -164,7 +164,9 @@
             <p><strong>Subtotal:</strong> $2,498.00</p>
             <p><strong>Descuento:</strong> -&dollar; 41.43</p>
             <h3><strong>Total:</strong> &dollar; 267.11</h3>
-            <button class="btn-comprar">Pagar</button>
+            <a href="factura-user.jsp">
+                <button type="btn-comprar">Pagar</button>
+            </a>
         </div>
     </main>
 

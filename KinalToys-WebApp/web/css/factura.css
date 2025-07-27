@@ -1,0 +1,183 @@
+/* ===== Estilos mejorados para la sección factura ===== */
+.container h2 {
+    font-size: 3.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 5rem 0 3rem 0; 
+    text-align: left;
+    letter-spacing: 2.5px;
+    text-shadow: 1px 1px 5px rgba(36, 59, 85, 0.4);
+}
+
+.summary-wrapper p2 {
+    font-size: 1.5rem;
+}
+
+/* Tabla */
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 15px;
+    margin-top: 3rem;
+    box-shadow: 0 8px 24px rgba(36, 59, 85, 0.15);
+    border-radius: 15px;
+    overflow: hidden;
+    background: #ffffff;
+    font-size: 1.6rem;
+    transition: transform 0.3s ease;
+}
+
+table:hover {
+    transform: scale(1.02);
+}
+
+thead {
+    background: linear-gradient(90deg, #243B55 0%, #141E30 100%);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(36, 59, 85, 0.2);
+}
+
+thead th {
+    padding: 1.8rem 2rem;
+    text-align: left;
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: 0.1rem;
+}
+
+tbody tr {
+    background-color: #fdfefe;
+    border-radius: 15px;
+    box-shadow: 0 2px 6px rgba(36, 59, 85, 0.05);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+tbody tr:hover {
+    background-color: #e8f0fe;
+    box-shadow: 0 8px 18px rgba(36, 59, 85, 0.15);
+}
+
+tbody td {
+    padding: 1.6rem 2rem;
+    color: var(--dark-color);
+    font-weight: 500;
+    vertical-align: middle;
+    border-left: 4px solid transparent;
+    transition: border-color 0.3s ease;
+}
+
+tbody td:first-child {
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+tbody tr:hover td {
+    border-left-color: var(--primary-color);
+}
+
+.summary:hover {
+    box-shadow: 0 10px 30px rgba(36, 59, 85, 0.15);
+}
+
+.summary p {
+    margin-bottom: 1.2rem;
+}
+
+.summary p strong {
+    color: var(--primary-color);
+    font-weight: 700;
+    font-size: 1.9rem;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+    .summary {
+        max-width: 100%;
+        margin: 3rem 0 5rem 0;  /* Espaciado inferior añadido */
+        padding: 2rem;
+        text-align: center;
+        font-size: 1.6rem;
+        border-radius: 1rem;
+        background: linear-gradient(135deg, #141E30, #243B55);
+        color: #fff;
+        box-shadow: 0 8px 25px rgba(36, 59, 85, 0.25);
+        border-right: none;
+    }
+
+    .summary p strong {
+        color: #4FC3F7; /* Azul claro vibrante para contrastar con fondo oscuro */
+        text-shadow: 0 0 10px rgba(79, 195, 247, 0.8);
+    }
+}
+/* Contenedor formulario de factura */
+.factura-info form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 2rem;
+    row-gap: 1.6rem;
+    font-size: 1.6rem;
+    color: var(--dark-color);
+}
+
+/* Formulario factura */
+.factura-info form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.4rem 2rem;
+    font-size: 1.6rem;
+    color: var(--dark-color);
+}
+
+/* Labels */
+.factura-info label {
+    flex: 0 0 40%;
+    font-weight: 600;
+    align-self: center;
+}
+
+/* Inputs y selects */
+.factura-info input[type="text"],
+.factura-info input[type="date"],
+.factura-info input[type="number"],
+.factura-info select {
+    flex: 0 0 55%;
+    padding: 0.6rem 1rem;
+    font-size: 1.5rem;
+    border: 1.5px solid #ccc;
+    border-radius: 0.6rem;
+    transition: border-color 0.3s ease;
+}
+
+.factura-info input[type="text"]:focus,
+.factura-info input[type="date"]:focus,
+.factura-info input[type="number"]:focus,
+.factura-info select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 6px var(--primary-color);
+}
+
+/* Boton Finalizar */
+.summary-wrapper {
+    align-items: center;
+    justify-content: space-between;
+    max-width: 50rem; /* ajusta según necesidad */
+    margin-top: 4rem;
+    margin-bottom: 5rem;
+}
+
+#btn-finalizar {
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    padding: 1rem 2.5rem;
+    font-size: 1.6rem;
+    font-weight: 600;
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#btn-finalizar:hover {
+    background-color: #141E30;
+}
