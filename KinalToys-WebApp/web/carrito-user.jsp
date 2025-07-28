@@ -46,7 +46,6 @@
                                     </a>
                                 </li>
                             </ul>
-                            <i class="fa-solid fa-basket-shopping"></i>
                         </div>
                     </div>
                 </div>

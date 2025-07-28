@@ -27,24 +27,37 @@
                             <span class="number">502-3110-0319</span>
                         </div>
                     </div>
+
                     <div class="container-logo">
                         <h1 class="logo"><a href="/">Kinal Toy's</a></h1>
                     </div>
+                    
                     <div class="container-user">
-                        <div class="user-menu">
-                            <i class="fa-solid fa-user"></i>
-                            <ul class="user-dropdown">
-                                <li><a href="cuenta-user.jsp">Mi cuenta</a></li>
-                                <li><a href="#">Cambiar cuenta</a></li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa-solid fa-right-from-bracket"></i> Salir
-                                    </a>
-                                </li>
-                            </ul>
-                            <i class="fa-solid fa-basket-shopping"></i>
+                    <div class="user-menu">
+                        <i class="fa-solid fa-user"></i>
+                        <ul class="user-dropdown">
+                            <li><a href="cuenta-user.jsp">Mi cuenta</a></li>
+                            <li><a href="#">Cambiar cuenta</a></li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa-solid fa-right-from-bracket"></i> Salir
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <input type="checkbox" id="toggle-cart" hidden>
+                    <label for="toggle-cart" class="fa-solid fa-basket-shopping"></label>
+                    <div class="carrito-items">
+                        <div class="carrito-header">
+                            <h3>Mi Carrito</h3>
+                            <label for="toggle-cart" class="cerrar-carrito">&times;</label>
                         </div>
-                    </div>
+
+                        <div class="resumen-carrito">
+                            <a href="carrito-user.jsp" class="btn-comprar">VER CARRITO Y PAGAR</a>
+                        </div>
+                    </div>
                 </div>
             </div>
 

@@ -146,14 +146,6 @@
   color: #243B55; /* Cambia color al hover, puedes modificar */
 }
 
-/* Para que el texto y número del carrito estén bien alineados */
-.content-shopping-cart {
-  margin-left: 0.5rem;
-  font-weight: 600;
-  font-size: 0.9rem;
-  display: inline-block;
-}
-
 /* Estilos para botones con clase .btn y elemento button */
 button, .btn {
   background-color: #243B55;
