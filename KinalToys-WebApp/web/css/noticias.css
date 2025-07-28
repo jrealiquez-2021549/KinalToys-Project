@@ -244,6 +244,8 @@ html {
 /*            MAIN CONTENT            */
 /* ********************************** */
 .main-content {
+    padding-top: 100px;
+    margin-top: 50px;
     background-color: var(--background-color);
 }
 

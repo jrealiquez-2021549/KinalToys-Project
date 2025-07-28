@@ -6,6 +6,7 @@
         <title>KinalToys - Mafex</title>
         <link rel="stylesheet" href="css/categorias.css">
         <link rel="stylesheet" href="css/administrador.css">
+        <link rel="stylesheet" href="css/principal.css">        
         <link rel="icon" href="img/kinal toys.png">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     </head>
@@ -25,22 +26,33 @@
                     <div class="container-logo">
                         <h1 class="logo"><a href="/">Kinal Toy's</a></h1>
                     </div>
-
+                    
                     <div class="container-user">
-                        <div class="user-menu">
-                            <i class="fa-solid fa-user"></i>
-                            <ul class="user-dropdown">
-                                <li><a href="cuenta-user.jsp">Mi cuenta</a></li>
-                                <li><a href="#">Cambiar cuenta</a></li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa-solid fa-right-from-bracket"></i> Salir
-                                    </a>
-                                </li>
-                            </ul>
-                            <i class="fa-solid fa-basket-shopping"></i>
+                    <div class="user-menu">
+                        <i class="fa-solid fa-user"></i>
+                        <ul class="user-dropdown">
+                            <li><a href="cuenta-user.jsp">Mi cuenta</a></li>
+                            <li><a href="#">Cambiar cuenta</a></li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa-solid fa-right-from-bracket"></i> Salir
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <input type="checkbox" id="toggle-cart" hidden>
+                    <label for="toggle-cart" class="fa-solid fa-basket-shopping"></label>
+                    <div class="carrito-items">
+                        <div class="carrito-header">
+                            <h2>Mi Carrito</h2>
+                            <label for="toggle-cart" class="cerrar-carrito">&times;</label>
                         </div>
-                    </div>
+
+                        <div class="resumen-carrito">
+                            <a href="carrito-user.jsp" class="btn-comprar">VER CARRITO Y PAGAR</a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -52,8 +64,8 @@
                         <li><a href="categorias.jsp">Catalogo</a></li>
                         <li><a href="noticia-user.jsp">Noticias</a></li>
                         <li><a href="#">Pre-Orden</a></li>
-                        <li><a href="#">Nuevos Productos</a></li>
-                        <li><a href="#">Categorias</a></li>
+                        <li><a href="categorias.jsp">Nuevos Productos</a></li>
+                        <li><a href="categorias.jsp">Categorias</a></li>
                     </ul>
 
                     <form class="search-form">
@@ -69,7 +81,7 @@
         <main class="product-category-layout">
             <aside class="filters">
                 <h2>Filtros</h2>
-                <form class="search-form filtros-search-form">
+                <form class="search-forms filtros-search-form">
                     <input type="search" placeholder="Buscar..." class="search-input filtros-search-input" />
                     <button class="btn-search filtros-btn-search" type="submit">
                         <i class="fa-solid fa-magnifying-glass"></i>

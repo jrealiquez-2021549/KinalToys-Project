@@ -19,7 +19,6 @@
         <link rel="stylesheet" href="css/cuenta.css" />
         <link rel="stylesheet" href="css/administrador.css">
         <style>
-            /* Opcional: para que los enlaces no cambien color por defecto */
             .container-user a {
                 color: inherit;
                 text-decoration: none;
@@ -30,9 +29,8 @@
                 cursor: pointer;
             }
             .container-user a:hover {
-                color: #007bff; /* Cambia color al hover, puedes modificar */
+                color: #007bff;
             }
-            /* Para que el texto y número del carrito estén bien alineados */
             .content-shopping-cart {
                 margin-left: 0.5rem;
                 font-weight: 600;
@@ -56,22 +54,33 @@
                     <div class="container-logo">
                         <h1 class="logo"><a href="/">Kinal Toy's</a></h1>
                     </div>
-
+                    
                     <div class="container-user">
-                        <div class="user-menu">
-                            <i class="fa-solid fa-user"></i>
-                            <ul class="user-dropdown">
-                                <li><a href="cuenta-user.jsp">Mi cuenta</a></li>
-                                <li><a href="#">Cambiar cuenta</a></li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa-solid fa-right-from-bracket"></i> Salir
-                                    </a>
-                                </li>
-                            </ul>
-                            <i class="fa-solid fa-basket-shopping"></i>
+                    <div class="user-menu">
+                        <i class="fa-solid fa-user"></i>
+                        <ul class="user-dropdown">
+                            <li><a href="cuenta-user.jsp">Mi cuenta</a></li>
+                            <li><a href="#">Cambiar cuenta</a></li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa-solid fa-right-from-bracket"></i> Salir
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <input type="checkbox" id="toggle-cart" hidden>
+                    <label for="toggle-cart" class="fa-solid fa-basket-shopping"></label>
+                    <div class="carrito-items">
+                        <div class="carrito-header">
+                            <h2>Mi Carrito</h2>
+                            <label for="toggle-cart" class="cerrar-carrito">&times;</label>
                         </div>
-                    </div>
+
+                        <div class="resumen-carrito">
+                            <a href="carrito-user.jsp" class="btn-comprar">VER CARRITO Y PAGAR</a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
