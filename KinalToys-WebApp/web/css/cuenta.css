@@ -164,3 +164,83 @@ button, .btn {
 button:hover, .btn:hover {
   background-color: #1d2c44; /* tono más oscuro al hacer hover */
 }
+
+
+/* ----------- MEDIA QUERIES PARA RESPONSIVIDAD ------------ */
+
+@media (max-width: 1024px) {
+  .mi-cuenta {
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+
+  .detalles-cuenta,
+  .mi-cuenta-right {
+    min-width: 100%;
+    max-width: 100%;
+    flex: 1 1 100%;
+  }
+
+  .detalles-cuenta {
+    padding: 2rem;
+  }
+
+  .mi-cuenta-right {
+    gap: 1.5rem;
+  }
+
+  .heading-1 {
+    font-size: 2.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    padding: 1.5rem;
+  }
+
+  .heading-1 {
+    font-size: 2.4rem;
+    margin-bottom: 1rem;
+  }
+
+  .detalles-cuenta,
+  .mi-cuenta-right {
+    padding: 1.5rem 1rem;
+    font-size: 1rem;
+  }
+
+  .detalles-cuenta h3 {
+    font-size: 1.8rem;
+  }
+
+  .mi-cuenta-card h3 {
+    font-size: 1.6rem;
+  }
+
+  button, .btn,
+  .detalles-cuenta button,
+  .detalles-cuenta .btn-dark,
+  .mi-cuenta-card a {
+    font-size: 1rem;
+    padding: 0.6rem 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .mi-cuenta {
+    flex-direction: column;
+  }
+
+  .detalles-cuenta,
+  .mi-cuenta-right {
+    min-width: 100%;
+    max-width: 100%;
+    padding: 1rem;
+  }
+
+  .heading-1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+}
