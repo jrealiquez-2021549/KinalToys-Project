@@ -138,7 +138,7 @@
 
                 <!-- LADO DERECHO: Botones como categorías -->
                 <div class="dashboard-right">
-                    <div class="container-categories">
+                    <div class="container-cruds">
                         <div class="card-category usuarios-bg">
                             <p>Usuarios</p>
                             <a href="usuario.jsp?categoria=usuarios"><span>Ingresar</span></a>
