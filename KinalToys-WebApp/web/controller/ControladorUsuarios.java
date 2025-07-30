@@ -1,6 +1,6 @@
 
 package controller;
-import com.kinaltoys.dominio.Usuarios;
+import dao.Usuarios;
 import javax.persistence.*;
 import java.util.List;
 import java.util.Scanner;
