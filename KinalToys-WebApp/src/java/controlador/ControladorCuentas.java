@@ -1,6 +1,6 @@
 
-package controller;
-import dao.Cuentas;
+package controlador;
+import modelo.Cuentas;
 import javax.persistence.*;
 import java.util.List;
 import java.util.Scanner;

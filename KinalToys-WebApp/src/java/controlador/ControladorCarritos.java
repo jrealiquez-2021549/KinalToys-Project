@@ -1,6 +1,6 @@
 
-package controller;
-import dao.Carritos;
+package controlador;
+import modelo.Carritos;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

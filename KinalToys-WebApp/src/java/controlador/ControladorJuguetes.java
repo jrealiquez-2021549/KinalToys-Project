@@ -1,6 +1,6 @@
 
-package controller;
-import dao.Juguetes;
+package controlador;
+import modelo.Juguetes;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;

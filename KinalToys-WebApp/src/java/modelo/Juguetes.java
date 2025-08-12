@@ -1,5 +1,5 @@
 
-package dao;
+package modelo;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import javax.persistence.Column;

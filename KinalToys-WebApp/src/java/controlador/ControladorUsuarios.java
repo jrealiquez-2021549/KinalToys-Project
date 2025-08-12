@@ -1,6 +1,6 @@
 
-package controller;
-import dao.Usuarios;
+package controlador;
+import modelo.Usuarios;
 import javax.persistence.*;
 import java.util.List;
 import java.util.Scanner;

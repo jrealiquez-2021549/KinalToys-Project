@@ -1,13 +1,13 @@
 
 package system;
-import controller.ControladorJuguetes;
-import controller.ControladorUsuarios;
-import controller.ControladorNoticias;
-import controller.ControladorProveedores;
-import controller.ControladorFacturas;
-import controller.ControladorCuentas;
-import controller.ControladorCarritos;
-import controller.ControladorDetallesCarritos;
+import controlador.ControladorJuguetes;
+import controlador.ControladorUsuarios;
+import controlador.ControladorNoticias;
+import controlador.ControladorProveedores;
+import controlador.ControladorFacturas;
+import controlador.ControladorCuentas;
+import controlador.ControladorCarritos;
+import controlador.ControladorDetallesCarritos;
 import java.util.Scanner;
 
 public class Principal {

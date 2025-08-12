@@ -1,6 +1,6 @@
 
-package controller;
-import dao.DetallesCarritos;
+package controlador;
+import modelo.DetallesCarritos;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;

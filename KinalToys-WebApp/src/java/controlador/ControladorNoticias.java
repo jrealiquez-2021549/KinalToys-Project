@@ -1,6 +1,6 @@
 
-package controller;
-import dao.Noticias;
+package controlador;
+import modelo.Noticias;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
