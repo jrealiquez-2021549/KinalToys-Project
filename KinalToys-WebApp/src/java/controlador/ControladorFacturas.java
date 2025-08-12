@@ -1,6 +1,6 @@
 
-package controller;
-import dao.Facturas;
+package controlador;
+import modelo.Facturas;
 import enums.MetodoPago;
 import javax.persistence.*;
 import java.math.BigDecimal;

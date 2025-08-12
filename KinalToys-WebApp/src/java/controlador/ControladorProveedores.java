@@ -1,6 +1,6 @@
 
-package controller;
-import dao.Proveedores;
+package controlador;
+import modelo.Proveedores;
 import javax.persistence.*;
 import java.util.List;
 import java.util.Scanner;

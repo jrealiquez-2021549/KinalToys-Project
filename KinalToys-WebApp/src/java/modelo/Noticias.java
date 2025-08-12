@@ -1,5 +1,5 @@
 
-package dao;
+package modelo;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import javax.persistence.Column;

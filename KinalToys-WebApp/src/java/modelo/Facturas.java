@@ -1,5 +1,5 @@
 
-package dao;
+package modelo;
 import enums.MetodoPago;
 import java.io.Serializable;
 import java.math.BigDecimal;
