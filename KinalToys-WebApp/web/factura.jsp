@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -52,7 +53,7 @@
                     <ul class="menu">
                         <li><a href="Controlador?menu=Principal">Inicio</a></li>
                         <li><a href="Controlador?menu=Usuarios">Usuarios</a></li>
-                        <li><a href="Controlador?menu=Facturas">Facturas</a></li>
+                        <li><a href="Controlador?menu=Facturas&accion=Listar">Facturas</a></li>
                         <li><a href="Controlador?menu=Noticias">Noticias</a></li>
                         <li><a href="Controlador?menu=Proveedores">Proveedores</a></li>
                         <li><a href="Controlador?menu=Juguetes">Juguetes</a></li>
@@ -70,37 +71,60 @@
                 </nav>
             </div>
         </header>
-
         <main class="main-users">
             <section class="users-section container">
                 <h1 class="users-title">Facturas</h1>
 
-                <form class="users-form">
+                <!-- Formulario para agregar/editar/actualizar -->
+                <form class="users-form" action="Controlador?menu=Facturas" method="POST">
+                    <div class="form-group">
+                        <label for="codigo-factura"><strong>Código de Factura:</strong></label>
+                        <!-- Este campo se usará para la actualización, y será de solo lectura -->
+                        <input type="text" id="codigo-factura" name="codigo-factura" placeholder="Autogenerado" readonly value="${facturaSeleccionada.codigoFactura}" />
+                    </div>
+
                     <div class="form-group">
                         <label for="fecha-emision"><strong>Fecha de Emisión:</strong></label>
-                        <input type="date" id="fecha-emision" name="fecha-emision" required />
+                        <input type="date" id="fecha-emision" name="fecha-emision" required value="${facturaSeleccionada.fechaEmisionHTML}" />
                     </div>
 
                     <div class="form-group">
                         <label for="metodo-pago"><strong>Método de Pago:</strong></label>
                         <select id="metodo-pago" name="metodo-pago" required>
                             <option value="">Seleccione</option>
-                            <option value="Efectivo">Efectivo</option>
-                            <option value="Credito">Crédito</option>
+                            <option value="Efectivo" ${facturaSeleccionada.metodoPago == 'Efectivo' ? 'selected' : ''}>Efectivo</option>
+                            <option value="Credito" ${facturaSeleccionada.metodoPago == 'Credito' ? 'selected' : ''}>Crédito</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label for="total"><strong>Total:</strong></label>
-                        <input type="number" id="total" name="total" step="0.01" placeholder="Ej. 150.75" required />
+                        <input type="number" id="total" name="total" step="0.01" placeholder="Ej. 150.75" required value="${facturaSeleccionada.total}" />
                     </div>
 
                     <div class="form-group">
                         <label for="codigo-usuario"><strong>Código de Usuario:</strong></label>
-                        <input type="number" id="codigo-usuario" name="codigo-usuario" placeholder="Ej. 1" required />
+                        <input type="number" id="codigo-usuario" name="codigo-usuario" placeholder="Ej. 1" required value="${facturaSeleccionada.codigoUsuario}" />
+                    </div>
+
+                    <div class="crud-buttons">
+                        <button class="btn-crud" name="accion" value="Agregar">Agregar</button>
+                        <button class="btn-crud" name="accion" value="Actualizar">Actualizar</button>
                     </div>
                 </form>
 
+                <!-- Nuevo contenedor para el formulario de búsqueda, con espacio y estilo -->
+                <div class="search-container">
+                    <form class="search-form" action="Controlador" method="GET">
+                        <input type="hidden" name="menu" value="Facturas" />
+                        <div class="search-buttons">
+                            <button class="btn-crud" name="accion" value="Buscar">Buscar</button>
+                            <input type="text" class="input-search" placeholder="Buscar por ID..." name="id" />
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Tabla de Facturas -->
                 <div class="table-wrapper">
                     <table class="users-table">
                         <thead>
@@ -110,34 +134,25 @@
                                 <th>Método de Pago</th>
                                 <th>Total</th>
                                 <th>Código Usuario</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody id="detalle-factura">
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
+                            <c:forEach var="factura" items="${facturas}">
+                                <tr>
+                                    <td>${factura.codigoFactura}</td>
+                                    <td>${factura.fechaEmision}</td>
+                                    <td>${factura.metodoPago}</td>
+                                    <td>${factura.total}</td>
+                                    <td>${factura.codigoUsuario}</td>
+                                    <td>
+                                        <a href="Controlador?menu=Facturas&accion=Cargar&id=${factura.codigoFactura}" class="btn-crud">Editar</a>
+                                        <a href="Controlador?menu=Facturas&accion=Eliminar&id=${factura.codigoFactura}" class="btn-crud">Eliminar</a>
+                                    </td>
+                                </tr>
+                            </c:forEach>
                         </tbody>
                     </table>
-                </div>
-
-                <div class="crud-buttons">
-                    <button class="btn-crud">Agregar</button>
-                    <button class="btn-crud">Listar</button>
-                    <button class="btn-crud">Buscar</button>
-                    <input type="text" class="input-search" placeholder="Ingrese búsqueda" />
-                    <button class="btn-crud">Eliminar</button>
-                    <button class="btn-crud">Actualizar</button>
                 </div>
             </section>
         </main>
@@ -221,7 +236,7 @@
                 </div>
             </div>
         </footer>
-        
+
         <script>
             document.addEventListener('DOMContentLoaded', () => {
                 const checkboxes = document.querySelectorAll('.task-checkbox');

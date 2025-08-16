@@ -57,7 +57,7 @@
                     <ul class="menu">
                         <li><a href="Controlador?menu=Principal">Inicio</a></li>
                         <li><a href="Controlador?menu=Usuarios">Usuarios</a></li>
-                        <li><a href="Controlador?menu=Facturas">Facturas</a></li>
+                        <li><a href="Controlador?menu=Facturas&accion=Listar">Facturas</a></li>
                         <li><a href="Controlador?menu=Noticias">Noticias</a></li>
                         <li><a href="Controlador?menu=Proveedores">Proveedores</a></li>
                         <li><a href="Controlador?menu=Juguetes">Juguetes</a></li>

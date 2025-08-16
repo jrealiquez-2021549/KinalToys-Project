@@ -1,9 +1,10 @@
-
 package modelo;
+
 import enums.MetodoPago;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -12,32 +13,35 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
+ 
 @Entity
 @Table(name = "Facturas")
+
 public class Facturas implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "codigoFactura")
     private Integer codigoFactura;
-
     @Column(name = "fechaEmision")
     private LocalDateTime fechaEmision;
-    
     @Enumerated(EnumType.STRING)
     @Column(name = "metodoPago")
     private MetodoPago metodoPago;
-    
     @Column(name = "total")
     private BigDecimal total;
-    
     @Column(name = "codigoUsuario")
     private Integer codigoUsuario;
     
     public Facturas() {
-        
     }
 
+    // Este es el metodo para formatear la fecha - jaquino
+    public String getFechaEmisionHTML() {
+        if (fechaEmision == null) return "";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        return fechaEmision.format(formatter);
+    }
+    
     public Integer getCodigoFactura() {
         return codigoFactura;
     }
