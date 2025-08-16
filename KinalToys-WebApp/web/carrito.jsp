@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -31,12 +32,12 @@
 
                     <div class="container-user">
                         <div class="user-menu">
-                            <img src="CuentaFoto" class="profile-pic" alt="Foto de Perfil">
+                            <i class="fa-solid fa-user"></i>
                             <ul class="user-dropdown">
                                 <li><a href="cuenta-admin.jsp">Mi cuenta</a></li>
                                 <li><a href="#">Cambiar cuenta</a></li>
                                 <li>
-                                    <a href="Controlador?menu=Salir">
+                                    <a href="#">
                                         <i class="fa-solid fa-right-from-bracket"></i> Salir
                                     </a>
                                 </li>
@@ -57,7 +58,7 @@
                         <li><a href="Controlador?menu=Proveedores">Proveedores</a></li>
                         <li><a href="Controlador?menu=Juguetes">Juguetes</a></li>
                         <li><a href="Controlador?menu=Cuentas&accion=Listar">Cuentas</a></li>
-                        <li><a href="Controlador?menu=Carritos">Carritos</a></li>
+                        <li><a href="Controlador?menu=Carritos&accion=Listar">Carritos</a></li>
                         <li><a href="Controlador?menu=DetallesCarritos">Detalles Carritos</a></li>
                     </ul>
 
@@ -75,7 +76,9 @@
             <section class="users-section container">
                 <h1 class="users-title">Carritos</h1>
 
-                <form class="users-form">
+                <form id="form-carrito" action="Controlador" method="POST" class="users-form">
+                    <input type="hidden" name="menu" value="Carritos"/>
+
                     <div class="form-group">
                         <label for="fecha-creacion"> <strong> Fecha de Creación</strong></label>
                         <input type="datetime-local" id="fecha-creacion" name="fecha-creacion" required />
@@ -100,7 +103,27 @@
                         <label for="codigo-usuario"> <strong>Código de Usuario</strong></label>
                         <input type="number" id="codigo-usuario" name="codigo-usuario" placeholder="Ej. 1" required />
                     </div>
+
+                    <div class="crud-buttons">
+                        <button type="submit" form="form-carrito" name="accion" value="Agregar" class="btn-crud">Agregar</button>
+                        <button type="submit" form="form-carrito" name="accion" value="Actualizar" class="btn-crud">Actualizar</button>
+                    </div>
+
+                    <c:if test="${not empty mensaje}">
+                        <script>alert("${mensaje}");</script>
+                    </c:if>
                 </form>
+
+                <!-- Nuevo contenedor para el formulario de búsqueda, con espacio y estilo -->
+                <div class="search-container">
+                    <form class="search-form" action="Controlador" method="GET">
+                        <input type="hidden" name="menu" value="Facturas" />
+                        <div class="search-buttons">
+                            <button class="btn-crud" name="accion" value="Buscar">Buscar</button>
+                            <input type="text" class="input-search" placeholder="Buscar por ID..." name="id" />
+                        </div>
+                    </form>
+                </div>
 
                 <div class="table-wrapper">
                     <table class="users-table">
@@ -111,23 +134,27 @@
                                 <th>Estado</th>
                                 <th>Total (Q)</th>
                                 <th>Código Usuario</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody id="detalle-carrito">
-                            <tr>
-                            </tr>
+                            <c:forEach var="carrito" items="${carritos}">
+                                <tr>
+                                    <td>${carrito.codigoCarrito}</td>
+                                    <td>${carrito.fechaCreacion}</td>
+                                    <td>${carrito.estado}</td>
+                                    <td>${carrito.total}</td>
+                                    <td>${carrito.codigoUsuario}</td>
+                                    <td>
+                                        <button type="submit" form="form-carrito" name="accion" value="Eliminar" class="btn-crud">Eliminar</button>
+                                        <button type="submit" form="form-carrito" name="accion" value="Actualizar" class="btn-crud">Actualizar</button>
+                                    </td>
+                                </tr>
+                            </c:forEach>
                         </tbody>
                     </table>
                 </div>
 
-                <div class="crud-buttons">
-                    <button class="btn-crud">Agregar</button>
-                    <button class="btn-crud">Listar</button>
-                    <button class="btn-crud">Buscar</button>
-                    <input type="text" class="input-search" placeholder="Ingrese código de carrito..." />
-                    <button class="btn-crud">Eliminar</button>
-                    <button class="btn-crud">Actualizar</button>
-                </div>
             </section>
         </main>
 
