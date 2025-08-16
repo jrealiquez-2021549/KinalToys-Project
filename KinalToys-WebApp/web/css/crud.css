@@ -44,10 +44,24 @@
     box-shadow: 0 0 5px var(--primary-color);
 }
 
-/* Tabla */
+/* Unifica la definición de .table-wrapper */
 .table-wrapper {
-    overflow-x: auto;
+    max-height: 400px;  /* Altura máxima para habilitar el scroll vertical */
+    overflow-y: auto;   /* Habilita la barra de desplazamiento vertical */
+    overflow-x: auto;   /* Mantiene el scroll horizontal si la tabla es muy ancha */
     margin-bottom: 4rem;
+    position: relative; /* Muy importante para que position: sticky funcione */
+}
+
+/* Aplica el estilo directamente a las celdas del encabezado */
+.users-table thead th {
+    position: sticky;
+    top: 0; /* Pega el encabezado en la parte superior del contenedor */
+    background-color: var(--primary-color); /* Utiliza el color de tu tema */
+    color: #fff;
+    z-index: 10;
+    box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+    text-align: left;
 }
 
 .users-table {
@@ -121,4 +135,61 @@
     outline: none;
     border-color: var(--primary-color);
     box-shadow: 0 0 5px var(--primary-color);
+}
+
+.form-group input[type="file"]::-webkit-file-upload-button {
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    padding: 0.8rem 1.2rem;
+    margin-right: 1rem;
+    border-radius: 0.6rem;
+    cursor: pointer;
+}
+
+.form-group input[type="file"]::-moz-file-upload-button {
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    padding: 0.8rem 1.2rem;
+    margin-right: 1rem;
+    border-radius: 0.6rem;
+    cursor: pointer;
+}
+
+.form-group input[type="file"]::file-selector-button {
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    padding: 0.8rem 1.2rem;
+    margin-right: 1rem;
+    border-radius: 0.6rem;
+    cursor: pointer;
+}
+
+/* Estilos para el nuevo contenedor de búsqueda */
+.search-container {
+    margin: 20px 0; /* Espacio para separar del formulario y la tabla */
+}
+
+.search-form {
+    display: flex;
+    gap: 10px; /* Espacio entre el botón y el input */
+    align-items: center;
+    width: auto; /* Ancho automático para no extenderse */
+}
+
+.input-search {
+    width: 200px; /* Ancho fijo para el campo de búsqueda */
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.profile-pic {
+    width: 50px; /* O el tamaño que prefieras */
+    height: 50px; /* Debe ser igual al ancho para que sea un círculo */
+    border-radius: 50%; /* Esto crea la forma de círculo */
+    object-fit: cover; /* Asegura que la imagen no se distorsione */
+    cursor: pointer;
 }

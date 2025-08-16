@@ -25,6 +25,9 @@ public class Cuentas implements Serializable {
     @Column(name = "contrasenaCuenta")
     private String contrasenaCuenta;
     
+    @Column(name = "fotoCuenta")
+    private byte[] fotoCuenta;
+    
     @Column(name = "codigoUsuario")
     private Integer codigoUsuario;
     
@@ -64,6 +67,14 @@ public class Cuentas implements Serializable {
         this.contrasenaCuenta = contrasenaCuenta;
     }
 
+    public byte[] getFotoCuenta() {
+        return fotoCuenta;
+    }
+
+    public void setFotoCuenta(byte[] fotoCuenta) {
+        this.fotoCuenta = fotoCuenta;
+    }
+
     public Integer getCodigoUsuario() {
         return codigoUsuario;
     }
@@ -74,6 +85,6 @@ public class Cuentas implements Serializable {
 
     @Override
     public String toString() {
-        return "Cuentas{" + "codigoCuenta=" + codigoCuenta + ", nombreCuenta=" + nombreCuenta + ", correoCuenta=" + correoCuenta + ", contrasenaCuenta=" + contrasenaCuenta + ", codigoUsuario=" + codigoUsuario + '}';
+        return "Cuentas{" + "codigoCuenta=" + codigoCuenta + ", nombreCuenta=" + nombreCuenta + ", correoCuenta=" + correoCuenta + ", contrasenaCuenta=" + contrasenaCuenta + ", fotoCuenta=" + fotoCuenta + ", codigoUsuario=" + codigoUsuario + '}';
     }
 }

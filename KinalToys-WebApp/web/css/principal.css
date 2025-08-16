@@ -1252,3 +1252,11 @@ html {
     background-color: var(--primary-color);
     color: #fff;
 }
+
+.profile-pic {
+    width: 40px; /* O el tamaño que prefieras */
+    height: 40px; /* Debe ser igual al ancho para que sea un círculo */
+    border-radius: 50%; /* Esto crea la forma de círculo */
+    object-fit: cover; /* Asegura que la imagen no se distorsione */
+    cursor: pointer;
+}

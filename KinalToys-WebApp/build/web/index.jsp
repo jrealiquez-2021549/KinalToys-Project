@@ -38,7 +38,7 @@
                 </form>
             </div>
             <div class="form-container sign-in-container">
-                <form action="principal-admin.jsp">
+                <form class="form-sign" action="Validar" method="POST">
                     <h1>Sign In</h1>
                     <div class="social-container">
                         <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
@@ -47,15 +47,15 @@
                     </div>
                     <span>or use your account</span>
                     <div class="infield">
-                        <input type="email" placeholder="Email" name="email"/>
+                        <input type="email" placeholder="Email" name="email" class="form-controller"/>
                         <label></label>
                     </div>
                     <div class="infield">
-                        <input type="password" placeholder="Password" />
+                        <input type="password" placeholder="Password" name="password" class="form-controller"/>
                         <label></label>
                     </div>
                     <a href="#" class="forgot">Forgot your password?</a>
-                    <button>Sign In</button>
+                    <button type="Submit" name="accion" value="Ingresar" class="btn btn-primary btn-block">Sign In</button>
                 </form>
             </div>
             <div class="overlay-container" id="overlayCon">
