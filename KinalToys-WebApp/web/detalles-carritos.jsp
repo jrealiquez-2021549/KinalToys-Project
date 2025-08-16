@@ -36,19 +36,18 @@
 
                     <div class="container-user">
                         <div class="user-menu">
-                            <i class="fa-solid fa-user"></i>
+                            <img src="CuentaFoto" class="profile-pic" alt="Foto de Perfil">
                             <ul class="user-dropdown">
                                 <li><a href="cuenta-admin.jsp">Mi cuenta</a></li>
                                 <li><a href="#">Cambiar cuenta</a></li>
                                 <li>
-                                    <a href="#">
+                                    <a href="Controlador?menu=Salir">
                                         <i class="fa-solid fa-right-from-bracket"></i> Salir
                                     </a>
                                 </li>
                             </ul>
-                            <i class="fa-solid fa-basket-shopping"></i>
                         </div>
-                    </div>
+                    </div>
                 </div>
             </div>
 
@@ -56,15 +55,15 @@
                 <nav class="navbar container">
                     <i class="fa-solid fa-bars"></i>
                     <ul class="menu">
-                        <li><a href="principal-admin.jsp">Inicio</a></li>
-                        <li><a href="usuario.jsp">Usuarios</a></li>
-                        <li><a href="factura.jsp">Facturas</a></li>
-                        <li><a href="noticia.jsp">Noticias</a></li>
-                        <li><a href="proveedor.jsp">Proveedores</a></li>
-                        <li><a href="juguete.jsp">Juguetes</a></li>
-                        <li><a href="cuenta.jsp">Cuentas</a></li>
-                        <li><a href="carrito.jsp">Carritos</a></li>
-                        <li><a href="detalles-carritos.jsp">Detalles Carritos</a></li>
+                        <li><a href="Controlador?menu=Principal">Inicio</a></li>
+                        <li><a href="Controlador?menu=Usuarios">Usuarios</a></li>
+                        <li><a href="Controlador?menu=Facturas">Facturas</a></li>
+                        <li><a href="Controlador?menu=Noticias">Noticias</a></li>
+                        <li><a href="Controlador?menu=Proveedores">Proveedores</a></li>
+                        <li><a href="Controlador?menu=Juguetes">Juguetes</a></li>
+                        <li><a href="Controlador?menu=Cuentas&accion=Listar">Cuentas</a></li>
+                        <li><a href="Controlador?menu=Carritos">Carritos</a></li>
+                        <li><a href="Controlador?menu=DetallesCarritos">Detalles Carritos</a></li>
                     </ul>
 
                     <form class="search-form">

@@ -58,6 +58,7 @@ create table Cuentas (
     nombreCuenta varchar(50),
     correoCuenta varchar(100),
     contrasenaCuenta varchar(50),
+    fotoCuenta longblob,
     codigoUsuario int,
     primary key PK_codigoCuenta (codigoCuenta),
     constraint FK_Cuenta_Usuario foreign key (codigoUsuario)
@@ -408,14 +409,16 @@ create procedure sp_AgregarCuenta (
 	in nombre varchar(50),
 	in correo varchar(100),
 	in contrasena varchar(50),
+    in fotCuenta longblob,
 	in codUsuario int)
 begin
-	insert into Cuentas (nombreCuenta, correoCuenta, contrasenaCuenta, codigoUsuario)
-	values (nombre, correo, contrasena, codUsuario);
+	insert into Cuentas (nombreCuenta, correoCuenta, contrasenaCuenta, fotoCuenta, codigoUsuario)
+	values (nombre, correo, contrasena, fotCuenta, codUsuario);
 end$$
 Delimiter ;
-call sp_AgregarCuenta('Proxy549', 'proxy549@gmail.com', 'admin', 1);
-call sp_AgregarCuenta('Aquino', 'jaquino@gmail.com', '123', 1);
+call sp_AgregarCuenta('Aquino', 'jaquino@gmail.com', '123', load_file('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/perfil.jpg'), 1);
+call sp_AgregarCuenta('Proxy549', 'proxy549@gmail.com', 'admin', load_file('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/perfil2.png'), 1);
+call sp_AgregarCuenta('Caelia1980', 'caelia80@gmail.com', 'admin', load_file('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/perfil3.jpg'), 1);
 
 -- LISTAR CUENTAS
 Delimiter $$
@@ -434,7 +437,7 @@ begin
 	delete from Cuentas where codigoCuenta = codCuenta;
 end$$
 Delimiter ;
-call sp_EliminarCuenta(2);
+call sp_EliminarCuenta(3);
 
 -- BUSCAR COMPRA
 Delimiter $$
@@ -453,17 +456,37 @@ create procedure sp_EditarCuenta (
 	in nombre varchar(50),
 	in correo varchar(100),
 	in contrasena varchar(50),
+    in fotCuenta longblob,
 	in codUsuario int)
 begin
 	update Cuentas 
 	set nombreCuenta = nombre, 
 		correoCuenta = correo, 
 		contrasenaCuenta = contrasena, 
+        fotoCuenta = fotCuenta,
 		codigoUsuario = codUsuario
 	where codigoCuenta = codCuenta;
 end$$
 Delimiter ;
-call sp_EditarCuenta(1, 'Realiquez', 'jrealiquez@gmail.com', '1980', 1);
+call sp_EditarCuenta(1, 'Realiquez', 'jrealiquez@gmail.com', '1980', load_file('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/perfil.jpg'), 1);
+
+-- EDITAR CUENTA (SIN CONTRASEÑA)
+Delimiter $$
+create procedure sp_EditarCuenta (
+	in codCuenta int,
+	in nombre varchar(50),
+	in correo varchar(100),
+    in fotCuenta longblob,
+	in codUsuario int)
+begin
+	update Cuentas 
+	set nombreCuenta = nombre, 
+		correoCuenta = correo,  
+        fotoCuenta = fotCuenta,
+		codigoUsuario = codUsuario
+	where codigoCuenta = codCuenta;
+end$$
+Delimiter ;
 
 -- PROCEDIMIENTOS ALMACENADOS (CARRITOS) -------------------------
 -- AGREGAR CARRITO
@@ -596,3 +619,6 @@ begin
 end$$
 Delimiter ;
 call sp_EditarDetalleCarrito(1, 3, 450.00, 30.00, 1, 1);
+
+select * from Cuentas where correoCuenta = "jrealiquez@gmail.com" and contrasenaCuenta =1980;
+SELECT fotoCuenta FROM Cuentas WHERE codigoCuenta = 1;

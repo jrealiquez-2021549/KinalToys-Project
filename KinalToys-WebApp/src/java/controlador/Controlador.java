@@ -1,78 +1,182 @@
 
 package controlador;
-
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+import modelo.Cuentas;
+import modelo.CuentasDAO;
 
+@MultipartConfig
 public class Controlador extends HttpServlet {
+    Cuentas cuentas = new Cuentas();
+    CuentasDAO cuentasDAO = new CuentasDAO();
+    int codCuenta;
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Controlador</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Controlador at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        String menu = request.getParameter("menu");
+        String accion = request.getParameter("accion");
+        
+        // Si el menú es "Salir", manejamos la lógica aquí para evitar conflictos
+        if (menu != null && menu.equals("Salir")) {
+            // Invalida la sesión actual para "cerrar la sesión"
+            if (request.getSession(false) != null) {
+                request.getSession(false).invalidate();
+            }
+            // Redirige a la página de inicio o login para romper el bucle
+            response.sendRedirect("index.jsp");
+            return;
+        }
+
+        if (menu.equals("Principal")) {
+            request.getRequestDispatcher("principal-admin.jsp").forward(request, response);
+        } else if (menu.equals("Usuarios")) {
+            request.getRequestDispatcher("usuario.jsp").forward(request, response);
+        } else if (menu.equals("Facturas")) {
+            request.getRequestDispatcher("factura.jsp").forward(request, response);
+        } else if (menu.equals("Noticias")) {
+            request.getRequestDispatcher("noticia.jsp").forward(request, response);
+        } else if (menu.equals("Proveedores")) {
+            request.getRequestDispatcher("proveedor.jsp").forward(request, response);
+        } else if (menu.equals("Juguetes")) {
+            request.getRequestDispatcher("juguete.jsp").forward(request, response);
+        } else if (menu.equals("Cuentas")) {
+            switch (accion) {
+                case "Listar":
+                    List<Cuentas> listaCuentas = cuentasDAO.listar();
+                    request.setAttribute("cuentas", listaCuentas);
+                    request.getRequestDispatcher("cuenta.jsp").forward(request, response);
+                    break;
+                case "Agregar":
+                    String nombreCuenta = request.getParameter("nombre-cuenta");
+                    String correoCuenta = request.getParameter("correo-cuenta");
+                    String contrasenaCuenta = request.getParameter("contrasena-cuenta");
+
+                    byte[] fotoBytes = null;
+                    Part filePart = request.getPart("foto-cuenta");
+                    if (filePart != null && filePart.getSize() > 0) {
+                        InputStream fotoCuentaInputStream = filePart.getInputStream();
+                        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+                        int nRead;
+                        byte[] data = new byte[1024];
+                        while ((nRead = fotoCuentaInputStream.read(data, 0, data.length)) != -1) {
+                            buffer.write(data, 0, nRead);
+                        }
+                        buffer.flush();
+                        fotoBytes = buffer.toByteArray();
+                        fotoCuentaInputStream.close();
+                        buffer.close();
+                    }
+
+                    int codigoUsuario = Integer.parseInt(request.getParameter("codigo-usuario"));
+
+                    cuentas.setNombreCuenta(nombreCuenta);
+                    cuentas.setCorreoCuenta(correoCuenta);
+                    cuentas.setContrasenaCuenta(contrasenaCuenta);
+                    cuentas.setFotoCuenta(fotoBytes);
+                    cuentas.setCodigoUsuario(codigoUsuario);
+
+                    cuentasDAO.agregar(cuentas);
+                    
+                    response.sendRedirect("Controlador?menu=Cuentas&accion=Listar");
+                    break;
+                case "Eliminar":
+                    codCuenta = Integer.parseInt(request.getParameter("id"));
+                    cuentasDAO.eliminar(codCuenta);
+                    response.sendRedirect("Controlador?menu=Cuentas&accion=Listar");
+                    break;
+                case "Cargar":
+                    codCuenta = Integer.parseInt(request.getParameter("id"));
+                    Cuentas cuentaSeleccionada = cuentasDAO.listarId(codCuenta);
+                    request.setAttribute("cuentaSeleccionada", cuentaSeleccionada);
+                    request.getRequestDispatcher("Controlador?menu=Cuentas&accion=Listar").forward(request, response);
+                    break;
+                case "Actualizar":
+                    codCuenta = Integer.parseInt(request.getParameter("codigo-cuenta"));
+                    String nombre = request.getParameter("nombre-cuenta");
+                    String correo = request.getParameter("correo-cuenta");
+                    int codigoUser = Integer.parseInt(request.getParameter("codigo-usuario"));
+
+                    byte[] fotoActualizar = null;
+                    Part fotoPart = request.getPart("foto-cuenta");
+                    if (fotoPart != null && fotoPart.getSize() > 0) {
+                        InputStream fotoInputStream = fotoPart.getInputStream();
+                        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+                        int nRead;
+                        byte[] data = new byte[1024];
+                        while ((nRead = fotoInputStream.read(data, 0, data.length)) != -1) {
+                            buffer.write(data, 0, nRead);
+                        }
+                        buffer.flush();
+                        fotoActualizar = buffer.toByteArray();
+                    } else {
+                        Cuentas cuentaExistente = cuentasDAO.listarId(codCuenta);
+                        fotoActualizar = cuentaExistente.getFotoCuenta();
+                    }
+
+                    cuentas.setCodigoCuenta(codCuenta);
+                    cuentas.setNombreCuenta(nombre);
+                    cuentas.setCorreoCuenta(correo);
+                    cuentas.setFotoCuenta(fotoActualizar);
+                    cuentas.setCodigoUsuario(codigoUser);
+                    
+                    cuentasDAO.actualizar(cuentas, fotoActualizar);
+                    
+                    response.sendRedirect("Controlador?menu=Cuentas&accion=Listar");
+                    break;
+                case "Buscar":
+                    String idParam = request.getParameter("id");
+                    if (idParam != null && !idParam.isEmpty()) {
+                        try {
+                            int idBuscar = Integer.parseInt(idParam);
+                            Cuentas cuentaEncontrada = cuentasDAO.listarId(idBuscar);
+                            List<Cuentas> listaEncontrada = new ArrayList<>();
+                            if (cuentaEncontrada.getNombreCuenta() != null) {
+                                listaEncontrada.add(cuentaEncontrada);
+                            }
+                            request.setAttribute("cuentas", listaEncontrada);
+                        } catch (NumberFormatException e) {
+                            request.setAttribute("cuentas", cuentasDAO.listar());
+                        }
+                    } else {
+                        request.setAttribute("cuentas", cuentasDAO.listar());
+                    }
+                    request.getRequestDispatcher("cuenta.jsp").forward(request, response);
+                    break;
+                default:
+                    List<Cuentas> lista = cuentasDAO.listar();
+                    request.setAttribute("cuentas", lista);
+                    request.getRequestDispatcher("cuenta.jsp").forward(request, response);
+            }
+        } else if (menu.equals("Carritos")) {
+            request.getRequestDispatcher("carrito.jsp").forward(request, response);
+        } else if (menu.equals("DetallesCarritos")) {
+            request.getRequestDispatcher("detalles-carritos.jsp").forward(request, response);
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
-
+    }
 }
