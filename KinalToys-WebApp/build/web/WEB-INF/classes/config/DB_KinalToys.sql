@@ -450,7 +450,7 @@ Delimiter ;
 call sp_BuscarCuenta(1);
 
 -- EDITAR CUENTA
-Delimiter $$
+/*Delimiter $$
 create procedure sp_EditarCuenta (
 	in codCuenta int,
 	in nombre varchar(50),
@@ -468,7 +468,7 @@ begin
 	where codigoCuenta = codCuenta;
 end$$
 Delimiter ;
-call sp_EditarCuenta(1, 'Realiquez', 'jrealiquez@gmail.com', '1980', load_file('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/perfil.jpg'), 1);
+call sp_EditarCuenta(1, 'Realiquez', 'jrealiquez@gmail.com', '1980', load_file('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/perfil.jpg'), 1);*/
 
 -- EDITAR CUENTA (SIN CONTRASEÑA)
 Delimiter $$
