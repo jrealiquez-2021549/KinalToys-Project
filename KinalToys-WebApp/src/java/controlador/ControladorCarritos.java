@@ -1,5 +1,5 @@
-
 package controlador;
+
 import modelo.Carritos;
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -30,19 +30,26 @@ public class ControladorCarritos {
             scanner.nextLine(); // limpiar buffer
 
             switch (opcion) {
-                case 1: agregarCarrito();
+                case 1:
+                    agregarCarrito();
                     break;
-                case 2: listarCarritos();
+                case 2:
+                    listarCarritos();
                     break;
-                case 3: buscarCarrito();
+                case 3:
+                    buscarCarrito();
                     break;
-                case 4: editarCarrito();
+                case 4:
+                    editarCarrito();
                     break;
-                case 5: eliminarCarrito();
+                case 5:
+                    eliminarCarrito();
                     break;
-                case 0: System.out.println("Saliendo del menú...");
+                case 0:
+                    System.out.println("Saliendo del menú...");
                     break;
-                default: System.out.println("Opción inválida. Intente de nuevo.");
+                default:
+                    System.out.println("Opción inválida. Intente de nuevo.");
                     break;
             }
 
@@ -58,7 +65,7 @@ public class ControladorCarritos {
         String estado = scanner.nextLine();
 
         System.out.print("Ingrese total del carrito: ");
-        String total = scanner.nextLine();
+        double total = Double.parseDouble(scanner.nextLine()); // ✅
 
         System.out.print("Ingrese código del usuario: ");
         int codigoUsuario = scanner.nextInt();
@@ -78,7 +85,7 @@ public class ControladorCarritos {
     }
 
     private void listarCarritos() {
-        List<Carritos> carritos = em.createQuery("SELECT c FROM Carritos c", Carritos.class).getResultList();
+        List<Carritos> carritos = em.createQuery("{call sp_ListarCarritos()}", Carritos.class).getResultList();
         System.out.println("\n--- Lista de Carritos ---");
         carritos.forEach(System.out::println);
     }
@@ -116,7 +123,7 @@ public class ControladorCarritos {
         String estado = scanner.nextLine();
 
         System.out.print("Nuevo total (actual: " + carrito.getTotal() + "): ");
-        String total = scanner.nextLine();
+        double total = Double.parseDouble(scanner.nextLine()); // ✅
 
         System.out.print("Nuevo código de usuario (actual: " + carrito.getCodigoUsuario() + "): ");
         int codigoUsuario = scanner.nextInt();

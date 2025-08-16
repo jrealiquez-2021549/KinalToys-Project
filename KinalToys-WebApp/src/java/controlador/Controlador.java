@@ -19,6 +19,8 @@ import enums.MetodoPago;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import modelo.Carritos;
+import modelo.CarritosDAO;
 
 @MultipartConfig
 public class Controlador extends HttpServlet {
@@ -30,6 +32,10 @@ public class Controlador extends HttpServlet {
     Facturas facturas = new Facturas();
     FacturasDAO facturasDAO = new FacturasDAO();
     int codFactura;
+
+    CarritosDAO carritosDAO = new CarritosDAO();
+    Carritos carritos = new Carritos();
+    int codCarrito;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -260,6 +266,62 @@ public class Controlador extends HttpServlet {
                     request.getRequestDispatcher("cuenta.jsp").forward(request, response);
             }
         } else if (menu.equals("Carritos")) {
+            switch (accion) {
+                case "Listar":
+                    List<Carritos> listarCarritos = carritosDAO.listar();
+                    request.setAttribute("carritos", listarCarritos);
+
+                    // mensaje
+                    String mensajeSesion = (String) request.getSession().getAttribute("mensaje");
+                    if (mensajeSesion != null) {
+                        request.setAttribute("mensaje", mensajeSesion);
+                        request.getSession().removeAttribute("mensaje");
+                    }
+                    break;
+
+                case "Agregar":
+                    String fechaCr = request.getParameter("fecha-creacion");
+                    String estado = request.getParameter("estado");
+                    String totalStr = request.getParameter("total");
+                    String codigoUsuarioStr = request.getParameter("codigo-usuario");
+
+                    //Se agregan validaciones != null en los case "Agregar" para evitar NullPointerException
+                    if (fechaCr != null && estado != null && totalStr != null && codigoUsuarioStr != null) {
+                        try {
+                            double total = Double.parseDouble(totalStr);
+                            int codigoUsuario = Integer.parseInt(codigoUsuarioStr);
+
+                            LocalDateTime fechaCreacion = LocalDateTime.parse(fechaCr, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
+
+                            carritos.setFechaCreacion(fechaCreacion);
+                            carritos.setEstado(estado);
+                            carritos.setTotal(total);
+                            carritos.setCodigoUsuario(codigoUsuario);
+
+                            carritosDAO.agregar(carritos);
+                            request.getSession().setAttribute("mensaje", "Se agregó correctamente");
+                        } catch (NumberFormatException e) {
+                            request.getSession().setAttribute("mensaje", "Error: Los datos numéricos no son válidos");
+                        } catch (Exception e) {
+                            request.getSession().setAttribute("mensaje", "Error: El formato de fecha es incorrecto");
+                        }
+                    } else {
+                        request.getSession().setAttribute("mensaje", "Error: Debe llenar todos los campos");
+                    }
+                    response.sendRedirect("Controlador?menu=Carritos&accion=Listar");
+                    return;
+                case "Editar":
+
+                    break;
+                case "Actualizar":
+
+                    break;
+                case "Eliminar":
+
+                    break;
+                default:
+                    request.getRequestDispatcher("Controlador?menu=Carritos&accion=Listar").forward(request, response);
+            }
             request.getRequestDispatcher("carrito.jsp").forward(request, response);
         } else if (menu.equals("DetallesCarritos")) {
             request.getRequestDispatcher("detalles-carritos.jsp").forward(request, response);

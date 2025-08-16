@@ -25,7 +25,7 @@ public class Carritos implements Serializable {
     private String estado;
 
     @Column(name = "total")
-    private String total;
+    private double total;
 
     @Column(name = "codigoUsuario")
     private Integer codigoUsuario;
@@ -58,11 +58,11 @@ public class Carritos implements Serializable {
         this.estado = estado;
     }
 
-    public String getTotal() {
+    public double getTotal() {
         return total;
     }
 
-    public void setTotal(String total) {
+    public void setTotal(double total) {
         this.total = total;
     }
 
