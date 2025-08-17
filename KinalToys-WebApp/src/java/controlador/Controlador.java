@@ -23,6 +23,8 @@ import modelo.Carritos;
 import modelo.CarritosDAO;
 import modelo.DetallesCarritos;
 import modelo.DetallesCarritosDAO;
+import modelo.Juguetes;
+import modelo.JuguetesDAO;
 
 @MultipartConfig
 public class Controlador extends HttpServlet {
@@ -38,7 +40,11 @@ public class Controlador extends HttpServlet {
     CarritosDAO carritosDAO = new CarritosDAO();
     Carritos carritos = new Carritos();
     int codCarrito;
-    
+
+    JuguetesDAO jugueteDAO = new JuguetesDAO();
+    Juguetes juguete = new Juguetes();
+    int codJuguete;
+
     DetallesCarritos detalleCarrito = new DetallesCarritos();
     DetallesCarritosDAO detallesCarritosDAO = new DetallesCarritosDAO();
 
@@ -161,7 +167,47 @@ public class Controlador extends HttpServlet {
         } else if (menu.equals("Proveedores")) {
             request.getRequestDispatcher("proveedor.jsp").forward(request, response);
         } else if (menu.equals("Juguetes")) {
-            request.getRequestDispatcher("juguete.jsp").forward(request, response);
+
+            switch (accion) {
+                case "Listar":
+                    List<Juguetes> listaJuguetes = jugueteDAO.listarJu();
+                    request.setAttribute("juguetes", listaJuguetes);
+                    request.getRequestDispatcher("juguete.jsp").forward(request, response);
+
+                    break;
+                case "Agregar":
+
+                    String nombrej = request.getParameter("nombre-juguete");
+                    String precioj = request.getParameter("precio-juguete");
+                    String categoriaj = request.getParameter("categoria-juguete");
+                    String marcaj = request.getParameter("marca-juguete");
+                    int stockj = Integer.parseInt(request.getParameter("stock-juguete"));
+                    int codigonoticiaj = Integer.parseInt(request.getParameter("codigo-noticia"));
+                    juguete.setNombreJuguete(nombrej);
+                    juguete.setPrecio(new BigDecimal(precioj)); // 👈 conversión String -> BigDecimal
+                    juguete.setCategoria(categoriaj);
+                    juguete.setMarca(marcaj);
+                    juguete.setStock(stockj);
+                    juguete.setCodigoNoticia(codigonoticiaj);
+                    jugueteDAO.agregarJu(juguete);
+                    request.getSession().setAttribute("mensaje", "Se agregó correctamente");
+
+                    request.getRequestDispatcher("Controlador?menu=Juguetes&accion=Listar").forward(request, response); 
+
+                    break;
+                case "Editar":
+                    System.out.println("LIST");
+                    break;
+                case "Actualizar":
+                    System.out.println("LIST");
+                    break;
+                case "Eliminar":
+                    System.out.println("LIST");
+                    break;
+                default:
+                    
+            } 
+
         } else if (menu.equals("Cuentas")) {
             switch (accion) {
                 case "Listar":
@@ -337,15 +383,14 @@ public class Controlador extends HttpServlet {
                 switch (accion) {
                     case "Listar":
                         try {
-                        List<DetallesCarritos> listaDetalles = detallesCarritosDAO.listar();
-                        request.setAttribute("detallesCarritos", listaDetalles);
-                        request.getRequestDispatcher("/detalles-carritos.jsp").forward(request, response);
-                        return;
+                            List<DetallesCarritos> listaDetalles = detallesCarritosDAO.listar();
+                            request.setAttribute("detallesCarritos", listaDetalles);
+                            request.getRequestDispatcher("/detalles-carritos.jsp").forward(request, response);
+                            return;
                         } catch (Exception e) {
                             e.printStackTrace();
                             e.getMessage();
                         }
-
 
                     case "Agregar":
                         System.out.println("Entrando en caso de Agregar detalle-carrito...");

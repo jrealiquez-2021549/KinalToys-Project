@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -21,7 +22,7 @@
                                 <span class="text">Soporte al cliente</span>
                                 <span class="number">502-3110-0319</span>
                             </div>
-                        </div>
+                        </div> 
 
                         <div class="container-logo">
                             <h1 class="logo"><a href="/">Kinal Toy's</a></h1>
@@ -42,31 +43,30 @@
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="container-navbar">
-                    <nav class="navbar container">
-                        <i class="fa-solid fa-bars"></i>
-                        <ul class="menu">
-                        <li><a href="Controlador?menu=Principal">Inicio</a></li>
-                        <li><a href="Controlador?menu=Usuarios">Usuarios</a></li>
-                        <li><a href="Controlador?menu=Facturas&accion=Listar">Facturas</a></li>
-                        <li><a href="Controlador?menu=Noticias">Noticias</a></li>
-                        <li><a href="Controlador?menu=Proveedores">Proveedores</a></li>
-                        <li><a href="Controlador?menu=Juguetes">Juguetes</a></li>
-                        <li><a href="Controlador?menu=Cuentas&accion=Listar">Cuentas</a></li>
-                        <li><a href="Controlador?menu=Carritos&accion=Listar">Carritos</a></li>
-                        <li><a href="Controlador?menu=DetallesCarritos&accion=Listar">Detalles Carritos</a></li>
-                    </ul>
+                    <div class="container-navbar">
+                        <nav class="navbar container">
+                            <i class="fa-solid fa-bars"></i>
+                            <ul class="menu">
+                                <li><a href="Controlador?menu=Principal">Inicio</a></li>
+                                <li><a href="Controlador?menu=Usuarios">Usuarios</a></li>
+                                <li><a href="Controlador?menu=Facturas&accion=Listar">Facturas</a></li>
+                                <li><a href="Controlador?menu=Noticias">Noticias</a></li>
+                                <li><a href="Controlador?menu=Proveedores">Proveedores</a></li>
+                                <li><a href="Controlador?menu=Juguetes&accion=Listar">Juguetes</a></li>
+                                <li><a href="Controlador?menu=Cuentas&accion=Listar">Cuentas</a></li>
+                                <li><a href="Controlador?menu=Carritos&accion=Listar">Carritos</a></li>
+                                <li><a href="Controlador?menu=DetallesCarritos&accion=Listar">Detalles Carritos</a></li>
+                            </ul>
 
-                        <form class="search-form">
-                            <input type="search" placeholder="Buscar..." />
-                            <button class="btn-search">
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                            </button>
-                        </form>
-                    </nav>
-                </div>
+                            <form class="search-form">
+                                <input type="search" placeholder="Buscar..." />
+                                <button class="btn-search">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                </button>
+                            </form>
+                        </nav>
+                    </div>
             </header>
         </header>
 
@@ -74,71 +74,93 @@
             <section class="users-section container">
                 <h1 class="users-title">Juguetes</h1>
 
-                <form class="users-form">
-                    <div class="form-group">
-                        <label for="nombre-juguete"><strong>Nombre Juguete:</strong></label>
-                        <input type="text" id="nombre-juguete" name="nombre-juguete" placeholder="Ej. Carrito Hot Wheels" required />
+                <form id="form-juguete" action="Controlador" method="POST" class="users-form">
+                    <input type="hidden" name="menu" value="Juguetes"/>
+
+                    <form class="users-form">
+                        <div class="form-group">
+                            <label for="nombre-juguete"><strong>Nombre Juguete:</strong></label>
+                            <input type="text" id="nombre-juguete" name="nombre-juguete" placeholder="Ej. Carrito Hot Wheels" required />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="precio-juguete"><strong>Precio:</strong></label>
+                            <input type="number" step="0.01" id="precio-juguete" name="precio-juguete" placeholder="Ej. 199.99" required />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="categoria-juguete"><strong>Categoría:</strong></label>
+                            <input type="text" id="categoria-juguete" name="categoria-juguete" placeholder="Ej. Vehículos" required />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="marca-juguete"><strong>Marca:</strong></label>
+                            <input type="text" id="marca-juguete" name="marca-juguete" placeholder="Ej. Mafex" required />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="stock-juguete"><strong>Stock:</strong></label>
+                            <input type="number" id="stock-juguete" name="stock-juguete" placeholder="Ej. 50" required />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="codigo-noticia"><strong>Código Noticia:</strong></label>
+                            <input type="number" id="codigo-noticia" name="codigo-noticia" placeholder="Ej. 1" required />
+                        </div>
+
+                        <div class="crud-buttons">
+                            <button type="submit" form="form-juguete" name="accion" value="Agregar" class="btn-crud">Agregar</button>
+                            <button type="submit" form="form-juguete" name="accion" value="Actualizar" class="btn-crud">Actualizar</button>
+                        </div>
+
+                    </form>
+
+                    <div class="table-wrapper">
+                        <table class="users-table">
+                            <thead>
+                                <tr>
+                                    <th>Código Juguete</th>
+                                    <th>Nombre</th>
+                                    <th>Precio</th>
+                                    <th>Categoría</th>
+                                    <th>Marca</th>
+                                    <th>Stock</th>
+                                    <th>Código Noticia</th>
+                                    <th>Acciones</th>
+
+                                </tr>
+                            </thead>
+                            <tbody id="detalle-juguete">
+
+                                <c:forEach var ="juguete" items="${juguetes}">
+
+                                    <tr>
+                                        <td>${juguete.getCodigoJuguete()}</td>
+                                        <td>${juguete.getNombreJuguete()}</td>
+                                        <td>${juguete.getPrecio()}</td>
+                                        <td>${juguete.getCategoria()}</td>
+                                        <td>${juguete.getMarca()}</td>
+                                        <td>${juguete.getStock()}</td>
+                                        <td>${juguete.getCodigoNoticia()}</td>
+
+                                        <td>                                       
+
+                                            <button type="submit" form="form-carrito" name="accion" value="Eliminar" class="btn-crud">Eliminar</button>
+                                            <button type="submit" form="form-carrito" name="accion" value="Actualizar" class="btn-crud">Actualizar</button>
+
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
                     </div>
 
-                    <div class="form-group">
-                        <label for="precio-juguete"><strong>Precio:</strong></label>
-                        <input type="number" step="0.01" id="precio-juguete" name="precio-juguete" placeholder="Ej. 199.99" required />
+
                     </div>
-
-                    <div class="form-group">
-                        <label for="categoria-juguete"><strong>Categoría:</strong></label>
-                        <input type="text" id="categoria-juguete" name="categoria-juguete" placeholder="Ej. Vehículos" required />
-                    </div>
-
-                    <div class="form-group">
-                        <label for="marca-juguete"><strong>Marca:</strong></label>
-                        <input type="text" id="marca-juguete" name="marca-juguete" placeholder="Ej. Mafex" required />
-                    </div>
-
-                    <div class="form-group">
-                        <label for="stock-juguete"><strong>Stock:</strong></label>
-                        <input type="number" id="stock-juguete" name="stock-juguete" placeholder="Ej. 50" required />
-                    </div>
-
-                    <div class="form-group">
-                        <label for="codigo-noticia"><strong>Código Noticia:</strong></label>
-                        <input type="number" id="codigo-noticia" name="codigo-noticia" placeholder="Ej. 1" required />
-                    </div>
-                </form>
-
-                <div class="table-wrapper">
-                    <table class="users-table">
-                        <thead>
-                            <tr>
-                                <th>Código Juguete</th>
-                                <th>Nombre</th>
-                                <th>Precio</th>
-                                <th>Categoría</th>
-                                <th>Marca</th>
-                                <th>Stock</th>
-                                <th>Código Noticia</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tabla-juguetes">
-                            <tr>
-                                <td colspan="7"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="crud-buttons">
-                    <button class="btn-crud">Agregar</button>
-                    <button class="btn-crud">Listar</button>
-                    <button class="btn-crud">Buscar</button>
-                    <input type="text" class="input-search" placeholder="Ingrese búsqueda" />
-                    <button class="btn-crud">Eliminar</button>
-                    <button class="btn-crud">Actualizar</button>
-                </div>
             </section>
-        </main>
+        </main> 
 
-<footer class="footer">
+        <footer class="footer">
             <div class="container container-footer">
                 <div class="menu-footer">
                     <div class="contact-info">
