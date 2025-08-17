@@ -55,7 +55,7 @@
                         <li><a href="Controlador?menu=Facturas&accion=Listar">Facturas</a></li>
                         <li><a href="Controlador?menu=Noticias">Noticias</a></li>
                         <li><a href="Controlador?menu=Proveedores">Proveedores</a></li>
-                        <li><a href="Controlador?menu=Juguetes">Juguetes</a></li>
+                        <li><a href="Controlador?menu=Juguetes&accion=Listar">Juguetes</a></li>
                         <li><a href="Controlador?menu=Cuentas&accion=Listar">Cuentas</a></li>
                         <li><a href="Controlador?menu=Carritos&accion=Listar">Carritos</a></li>
                         <li><a href="Controlador?menu=DetallesCarritos&accion=Listar">Detalles Carritos</a></li>
