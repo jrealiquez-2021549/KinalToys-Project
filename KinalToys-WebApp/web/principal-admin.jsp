@@ -58,7 +58,7 @@
                         <li><a href="Controlador?menu=Juguetes">Juguetes</a></li>
                         <li><a href="Controlador?menu=Cuentas&accion=Listar">Cuentas</a></li>
                         <li><a href="Controlador?menu=Carritos&accion=Listar">Carritos</a></li>
-                        <li><a href="Controlador?menu=DetallesCarritos">Detalles Carritos</a></li>
+                        <li><a href="Controlador?menu=DetallesCarritos&accion=Listar">Detalles Carritos</a></li>
                     </ul>
 
                     <form class="search-form">
@@ -142,35 +142,35 @@
                     <div class="container-cruds">
                         <div class="card-category usuarios-bg">
                             <p>Usuarios</p>
-                            <a href="usuario.jsp?categoria=usuarios"><span>Ingresar</span></a>
+                            <a href="Controlador?menu=Usuarios"><span>Ingresar</span></a>
                         </div>
                         <div class="card-category facturas-bg">
                             <p>Facturas</p>
-                            <a href="factura.jsp?categoria=facturas"><span>Ingresar</span></a>
+                            <a href="Controlador?menu=Facturas&accion=Listar"><span>Ingresar</span></a>
                         </div>
                         <div class="card-category noticias-bg">
                             <p>Noticias</p>
-                            <a href="noticia.jsp?categoria=noticias"><span>Ingresar</span></a>
+                            <a href="Controlador?menu=Noticias"><span>Ingresar</span></a>
                         </div>
                         <div class="card-category proveedores-bg">
                             <p>Proveedores</p>
-                            <a href="proveedor.jsp?categoria=proveedores"><span>Ingresar</span></a>
+                            <a href="Controlador?menu=Proveedores"><span>Ingresar</span></a>
                         </div>
                         <div class="card-category juguetes-bg">
                             <p>Juguetes</p>
-                            <a href="juguete.jsp?categoria=juguetes"><span>Ingresar</span></a>
+                            <a href="Controlador?menu=Juguetes"><span>Ingresar</span></a>
                         </div>
                         <div class="card-category cuentas-bg">
                             <p>Cuentas</p>
-                            <a href="cuenta.jsp?categoria=cuentas"><span>Ingresar</span></a>
+                            <a href="Controlador?menu=Cuentas&accion=Listar"><span>Ingresar</span></a>
                         </div>
                         <div class="card-category carritos-bg">
                             <p>Carritos</p>
-                            <a href="carrito.jsp?categoria=carritos"><span>Ingresar</span></a>
+                            <a href="Controlador?menu=Carritos&accion=Listar""><span>Ingresar</span></a>
                         </div>
                         <div class="card-category detalles-bg">
                             <p>Detalles Carritos</p>
-                            <a href="detalle.jsp?categoria=detalles"><span>Ingresar</span></a>
+                            <a href="Controlador?menu=DetallesCarritos&accion=Listar"><span>Ingresar</span></a>
                         </div>
                     </div>
                 </div>
