@@ -21,6 +21,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import modelo.Carritos;
 import modelo.CarritosDAO;
+import modelo.DetallesCarritos;
+import modelo.DetallesCarritosDAO;
 
 @MultipartConfig
 public class Controlador extends HttpServlet {
@@ -36,6 +38,9 @@ public class Controlador extends HttpServlet {
     CarritosDAO carritosDAO = new CarritosDAO();
     Carritos carritos = new Carritos();
     int codCarrito;
+    
+    DetallesCarritos detalleCarrito = new DetallesCarritos();
+    DetallesCarritosDAO detallesCarritosDAO = new DetallesCarritosDAO();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -323,8 +328,61 @@ public class Controlador extends HttpServlet {
                     request.getRequestDispatcher("Controlador?menu=Carritos&accion=Listar").forward(request, response);
             }
             request.getRequestDispatcher("carrito.jsp").forward(request, response);
-        } else if (menu.equals("DetallesCarritos")) {
-            request.getRequestDispatcher("detalles-carritos.jsp").forward(request, response);
+        } else if ("DetallesCarritos".equals(menu)) {
+            try {
+                if (accion == null) {
+                    accion = "Listar";
+                }
+
+                switch (accion) {
+                    case "Listar":
+                        try {
+                        List<DetallesCarritos> listaDetalles = detallesCarritosDAO.listar();
+                        request.setAttribute("detallesCarritos", listaDetalles);
+                        request.getRequestDispatcher("/detalles-carritos.jsp").forward(request, response);
+                        return;
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            e.getMessage();
+                        }
+
+
+                    case "Agregar":
+                        System.out.println("Entrando en caso de Agregar detalle-carrito...");
+
+                        String cantidadStr = request.getParameter("txtCantidad");
+                        String subTotalStr = request.getParameter("txtSubTotal");
+                        String descuentoStr = request.getParameter("txtDescuento");
+                        String codigoCarritoStr = request.getParameter("txtCodigoCarrito");
+                        String codigoJugueteStr = request.getParameter("txtCodigoJuguete");
+
+                        int cantidad = Integer.parseInt(cantidadStr);
+                        BigDecimal subTotal = new BigDecimal(subTotalStr);
+                        BigDecimal descuento = new BigDecimal(descuentoStr);
+                        int codigoCarrito = Integer.parseInt(codigoCarritoStr);
+                        int codigoJuguete = Integer.parseInt(codigoJugueteStr);
+
+                        detalleCarrito.setCantidad(cantidad);
+                        detalleCarrito.setSubTotal(subTotal);
+                        detalleCarrito.setDescuentoAplicado(descuento);
+                        detalleCarrito.setCodigoCarrito(codigoCarrito);
+                        detalleCarrito.setCodigoJuguete(codigoJuguete);
+
+                        detallesCarritosDAO.agregar(detalleCarrito);
+
+                        response.sendRedirect("Controlador?menu=DetallesCarritos&accion=Listar");
+                        return;
+
+                    case "Editar":
+                        break;
+
+                    default:
+                        throw new AssertionError("Acción no reconocida: " + accion);
+                }
+            } catch (Exception e) {
+                System.out.println("Error en controlador de detalles-carritos: " + e.getMessage());
+                e.printStackTrace();
+            }
         }
     }
 

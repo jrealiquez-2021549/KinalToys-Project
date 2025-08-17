@@ -1,9 +1,4 @@
-<%-- 
-    Document   : DetallesCarritos
-    Created on : 26/07/2025, 19:24:27
-    Author     : leocu
---%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -63,7 +58,7 @@
                         <li><a href="Controlador?menu=Juguetes">Juguetes</a></li>
                         <li><a href="Controlador?menu=Cuentas&accion=Listar">Cuentas</a></li>
                         <li><a href="Controlador?menu=Carritos&accion=Listar">Carritos</a></li>
-                        <li><a href="Controlador?menu=DetallesCarritos">Detalles Carritos</a></li>
+                        <li><a href="Controlador?menu=DetallesCarritos&accion=Listar">Detalles Carritos</a></li>
                     </ul>
 
                     <form class="search-form">
@@ -76,71 +71,84 @@
             </div>
         </header>
 
-        <main>
-            <!-- Formulario de detalles -->
-            <section class="formulario-container">
-                <h1 class="users-title">Detalles de Carritos</h1>
-                
-                <form class="formulario-detalle">
+        <main class="main-users">
+            <section class="users-section container">
+                <h1 class="users-title">Detalles Carritos</h1>
+
+                <!-- Formulario para agregar detalle -->
+                <form action="Controlador?menu=DetallesCarritos" method="POST" class="formulario-detalle">
                     <div class="form-row">
                         <label>Cantidad:
-                            <input type="number" name="cantidad" min="1"  placeholder="Ej. 1">
+                            <input type="number" name="txtCantidad" placeholder="Ej. 2" required>
                         </label>
-
-                        <label>Subtotal:
-                            <input type="number" step="0.01" name="subTotal"  placeholder="Ej. 599.99">
+                        <label>SubTotal:
+                            <input type="number" step="0.01" name="txtSubTotal" placeholder="Ej. 300.00" required>
                         </label>
                     </div>
 
                     <div class="form-row">
-                        <label>Descuento Aplicado:
-                            <input type="number" step="0.01" name="descuento"  placeholder="Ej. 20">
+                        <label>Descuento:
+                            <input type="number" step="0.01" name="txtDescuento" placeholder="Ej. 20.00">
                         </label>
-
                         <label>Código Carrito:
-                            <input type="number" name="codigoCarrito"  placeholder="Ej. 1">
+                            <input type="number" name="txtCodigoCarrito" placeholder="Ej. 1" required>
                         </label>
-                    </div>
-
-                    <div class="form-row">
                         <label>Código Juguete:
-                            <input type="number" name="codigoJuguete"  placeholder="Ej. 1">
+                            <input type="number" name="txtCodigoJuguete" placeholder="Ej. 1" required>
                         </label>
                     </div>
 
+                    <div class="crud-buttons">
+                        <button class="btn-crud" type="submit" name="accion" value="Agregar">Agregar</button>
+                        <button class="btn-crud">Actualizar</button>
+                    </div>
                 </form>
-                <!-- Lista de detalles -->
-            <div class="table-wrapper">
+
+                <div class="search-container">
+                    <form class="search-form" action="Controlador" method="GET">
+                        <input type="hidden" name="menu" value="Facturas" />
+                        <div class="search-buttons">
+                            <button class="btn-crud" name="accion" value="Buscar">Buscar</button>
+                            <input type="text" class="input-search" placeholder="Buscar por ID..." name="id" />
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Tabla de detalles -->
+                <div class="table-wrapper">
                     <table class="users-table">
                         <thead>
                             <tr>
-                                <th>Código Detalles Carrito</th>
+                                <th>Código Detalle</th>
                                 <th>Cantidad</th>
                                 <th>SubTotal</th>
                                 <th>Descuento Aplicado</th>
                                 <th>Código Carrito</th>
                                 <th>Código Juguete</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
-                        <tbody id="detalle-carrito">
-                            <tr>
-                            </tr>
+                        <tbody>
+                            <c:forEach var="detalle" items="${detallesCarritos}">
+                                <tr>
+                                    <td>${detalle.codigoDetalleC}</td>
+                                    <td>${detalle.cantidad}</td>
+                                    <td>${detalle.subTotal}</td>
+                                    <td>${detalle.descuentoAplicado}</td>
+                                    <td>${detalle.codigoCarrito}</td>
+                                    <td>${detalle.codigoJuguete}</td>
+                                    <td>
+                                        <button class="btn-crud">Editar</button>
+                                        <button class="btn-crud">Eliminar</button></td>
+                                    </tr>
+                                </tr>
+                            </c:forEach>
                         </tbody>
                     </table>
                 </div>
-
-                <div class="crud-buttons">
-                    <button class="btn-crud">Agregar</button>
-                    <button class="btn-crud">Listar</button>
-                    <button class="btn-crud">Buscar</button>
-                    <input type="text" class="input-search" placeholder="código de Detalle carrito..." />
-                    <button class="btn-crud">Eliminar</button>
-                    <button class="btn-crud">Actualizar</button>
-                </div>
             </section>
-
-            
         </main>
+
 
         <footer class="footer">
             <div class="container container-footer">

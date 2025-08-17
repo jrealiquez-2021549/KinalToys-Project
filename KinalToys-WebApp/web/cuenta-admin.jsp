@@ -86,7 +86,7 @@
                         <li><a href="Controlador?menu=Juguetes">Juguetes</a></li>
                         <li><a href="Controlador?menu=Cuentas&accion=Listar">Cuentas</a></li>
                         <li><a href="Controlador?menu=Carritos&accion=Listar">Carritos</a></li>
-                        <li><a href="Controlador?menu=DetallesCarritos">Detalles Carritos</a></li>
+                        <li><a href="Controlador?menu=DetallesCarritos&accion=Listar">Detalles Carritos</a></li>
                     </ul>
 
                     <form class="search-form">
