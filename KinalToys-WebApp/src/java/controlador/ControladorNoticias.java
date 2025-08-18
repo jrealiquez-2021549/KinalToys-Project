@@ -1,8 +1,8 @@
 
 package controlador;
+import java.time.LocalDate;
 import modelo.Noticias;
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
@@ -59,9 +59,9 @@ public class ControladorNoticias {
         System.out.print("Ingrese categoría: ");
         String categoria = scanner.nextLine();
 
-        System.out.print("Ingrese fecha (formato yyyy-MM-dd HH:mm:ss): ");
+        System.out.print("Ingrese fecha (formato yyyy-MM-dd): ");
         String fechaTexto = scanner.nextLine();
-        LocalDateTime fecha = LocalDateTime.parse(fechaTexto, formatter);
+        LocalDate fecha = LocalDate.parse(fechaTexto, formatter);
 
         Noticias noticia = new Noticias();
         noticia.setEncabezado(encabezado);
@@ -118,7 +118,7 @@ public class ControladorNoticias {
 
         System.out.print("Nueva fecha (actual: " + noticia.getFechaNoticia().format(formatter) + "): ");
         String fechaTexto = scanner.nextLine();
-        LocalDateTime fecha = LocalDateTime.parse(fechaTexto, formatter);
+        LocalDate fecha = LocalDate.parse(fechaTexto, formatter);
 
         em.getTransaction().begin();
         noticia.setEncabezado(encabezado);
