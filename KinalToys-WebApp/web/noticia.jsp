@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -51,10 +52,10 @@
                     <i class="fa-solid fa-bars"></i>
                     <ul class="menu">
                         <li><a href="Controlador?menu=Principal">Inicio</a></li>
-                        <li><a href="Controlador?menu=Usuarios">Usuarios</a></li>
+                        <li><a href="Controlador?menu=Usuarios&accion=Listar">Usuarios</a></li>
                         <li><a href="Controlador?menu=Facturas&accion=Listar">Facturas</a></li>
-                        <li><a href="Controlador?menu=Noticias">Noticias</a></li>
-                        <li><a href="Controlador?menu=Proveedores">Proveedores</a></li>
+                        <li><a href="Controlador?menu=Noticias&accion=Listar">Noticias</a></li>
+                        <li><a href="Controlador?menu=Proveedores&accion=Listar">Proveedores</a></li>
                         <li><a href="Controlador?menu=Juguetes&accion=Listar">Juguetes</a></li>
                         <li><a href="Controlador?menu=Cuentas&accion=Listar">Cuentas</a></li>
                         <li><a href="Controlador?menu=Carritos&accion=Listar">Carritos</a></li>
@@ -72,71 +73,88 @@
         </header>
 
         <main class="main-users">
-        <section class="users-section container">
-            <h1 class="users-title">Noticias</h1>
- 
-            <form class="users-form">
-                <div class="form-group">
-                    <label for="encabezado-noticia"><strong>Encabezado:</strong></label>
-                    <input type="text" id="encabezado-noticia" name="encabezado-noticia" placeholder="Ej. Nueva .." required />
+            <section class="users-section container">
+                <h1 class="users-title">Noticias</h1>
+
+                <!-- Formulario para agregar/editar/actualizar -->
+                <form class="users-form" action="Controlador?menu=Noticias" method="POST" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="codigo-noticia"><strong>Código de Noticia:</strong></label>
+                        <!-- Este campo se usará para la actualización, y será de solo lectura -->
+                        <input type="text" id="codigo-noticia" name="codigo-noticia" placeholder="Autogenerado" readonly value="${noticiaSeleccionada.codigoNoticia}" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="encabezado"><strong>Encabezado:</strong></label>
+                        <input type="text" id="encabezado" name="encabezado" placeholder="Ej. Nueva" required value="${noticiaSeleccionada.encabezado}" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="informacion"><strong>Informacion:</strong></label>
+                        <input type="text" id="informacion" name="informacion" placeholder="Ej. La nueva" required value="${noticiaSeleccionada.informacion}" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="categoria"><strong>Categoria:</strong></label>
+                        <input type="text" id="categoria" name="categoria" placeholder="Ej. Novedades" required value="${noticiaSeleccionada.categoria}" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fecha-noticia"><strong>Fecha Noticia:</strong></label>
+                        <input type="date" id="fecha-noticia" name="fecha-noticia" placeholder="Ej. 2023-06-01" required value="${noticiaSeleccionada.fechaNoticia}" />
+                    </div>
+
+                    <div class="crud-buttons">
+                        <button class="btn-crud" name="accion" value="Agregar">Agregar</button>
+                        <button class="btn-crud" name="accion" value="Actualizar">Actualizar</button>
+                        <button class="btn-crud" name="accion" value="Actualizar">Buscar</button>
+                    </div>
+                </form>
+
+                <!-- Nuevo contenedor para el formulario de búsqueda, con espacio y estilo -->
+                <div class="search-container">
+                    <form class="search-form" action="Controlador" method="GET">
+                        <input type="hidden" name="menu" value="Noticias" />
+                        <div class="search-buttons">
+                            <button class="btn-crud" name="accion" value="Buscar">Buscar</button>
+                            <input type="text" class="input-search" placeholder="Buscar por ID..." name="id" />
+                        </div>
+                    </form>
                 </div>
- 
-                <div class="form-group">
-                    <label for="informacion-noticia"><strong>Información:</strong></label>
-                    <input type="text" id="informacion-noticia" name="informacion-noticia" placeholder="Ej. La nueva .." required />
+
+                <!-- Tabla de Noticias -->
+                <div class="table-wrapper">
+                    <table class="users-table">
+                        <thead>
+                            <tr>
+                                <th>Código Noticia</th>
+                                <th>Encabezado</th>
+                                <th>Información</th>
+                                <th>Categoria</th>
+                                <th>Fecha Noticia</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="detalle-noticia">
+                            <c:forEach var="noticia" items="${noticias}"> 
+
+                                <tr>
+                                    <td>${noticia.codigoNoticia}</td>
+                                    <td>${noticia.encabezado}</td>
+                                    <td>${noticia.informacion}</td>
+                                    <td>${noticia.categoria}</td>
+                                    <td>${noticia.fechaNoticia}</td>
+                                    <td>
+                                        <a href="Controlador?menu=Noticias&accion=Cargar&id=${noticia.codigoNoticia}" class="btn-crud">Editar</a>
+                                        <a href="Controlador?menu=Noticias&accion=Eliminar&id=${noticia.codigoNoticia}" class="btn-crud">Eliminar</a>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
                 </div>
- 
-                <div class="form-group">
-                    <label for="categoria-noticia"><strong>Categoría:</strong></label>
-                    <input type="text" id="categoria-noticia" name="categoria-noticia" placeholder="Ej. Novedades" required />
-                </div>
- 
-                <div class="form-group">
-                    <label for="fecha-noticia"><strong>Fecha Noticia:</strong></label>
-                    <input type="date" id="fecha-noticia" name="fecha-noticia" required />
-                </div>
-            </form>
- 
-            <div class="table-wrapper">
-                <table class="users-table">
-                    <thead>
-                        <tr>
-                            <th>Código Noticia</th>
-                            <th>Encabezado</th>
-                            <th>Información</th>
-                            <th>Categoría</th>
-                            <th>Fecha Noticia</th>
-                        </tr>
-                    </thead>
-                    <tbody id="detalle-cuenta">
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
- 
-            <div class="crud-buttons">
-                <button class="btn-crud">Agregar</button>
-                <button class="btn-crud">Listar</button>
-                <button class="btn-crud">Buscar</button>
-                <input type="text" class="input-search" placeholder="Ingrese búsqueda" />
-                <button class="btn-crud">Eliminar</button>
-                <button class="btn-crud">Actualizar</button>
-            </div>
-        </section>
-    </main>
+            </section>
+        </main>
 
         <footer class="footer">
             <div class="container container-footer">
@@ -217,7 +235,7 @@
                 </div>
             </div>
         </footer>
-        
+
         <script>
             document.addEventListener('DOMContentLoaded', () => {
                 const checkboxes = document.querySelectorAll('.task-checkbox');
@@ -238,6 +256,6 @@
                 });
             });
         </script>
-        
+
     </body>
 </html>

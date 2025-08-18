@@ -17,6 +17,7 @@ import modelo.Facturas;
 import modelo.FacturasDAO;
 import enums.MetodoPago;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import modelo.Carritos;
@@ -25,6 +26,8 @@ import modelo.DetallesCarritos;
 import modelo.DetallesCarritosDAO;
 import modelo.Juguetes;
 import modelo.JuguetesDAO;
+import modelo.Noticias;
+import modelo.NoticiasDAO;
 import modelo.Proveedores;
 import modelo.ProveedoresDAO;
 
@@ -34,7 +37,7 @@ public class Controlador extends HttpServlet {
     Cuentas cuentas = new Cuentas();
     CuentasDAO cuentasDAO = new CuentasDAO();
     int codCuenta;
-    
+
     Proveedores proveedores = new Proveedores();
     ProveedoresDAO proveedoresDAO = new ProveedoresDAO();
     int codProveedores;
@@ -42,6 +45,10 @@ public class Controlador extends HttpServlet {
     Facturas facturas = new Facturas();
     FacturasDAO facturasDAO = new FacturasDAO();
     int codFactura;
+
+    NoticiasDAO noticiasDAO = new NoticiasDAO();
+    Noticias noticias = new Noticias();
+    int codNoticia;
 
     CarritosDAO carritosDAO = new CarritosDAO();
     Carritos carritos = new Carritos();
@@ -169,11 +176,40 @@ public class Controlador extends HttpServlet {
                     break;
             }
         } else if (menu.equals("Noticias")) {
-            request.getRequestDispatcher("noticia.jsp").forward(request, response);
+            switch (accion) {
+                case "Listar":
+                    List<Noticias> listaNoticias = noticiasDAO.listar();
+                    request.setAttribute("noticias", listaNoticias);
+                    request.getRequestDispatcher("noticia.jsp").forward(request, response);
+                    break;
+
+                case "Agregar":
+                    String encabezado = request.getParameter("encabezado");
+                    String informacion = request.getParameter("informacion");
+                    String categoria = request.getParameter("categoria");
+                    String fechaStr = request.getParameter("fecha-noticia");
+                    LocalDate fechaNoticia = LocalDate.parse(fechaStr);
+
+                    noticias.setEncabezado(encabezado);
+                    noticias.setInformacion(informacion);
+                    noticias.setCategoria(categoria);
+                    noticias.setFechaNoticia(fechaNoticia);
+
+                    noticiasDAO.agregar(noticias);
+
+                    response.sendRedirect("Controlador?menu=Noticias&accion=Listar");
+                    break;
+
+                default:
+                    List<Noticias> lista = noticiasDAO.listar();
+                    request.setAttribute("noticias", lista);
+                    request.getRequestDispatcher("noticia.jsp").forward(request, response);
+            }
+
         } else if (menu.equals("Proveedores")) {
             if (accion == null) {
-                    accion = "Listar";
-                }
+                accion = "Listar";
+            }
             switch (accion) {
                 case "Listar":
                     try {
@@ -184,22 +220,22 @@ public class Controlador extends HttpServlet {
                         e.printStackTrace();
                     }
                     break;
-               case "Agregar":
+                case "Agregar":
                     String nombreProv = request.getParameter("nombre-proveedor");
                     String telefonoProv = request.getParameter("telefono-proveedor");
                     String correoProv = request.getParameter("correo-proveedor");
                     String direccionProv = request.getParameter("direccion-proveedor");
- 
+
                     Proveedores proveedores = new Proveedores();
                     proveedores.setNombreProveedor(nombreProv);
                     proveedores.setTelefonoProveedor(telefonoProv);
                     proveedores.setCorreoProveedor(correoProv);
                     proveedores.setDireccionProveedor(direccionProv);
- 
+
                     proveedoresDAO.agregar(proveedores);
                     response.sendRedirect("Controlador?menu=Proveedores&accion=Listar");
                     break;
- 
+
                 case "Editar":
                     System.out.println("LIST");
                     break;
@@ -243,7 +279,7 @@ public class Controlador extends HttpServlet {
                     jugueteDAO.agregarJu(juguete);
                     request.getSession().setAttribute("mensaje", "Se agregó correctamente");
 
-                    request.getRequestDispatcher("Controlador?menu=Juguetes&accion=Listar").forward(request, response); 
+                    request.getRequestDispatcher("Controlador?menu=Juguetes&accion=Listar").forward(request, response);
 
                     break;
                 case "Editar":
@@ -256,8 +292,8 @@ public class Controlador extends HttpServlet {
                     System.out.println("LIST");
                     break;
                 default:
-                    
-            } 
+
+            }
 
         } else if (menu.equals("Cuentas")) {
             switch (accion) {

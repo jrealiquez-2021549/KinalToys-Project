@@ -1,7 +1,7 @@
 
 package modelo;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,7 +27,7 @@ public class Noticias implements Serializable {
     private String categoria;
     
     @Column(name = "fechaNoticia")
-    private LocalDateTime fechaNoticia;
+    private LocalDate fechaNoticia;
     
     public Noticias() {
         
@@ -65,11 +65,11 @@ public class Noticias implements Serializable {
         this.categoria = categoria;
     }
 
-    public LocalDateTime getFechaNoticia() {
+    public LocalDate getFechaNoticia() {
         return fechaNoticia;
     }
 
-    public void setFechaNoticia(LocalDateTime fechaNoticia) {
+    public void setFechaNoticia(LocalDate fechaNoticia) {
         this.fechaNoticia = fechaNoticia;
     }
 
