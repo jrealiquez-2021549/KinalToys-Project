@@ -25,6 +25,8 @@ import modelo.DetallesCarritos;
 import modelo.DetallesCarritosDAO;
 import modelo.Juguetes;
 import modelo.JuguetesDAO;
+import modelo.Proveedores;
+import modelo.ProveedoresDAO;
 
 @MultipartConfig
 public class Controlador extends HttpServlet {
@@ -32,6 +34,10 @@ public class Controlador extends HttpServlet {
     Cuentas cuentas = new Cuentas();
     CuentasDAO cuentasDAO = new CuentasDAO();
     int codCuenta;
+    
+    Proveedores proveedores = new Proveedores();
+    ProveedoresDAO proveedoresDAO = new ProveedoresDAO();
+    int codProveedores;
 
     Facturas facturas = new Facturas();
     FacturasDAO facturasDAO = new FacturasDAO();
@@ -165,7 +171,52 @@ public class Controlador extends HttpServlet {
         } else if (menu.equals("Noticias")) {
             request.getRequestDispatcher("noticia.jsp").forward(request, response);
         } else if (menu.equals("Proveedores")) {
-            request.getRequestDispatcher("proveedor.jsp").forward(request, response);
+            if (accion == null) {
+                    accion = "Listar";
+                }
+            switch (accion) {
+                case "Listar":
+                    try {
+                        List<Proveedores> listaProveedores = proveedoresDAO.listar();
+                        request.setAttribute("proveedores", listaProveedores);
+                        request.getRequestDispatcher("/proveedor.jsp").forward(request, response);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    break;
+               case "Agregar":
+                    String nombreProv = request.getParameter("nombre-proveedor");
+                    String telefonoProv = request.getParameter("telefono-proveedor");
+                    String correoProv = request.getParameter("correo-proveedor");
+                    String direccionProv = request.getParameter("direccion-proveedor");
+ 
+                    Proveedores proveedores = new Proveedores();
+                    proveedores.setNombreProveedor(nombreProv);
+                    proveedores.setTelefonoProveedor(telefonoProv);
+                    proveedores.setCorreoProveedor(correoProv);
+                    proveedores.setDireccionProveedor(direccionProv);
+ 
+                    proveedoresDAO.agregar(proveedores);
+                    response.sendRedirect("Controlador?menu=Proveedores&accion=Listar");
+                    break;
+ 
+                case "Editar":
+                    System.out.println("LIST");
+                    break;
+                case "Actualizar":
+                    System.out.println("LIST");
+                    break;
+                case "Eliminar":
+                    System.out.println("LIST");
+                    break;
+                case "Cargar":
+                    System.out.println("LIST");
+                    break;
+                case "Buscar":
+                    System.out.println("LIST");
+                    break;
+                default:
+            }
         } else if (menu.equals("Juguetes")) {
 
             switch (accion) {

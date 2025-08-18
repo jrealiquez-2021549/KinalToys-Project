@@ -1,4 +1,4 @@
--- Drop database if exists DB_KinalToys;
+Drop database if exists DB_KinalToys;
 create database DB_KinalToys;
 use DB_KinalToys;
 
