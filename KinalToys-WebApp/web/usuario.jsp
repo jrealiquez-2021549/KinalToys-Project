@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -53,8 +54,8 @@
                         <li><a href="Controlador?menu=Principal">Inicio</a></li>
                         <li><a href="Controlador?menu=Usuarios&accion=Listar">Usuarios</a></li>
                         <li><a href="Controlador?menu=Facturas&accion=Listar">Facturas</a></li>
-                        <li><a href="Controlador?menu=Noticias&accion=Listar">Noticias</a></li>
-                        <li><a href="Controlador?menu=Proveedores&accion=Listar">Proveedores</a></li>
+                        <li><a href="Controlador?menu=Noticias">Noticias</a></li>
+                        <li><a href="Controlador?menu=Proveedores">Proveedores</a></li>
                         <li><a href="Controlador?menu=Juguetes&accion=Listar">Juguetes</a></li>
                         <li><a href="Controlador?menu=Cuentas&accion=Listar">Cuentas</a></li>
                         <li><a href="Controlador?menu=Carritos&accion=Listar">Carritos</a></li>
@@ -75,7 +76,13 @@
             <section class="users-section container">
                 <h1 class="users-title">Usuarios</h1>
 
-                <form class="users-form">
+                <form class="users-form" action="Controlador?menu=Usuarios" method="POST">
+                    
+                    <div class="form-group">
+                        <label for="codigo-usuario"><strong>Código de Usuario</strong></label>
+                        <!-- Este campo se usará para la actualización, y será de solo lectura -->
+                        <input type="text" id="codigo-usuario" name="codigo-usuario" placeholder="Autogenerado" readonly value="${usuarioSeleccionada.codigoUsuario}" />
+                    </div>
                     <div class="form-group">
                         <label for="nombre-usuario"><strong>Nombre Usuario:</strong></label>
                         <input type="text" id="nombre-usuario" name="nombre-usuario" placeholder="Ej. Jorge" required />
@@ -95,8 +102,23 @@
                         <label for="telefono-usuario"><strong>Teléfono Usuario:</strong></label>
                         <input type="text" id="telefono-usuario" name="telefono-usuario" placeholder="Ej. 23242-34242" required />
                     </div>
+                    
+                    <div class="crud-buttons">
+                        <button class="btn-crud" name="accion" value="Agregar">Agregar</button>
+                        <button class="btn-crud" name="accion" value="Actualizar">Actualizar</button>
+                    </div>
                 </form>
-
+                    
+                    <div class="search-container">
+                    <form class="search-form" action="Controlador" method="GET">
+                        <input type="hidden" name="menu" value="Facturas" />
+                        <div class="search-buttons">
+                            <button class="btn-crud" name="accion" value="Buscar">Buscar</button>
+                            <input type="text" class="input-search" placeholder="Buscar por ID..." name="id" />
+                        </div>
+                    </form>
+                </div>
+                    
                 <div class="table-wrapper">
                     <table class="users-table">
                         <thead>
@@ -105,21 +127,24 @@
                                 <th>Apellido</th>
                                 <th>Dirección</th>
                                 <th>Teléfono</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
-                        <tbody id="detalle-factura">
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
+                        <tbody id="detalle-usuario">
+                            <c:forEach var="usuario" items="${usuarios}">
+                                <tr>
+                                    <td>${usuario.codigoUsuario}</td>
+                                    <td>${usuario.nombreUsuario}</td>
+                                    <td>${usuario.apellidoUsuario}</td>
+                                    <td>${usuario.direccionUsuario}</td>
+                                    <td>${usuario.telefonoUsuario}</td>
+                                    
+                                    <td>
+                                        <a href="Controlador?menu=Usuarios&accion=Cargar&id=${usuario.codigoUsuario}" class="btn-crud">Editar</a>
+                                        <a href="Controlador?menu=Usuarios&accion=Eliminar&id=${usuario.codigoUsuario}" class="btn-crud">Eliminar</a>
+                                    </td>
+                                </tr>
+                            </c:forEach>
                         </tbody>
                     </table>
                 </div>
