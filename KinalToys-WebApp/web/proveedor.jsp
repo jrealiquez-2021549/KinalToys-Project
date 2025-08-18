@@ -1,9 +1,11 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Kinal Toy's (Menú Principal)</title>
+        <title>Kinal Toy's (MenÃº Principal)</title>
         <!-- Icons -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <!-- Icono -->
@@ -50,7 +52,7 @@
                 <nav class="navbar container">
                     <i class="fa-solid fa-bars"></i>
                     <ul class="menu">
-                        <li><a href="Controlador?menu=Principal">Inicio</a></li>
+                        <li><a href="Controlador?menu=principal-admin">Inicio</a></li>
                         <li><a href="Controlador?menu=Usuarios">Usuarios</a></li>
                         <li><a href="Controlador?menu=Facturas&accion=Listar">Facturas</a></li>
                         <li><a href="Controlador?menu=Noticias">Noticias</a></li>
@@ -74,66 +76,75 @@
         <main class="main-users">
             <section class="users-section container">
                 <h1 class="users-title">Proveedores</h1>
+                
 
-                <form class="users-form">
+                <form action="Controlador?menu=Proveedores" method="POST" class="formulario-detalle">
+ 
                     <div class="form-group">
                         <label for="nombre-proveedor"><strong>Nombre del Proveedor:</strong></label>
                         <input type="text" id="nombre-proveedor" name="nombre-proveedor" placeholder="Ej. Farmacias del Ahorro" required />
                     </div>
 
                     <div class="form-group">
-                        <label for="telefono-proveedor"><strong>Teléfono:</strong></label>
+                        <label for="telefono-proveedor"><strong>TelÃ©fono:</strong></label>
                         <input type="text" id="telefono-proveedor" name="telefono-proveedor" placeholder="Ej. 123456789" required />
                     </div>
 
                     <div class="form-group">
-                        <label for="correo-proveedor"><strong>Correo Electrónico:</strong></label>
+                        <label for="correo-proveedor"><strong>Correo ElectrÃ³nico:</strong></label>
                         <input type="email" id="correo-proveedor" name="correo-proveedor" placeholder="Ej. proveedor@correo.com" required />
                     </div>
 
                     <div class="form-group">
-                        <label for="direccion-proveedor"><strong>Dirección:</strong></label>
+                        <label for="direccion-proveedor"><strong>DirecciÃ³n:</strong></label>
                         <input type="text" id="direccion-proveedor" name="direccion-proveedor" placeholder="Ej. Zona 1, Guatemala" required />
                     </div>
+                    
+                    <div class="crud-buttons">
+                        <button class="btn-crud" type="submit" name="accion" value="Agregar">Agregar</button>
+                        <button class="btn-crud">Actualizar</button>
+                    </div>
                 </form>
+                
+                <div class="search-container">
+                    <form class="search-form">
+                        <input type="hidden"/>
+                        <div class="search-buttons">
+                            <button class="btn-crud">Buscar</button>
+                            <input type="text" class="input-search" placeholder="Buscar por ID..." />
+                        </div>
+                    </form>
+                </div>
 
                 <div class="table-wrapper">
                     <table class="users-table">
                         <thead>
                             <tr>
-                                <th>Código</th>
+                                <th>CÃ³digo</th>
                                 <th>Nombre</th>
-                                <th>Teléfono</th>
+                                <th>TelÃ©fono</th>
                                 <th>Correo</th>
-                                <th>Dirección</th>
+                                <th>DirecciÃ³n</th>
+                                <th>Acciones</th>
                             </tr>
-                        </thead>
-                        <tbody id="detalle-proveedor">
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                    </thead>
 
-                <div class="crud-buttons">
-                    <button class="btn-crud">Agregar</button>
-                    <button class="btn-crud">Listar</button>
-                    <button class="btn-crud">Buscar</button>
-                    <input type="text" class="input-search" placeholder="Ingrese búsqueda" />
-                    <button class="btn-crud">Eliminar</button>
-                    <button class="btn-crud">Actualizar</button>
+                        <c:forEach var="proveedor" items="${proveedores}">
+                            <tr>
+                                <td>${proveedor.codigoProveedor}</td>
+                                <td>${proveedor.nombreProveedor}</td>
+                                <td>${proveedor.telefonoProveedor}</td>
+                                <td>${proveedor.correoProveedor}</td>
+                                <td>${proveedor.direccionProveedor}</td>
+                                <td>
+                                    <form action="Controlador?menu=Proveedores" method="POST" id="form-proveedores">
+                                        <button type="submit" name="accion" value="Eliminar" class="btn-crud">Eliminar</button>
+                                        <button type="submit" name="accion" value="Actualizar" class="btn-crud">Actualizar</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </table>
                 </div>
             </section>
         </main>
@@ -142,10 +153,10 @@
             <div class="container container-footer">
                 <div class="menu-footer">
                     <div class="contact-info">
-                        <p class="title-footer">Información de Contacto</p>
+                        <p class="title-footer">InformaciÃ³n de Contacto</p>
                         <ul>
-                            <li>Dirección: 71 Pennington Lane Vernon Rockville, CT 06066</li>
-                            <li>Teléfono: 123-456-7890</li>
+                            <li>DirecciÃ³n: 71 Pennington Lane Vernon Rockville, CT 06066</li>
+                            <li>TelÃ©fono: 123-456-7890</li>
                             <li>Fax: 55555300</li>
                             <li>EmaiL: baristas@support.com</li>
                         </ul>
@@ -159,13 +170,13 @@
                     </div>
 
                     <div class="information">
-                        <p class="title-footer">Información</p>
+                        <p class="title-footer">InformaciÃ³n</p>
                         <ul>
                             <li><a href="#">Acerca de Nosotros</a></li>
-                            <li><a href="#">Información Delivery</a></li>
-                            <li><a href="#">Políticas de Privacidad</a></li>
-                            <li><a href="#">Términos y condiciones</a></li>
-                            <li><a href="#">Contáctanos</a></li>
+                            <li><a href="#">InformaciÃ³n Delivery</a></li>
+                            <li><a href="#">PolÃ­ticas de Privacidad</a></li>
+                            <li><a href="#">TÃ©rminos y condiciones</a></li>
+                            <li><a href="#">ContÃ¡ctanos</a></li>
                         </ul>
                     </div>
 
@@ -173,19 +184,19 @@
                         <p class="title-footer">Mi cuenta</p>
                         <ul>
                             <li><a href="cuenta-admin.jsp">Mi cuenta</a></li>
-                            <li><a href="#">Historial de órdenes</a></li>
+                            <li><a href="#">Historial de Ã³rdenes</a></li>
                             <li><a href="#">Lista de deseos</a></li>
-                            <li><a href="#">Boletín</a></li>
+                            <li><a href="#">BoletÃ­n</a></li>
                             <li><a href="#">Reembolsos</a></li>
                         </ul>
                     </div>
 
                     <div class="newsletter">
-                        <p class="title-footer">Boletín informativo</p>
+                        <p class="title-footer">BoletÃ­n informativo</p>
                         <div class="content">
-                            <p>Suscríbete a nuestros boletines ahora y mantente al día con nuevas colecciones y ofertas exclusivas.</p>
-                            <input type="email" placeholder="Ingresa el correo aquí...">
-                            <button>Suscríbete</button>
+                            <p>SuscrÃ­bete a nuestros boletines ahora y mantente al dÃ­a con nuevas colecciones y ofertas exclusivas.</p>
+                            <input type="email" placeholder="Ingresa el correo aquÃ­...">
+                            <button>SuscrÃ­bete</button>
                         </div>
                     </div>
                 </div>
@@ -220,5 +231,5 @@
                 }
             });
         </script>
-    </body>
+   Â </body>
 </html>
