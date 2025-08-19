@@ -107,7 +107,6 @@
                     <div class="crud-buttons">
                         <button class="btn-crud" name="accion" value="Agregar">Agregar</button>
                         <button class="btn-crud" name="accion" value="Actualizar">Actualizar</button>
-                        <button class="btn-crud" name="accion" value="Actualizar">Buscar</button>
                     </div>
                 </form>
 

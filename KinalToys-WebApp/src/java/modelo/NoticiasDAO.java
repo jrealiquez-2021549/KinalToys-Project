@@ -58,4 +58,57 @@ public class NoticiasDAO {
         }
         return resp;
     }
+    
+    // Método para listar una noticia por su ID (Cargar)
+    public Noticias listarId(int id) {
+        Noticias nt = new Noticias();
+        String sql = "call sp_BuscarNoticia(?)";
+        try {
+            con = cn.Conexion();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                nt.setCodigoNoticia(rs.getInt(1));
+                nt.setEncabezado(rs.getString(2));
+                nt.setInformacion(rs.getString(3));
+                nt.setCategoria(rs.getString(4));
+                nt.setFechaNoticia(rs.getDate(5).toLocalDate());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return nt;
+    }
+    
+    // Método para actualizar una noticia existente
+    public int actualizar(Noticias noticia) {
+        String sql = "call sp_EditarNoticia(?, ?, ?, ?, ?)";
+        try {
+            con = cn.Conexion();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, noticia.getCodigoNoticia());
+            ps.setString(2, noticia.getEncabezado());
+            ps.setString(3, noticia.getInformacion());
+            ps.setString(4, noticia.getCategoria());
+            ps.setDate(5, Date.valueOf(noticia.getFechaNoticia()));
+            resp = ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return resp;
+    }
+    
+    // Método para eliminar una noticia
+    public void eliminar(int id) {
+        String sql = "call sp_EliminarNoticia(?)";
+        try {
+            con = cn.Conexion();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
