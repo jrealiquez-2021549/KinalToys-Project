@@ -85,8 +85,7 @@ public class Controlador extends HttpServlet {
         if (menu.equals("Principal")) {
             request.getRequestDispatcher("principal-admin.jsp").forward(request, response);
         } else if (menu.equals("Usuarios")) {
-            
-             
+
             switch (accion) {
                 case "Listar":
                     List<Usuarios> listaUsuarios = usuariosDAO.listar();
@@ -233,6 +232,58 @@ public class Controlador extends HttpServlet {
                     noticiasDAO.agregar(noticias);
 
                     response.sendRedirect("Controlador?menu=Noticias&accion=Listar");
+                    break;
+
+                case "Eliminar":
+                    int codigoNoticia = Integer.parseInt(request.getParameter("id"));
+                    noticiasDAO.eliminar(codigoNoticia);
+                    response.sendRedirect("Controlador?menu=Noticias&accion=Listar");
+                    break;
+
+                case "Cargar":
+                    int codNoticia = Integer.parseInt(request.getParameter("id"));
+                    Noticias noticiaSeleccionada = noticiasDAO.listarId(codNoticia);
+                    request.setAttribute("noticiaSeleccionada", noticiaSeleccionada);
+                    request.getRequestDispatcher("Controlador?menu=Noticias&accion=Listar").forward(request, response);
+                    break;
+
+                case "Actualizar":
+                    int codigoActualizar = Integer.parseInt(request.getParameter("codigo-noticia"));
+                    String enc = request.getParameter("encabezado");
+                    String info = request.getParameter("informacion");
+                    String cat = request.getParameter("categoria");
+                    String fechaActualizarStr = request.getParameter("fecha-noticia");
+                    LocalDate fechaActualizar = LocalDate.parse(fechaActualizarStr);
+
+                    noticias.setCodigoNoticia(codigoActualizar);
+                    noticias.setEncabezado(enc);
+                    noticias.setInformacion(info);
+                    noticias.setCategoria(cat);
+                    noticias.setFechaNoticia(fechaActualizar);
+
+                    noticiasDAO.actualizar(noticias);
+
+                    response.sendRedirect("Controlador?menu=Noticias&accion=Listar");
+                    break;
+
+                case "Buscar":
+                    String idParam = request.getParameter("id");
+                    if (idParam != null && !idParam.isEmpty()) {
+                        try {
+                            int idBuscar = Integer.parseInt(idParam);
+                            Noticias noticiaEncontrada = noticiasDAO.listarId(idBuscar);
+                            List<Noticias> listaEncontrada = new ArrayList<>();
+                            if (noticiaEncontrada.getEncabezado() != null) {
+                                listaEncontrada.add(noticiaEncontrada);
+                            }
+                            request.setAttribute("noticias", listaEncontrada);
+                        } catch (NumberFormatException e) {
+                            request.setAttribute("noticias", noticiasDAO.listar());
+                        }
+                    } else {
+                        request.setAttribute("noticias", noticiasDAO.listar());
+                    }
+                    request.getRequestDispatcher("noticia.jsp").forward(request, response);
                     break;
 
                 default:
