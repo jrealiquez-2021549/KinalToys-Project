@@ -65,6 +65,7 @@ public class Controlador extends HttpServlet {
 
     DetallesCarritos detalleCarrito = new DetallesCarritos();
     DetallesCarritosDAO detallesCarritosDAO = new DetallesCarritosDAO();
+    int codDetalles;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -556,6 +557,7 @@ public class Controlador extends HttpServlet {
                 switch (accion) {
                     case "Listar":
                         try {
+                            
                             List<DetallesCarritos> listaDetalles = detallesCarritosDAO.listar();
                             request.setAttribute("detallesCarritos", listaDetalles);
                             request.getRequestDispatcher("/detalles-carritos.jsp").forward(request, response);
@@ -566,8 +568,6 @@ public class Controlador extends HttpServlet {
                         }
 
                     case "Agregar":
-                        System.out.println("Entrando en caso de Agregar detalle-carrito...");
-
                         String cantidadStr = request.getParameter("txtCantidad");
                         String subTotalStr = request.getParameter("txtSubTotal");
                         String descuentoStr = request.getParameter("txtDescuento");
@@ -590,10 +590,68 @@ public class Controlador extends HttpServlet {
 
                         response.sendRedirect("Controlador?menu=DetallesCarritos&accion=Listar");
                         return;
-
                     case "Editar":
+                        System.out.println("entro a editar");
+                        codDetalles = Integer.parseInt(request.getParameter("codigoDetalleC"));
+                        DetallesCarritos dc = detallesCarritosDAO.listaCodigoDetallesCarritos(codDetalles);
+                        System.out.println(codDetalles);
+                        request.setAttribute("detalle", dc);
+                        request.getRequestDispatcher("Controlador?menu=DetallesCarritos&accion=Listar").forward(request,response);
                         break;
 
+                    case "Actualizar":
+                        String codigoDetalleCS = request.getParameter("txtCodigoDetalleC");
+                        String cantidadS = request.getParameter("txtCantidad");
+                        String subTotalS = request.getParameter("txtSubTotal");
+                        String descuentoS = request.getParameter("txtDescuento");
+                        String codigoCarritoS = request.getParameter("txtCodigoCarrito");
+                        String codigoJugueteS = request.getParameter("txtCodigoJuguete");
+
+                        int codigoDetalleCI = Integer.parseInt(codigoDetalleCS);
+                        int cantidadI = Integer.parseInt(cantidadS);
+                        BigDecimal subTotalB = new BigDecimal(subTotalS);
+                        BigDecimal descuentoB = new BigDecimal(descuentoS);
+                        int codigoCarritoI = Integer.parseInt(codigoCarritoS);
+                        int codigoJugueteI = Integer.parseInt(codigoJugueteS);
+
+                        DetallesCarritos detalleCarrito = new DetallesCarritos();
+                        detalleCarrito.setCodigoDetalleC(codigoDetalleCI);
+                        detalleCarrito.setCantidad(cantidadI);
+                        detalleCarrito.setSubTotal(subTotalB);
+                        detalleCarrito.setDescuentoAplicado(descuentoB);
+                        detalleCarrito.setCodigoCarrito(codigoCarritoI);
+                        detalleCarrito.setCodigoJuguete(codigoJugueteI);
+
+                        detallesCarritosDAO.actualizar(detalleCarrito);
+
+                        request.getRequestDispatcher("Controlador?menu=DetallesCarritos&accion=Listar").forward(request, response);
+                        break;
+
+                    case "Eliminar":
+                        System.out.println("entro en eliminar");
+                        codDetalles = Integer.parseInt(request.getParameter("codigoDetalle")); 
+                        System.out.println("Código a eliminar: " + codDetalles);
+                        detallesCarritosDAO.eliminar(codDetalles);
+                        response.sendRedirect("Controlador?menu=DetallesCarritos&accion=Listar");
+                        break;
+                    
+                    case "Buscar":
+                        String idS = request.getParameter("txtid");
+                        if (idS != null && !idS.isEmpty()) {
+                            int id = Integer.parseInt(idS);
+                            DetallesCarritos dcBuscado = detallesCarritosDAO.buscar(id);
+
+                            List<DetallesCarritos> lista = new ArrayList<>();
+                            if (dcBuscado != null) {
+                                lista.add(dcBuscado);
+                            }
+                            request.setAttribute("detallesCarritos", lista);
+                        } else {
+                            List<DetallesCarritos> listaDetalles = detallesCarritosDAO.listar();
+                            request.setAttribute("detallesCarritos", listaDetalles);
+                        }
+                        request.getRequestDispatcher("/detalles-carritos.jsp").forward(request, response);
+                        break;
                     default:
                         throw new AssertionError("Acción no reconocida: " + accion);
                 }

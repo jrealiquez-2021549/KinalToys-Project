@@ -144,7 +144,6 @@ public class ControladorDetallesCarritos {
     }
 
     private void eliminarDetalle() {
-        System.out.print("Ingrese ID del detalle a eliminar: ");
         int id = scanner.nextInt();
         scanner.nextLine();
 

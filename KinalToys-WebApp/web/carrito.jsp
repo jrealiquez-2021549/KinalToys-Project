@@ -32,7 +32,7 @@
 
                     <div class="container-user">
                         <div class="user-menu">
-                            <i class="fa-solid fa-user"></i>
+                            <img src="CuentaFoto" class="profile-pic" alt="Foto de Perfil">
                             <ul class="user-dropdown">
                                 <li><a href="cuenta-admin.jsp">Mi cuenta</a></li>
                                 <li><a href="#">Cambiar cuenta</a></li>
