@@ -620,5 +620,22 @@ end$$
 Delimiter ;
 call sp_EditarDetalleCarrito(1, 3, 450.00, 30.00, 1, 1);
 
+-- Buscar DetallesCarrito por medio de codigo
+Delimiter $$
+create procedure sp_ListarDetallesCarritosPorCodigo (
+	in codDetalle int)
+begin
+	select 
+        codigoDetalleC,
+        cantidad,
+        subTotal,
+        descuentoAplicado,
+        codigoCarrito,
+        codigoJuguete
+    from DetallesCarritos
+    where codigoDetalleC = codDetalle;
+end$$
+Delimiter ;
+
 select * from Cuentas where correoCuenta = "jrealiquez@gmail.com" and contrasenaCuenta =1980;
 SELECT fotoCuenta FROM Cuentas WHERE codigoCuenta = 1;

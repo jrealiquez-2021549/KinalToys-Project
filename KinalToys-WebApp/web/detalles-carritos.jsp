@@ -78,41 +78,44 @@
                 <!-- Formulario para agregar detalle -->
                 <form action="Controlador?menu=DetallesCarritos" method="POST" class="formulario-detalle">
                     <div class="form-row">
+                        <input type="hidden" name="txtCodigoDetalleC" value="${detalle.codigoDetalleC}" />
+
                         <label>Cantidad:
-                            <input type="number" name="txtCantidad" placeholder="Ej. 2" required>
+                            <input type="number" name="txtCantidad" value="${detalle.cantidad}" placeholder="Ej. 2" required>
                         </label>
                         <label>SubTotal:
-                            <input type="number" step="0.01" name="txtSubTotal" placeholder="Ej. 300.00" required>
+                            <input type="number" step="0.01" value="${detalle.subTotal}" name="txtSubTotal" placeholder="Ej. 300.00" required>
                         </label>
                     </div>
 
                     <div class="form-row">
                         <label>Descuento:
-                            <input type="number" step="0.01" name="txtDescuento" placeholder="Ej. 20.00">
+                            <input type="number" step="0.01" value="${detalle.descuentoAplicado}" name="txtDescuento" placeholder="Ej. 20.00">
                         </label>
                         <label>Código Carrito:
-                            <input type="number" name="txtCodigoCarrito" placeholder="Ej. 1" required>
+                            <input type="number" value="${detalle.codigoCarrito}" name="txtCodigoCarrito" placeholder="Ej. 1" required>
                         </label>
                         <label>Código Juguete:
-                            <input type="number" name="txtCodigoJuguete" placeholder="Ej. 1" required>
+                            <input type="number" value="${detalle.codigoJuguete}" name="txtCodigoJuguete" placeholder="Ej. 1" required>
                         </label>
                     </div>
 
                     <div class="crud-buttons">
                         <button class="btn-crud" type="submit" name="accion" value="Agregar">Agregar</button>
-                        <button class="btn-crud">Actualizar</button>
+                        <button class="btn-crud" type="submit" name="accion" value="Actualizar">Actualizar</button>
                     </div>
                 </form>
 
                 <div class="search-container">
                     <form class="search-form" action="Controlador" method="GET">
-                        <input type="hidden" name="menu" value="Facturas" />
+                        <input type="hidden" name="menu" value="DetallesCarritos" />
                         <div class="search-buttons">
-                            <button class="btn-crud" name="accion" value="Buscar">Buscar</button>
-                            <input type="text" class="input-search" placeholder="Buscar por ID..." name="id" />
+                            <button class="btn-crud" type="submit" name="accion" value="Buscar">Buscar</button>
+                            <input type="text" class="input-search" placeholder="Buscar por ID..." name="txtid" />
                         </div>
                     </form>
                 </div>
+
 
                 <!-- Tabla de detalles -->
                 <div class="table-wrapper">
@@ -138,9 +141,9 @@
                                     <td>${detalle.codigoCarrito}</td>
                                     <td>${detalle.codigoJuguete}</td>
                                     <td>
-                                        <button class="btn-crud">Editar</button>
-                                        <button class="btn-crud">Eliminar</button></td>
-                                    </tr>
+                                        <a class="btn-crud" href="Controlador?menu=DetallesCarritos&accion=Editar&codigoDetalleC=${detalle.codigoDetalleC}">Editar</a>
+                                        <a class="btn-crud" href="Controlador?menu=DetallesCarritos&accion=Eliminar&codigoDetalle=${detalle.codigoDetalleC}">Eliminar</a>
+                                    </td>
                                 </tr>
                             </c:forEach>
                         </tbody>
