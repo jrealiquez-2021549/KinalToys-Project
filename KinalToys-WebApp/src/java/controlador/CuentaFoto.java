@@ -2,6 +2,7 @@
 package controlador;
 
 import config.Conexion;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -59,13 +60,17 @@ public class CuentaFoto extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         Cuentas cuentas = (Cuentas) session.getAttribute("cuentas");
-        
+
+        // Ruta a la imagen por defecto en el sistema de archivos del servidor
+        String defaultImagePath = request.getServletContext().getRealPath("/img/default-profile.png");
+
         if (cuentas != null) {
             int codigoCuenta = cuentas.getCodigoCuenta();
             Conexion cn = new Conexion();
             Connection con = null;
             PreparedStatement ps = null;
             ResultSet rs = null;
+            InputStream inputStream = null;
 
             try {
                 con = cn.Conexion();
@@ -75,29 +80,58 @@ public class CuentaFoto extends HttpServlet {
                 rs = ps.executeQuery();
 
                 if (rs.next()) {
-                    InputStream inputStream = rs.getBinaryStream("fotoCuenta");
-                    if (inputStream != null) {
-                        // Establece el tipo de contenido para la imagen.
-                        // Esto podría ser dinámico, pero para este caso asumimos un formato común.
-                        response.setContentType("image/jpeg");
-                        
-                        OutputStream outputStream = response.getOutputStream();
-                        byte[] buffer = new byte[4096];
-                        int bytesRead;
-
-                        while ((bytesRead = inputStream.read(buffer)) != -1) {
-                            outputStream.write(buffer, 0, bytesRead);
-                        }
-                        
-                        inputStream.close();
-                        outputStream.close();
-                    }
+                    inputStream = rs.getBinaryStream("fotoCuenta");
                 }
+
+                // Verifica si se obtuvo una imagen de la base de datos
+                if (inputStream != null && inputStream.available() > 0) {
+                    // Si la imagen existe, la muestra
+                    response.setContentType("image/jpeg");
+                    OutputStream outputStream = response.getOutputStream();
+                    byte[] buffer = new byte[4096];
+                    int bytesRead;
+
+                    while ((bytesRead = inputStream.read(buffer)) != -1) {
+                        outputStream.write(buffer, 0, bytesRead);
+                    }
+                    outputStream.close();
+                } else {
+                    // Si no existe, muestra la imagen por defecto
+                    response.setContentType("image/png"); // O el tipo de la imagen por defecto
+                    InputStream defaultImageStream = new FileInputStream(defaultImagePath);
+                    OutputStream outputStream = response.getOutputStream();
+                    byte[] buffer = new byte[4096];
+                    int bytesRead;
+
+                    while ((bytesRead = defaultImageStream.read(buffer)) != -1) {
+                        outputStream.write(buffer, 0, bytesRead);
+                    }
+                    defaultImageStream.close();
+                    outputStream.close();
+                }
+
             } catch (Exception e) {
                 e.printStackTrace();
-            } finally {
-                // Asegúrate de cerrar todos los recursos
+                // En caso de error, también muestra la imagen por defecto
                 try {
+                    response.setContentType("image/png");
+                    InputStream defaultImageStream = new FileInputStream(defaultImagePath);
+                    OutputStream outputStream = response.getOutputStream();
+                    byte[] buffer = new byte[4096];
+                    int bytesRead;
+
+                    while ((bytesRead = defaultImageStream.read(buffer)) != -1) {
+                        outputStream.write(buffer, 0, bytesRead);
+                    }
+                    defaultImageStream.close();
+                    outputStream.close();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+
+            } finally {
+                try {
+                    if (inputStream != null) inputStream.close();
                     if (rs != null) rs.close();
                     if (ps != null) ps.close();
                     if (con != null) con.close();
