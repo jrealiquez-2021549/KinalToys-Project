@@ -85,33 +85,35 @@
                     </div>
                     <div class="form-group">
                         <label for="nombre-usuario"><strong>Nombre Usuario:</strong></label>
-                        <input type="text" id="nombre-usuario" name="nombre-usuario" placeholder="Ej. Jorge" required />
+                        <input type="text" id="nombre-usuario" name="nombre-usuario" placeholder="Ej. Jorge" required value="${usuarioSeleccionada.nombreUsuario}" />
                     </div>
 
                     <div class="form-group">
                         <label for="apellido-usuario"><strong>Apellido Usuario:</strong></label>
-                        <input type="text" id="apellido-usuario" name="apellido-usuario" placeholder="Ej. López" required />
+                        <input type="text" id="apellido-usuario" name="apellido-usuario" placeholder="Ej. López" required value="${usuarioSeleccionada.apellidoUsuario}" />
                     </div>
 
                     <div class="form-group">
                         <label for="direccion-usuario"><strong>Dirección Usuario:</strong></label>
-                        <input type="text" id="direccion-usuario" name="direccion-usuario" placeholder="Ej. 12 avenida" required />
+                        <input type="text" id="direccion-usuario" name="direccion-usuario" placeholder="Ej. 12 avenida" required value="${usuarioSeleccionada.direccionUsuario}"/>
                     </div>
 
                     <div class="form-group">
                         <label for="telefono-usuario"><strong>Teléfono Usuario:</strong></label>
-                        <input type="text" id="telefono-usuario" name="telefono-usuario" placeholder="Ej. 23242-34242" required />
+                        <input type="text" id="telefono-usuario" name="telefono-usuario" placeholder="Ej. 23242-34242" required value="${usuarioSeleccionada.telefonoUsuario}" />
                     </div>
                     
                     <div class="crud-buttons">
                         <button class="btn-crud" name="accion" value="Agregar">Agregar</button>
                         <button class="btn-crud" name="accion" value="Actualizar">Actualizar</button>
+                        <button class="btn-crud" name="accion" value="Actualizar">Buscar</button>
                     </div>
                 </form>
                     
-                    <div class="search-container">
+                     <!-- Nuevo contenedor para el formulario de búsqueda, con espacio y estilo -->
+                <div class="search-container">
                     <form class="search-form" action="Controlador" method="GET">
-                        <input type="hidden" name="menu" value="Facturas" />
+                        <input type="hidden" name="menu" value="Usuarios" />
                         <div class="search-buttons">
                             <button class="btn-crud" name="accion" value="Buscar">Buscar</button>
                             <input type="text" class="input-search" placeholder="Buscar por ID..." name="id" />
@@ -123,6 +125,7 @@
                     <table class="users-table">
                         <thead>
                             <tr>
+                                <th>Codigo Usuario</th>
                                 <th>Nombre</th>
                                 <th>Apellido</th>
                                 <th>Dirección</th>

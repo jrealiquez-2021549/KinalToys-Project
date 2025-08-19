@@ -86,82 +86,34 @@ public class Controlador extends HttpServlet {
             request.getRequestDispatcher("principal-admin.jsp").forward(request, response);
         } else if (menu.equals("Usuarios")) {
             
+             
             switch (accion) {
                 case "Listar":
                     List<Usuarios> listaUsuarios = usuariosDAO.listar();
-                    request.setAttribute("Usuarios", listaUsuarios);
+                    request.setAttribute("usuarios", listaUsuarios);
                     request.getRequestDispatcher("usuario.jsp").forward(request, response);
                     break;
+
                 case "Agregar":
-                    
-                    String NombreUsuario = request.getParameter("nombre-usuario");
-                    String ApellidoUsuario = request.getParameter("Apellido-usuario");
-                    String DireccionUsuario = request.getParameter("Direccion-usuario");
-                    String TelefonoUsuario = request.getParameter("Telefono-usuario");
+                    String nombreUsuario = request.getParameter("nombre-usuario");
+                    String apellidoUsuario = request.getParameter("apellido-usuario");
+                    String direccionUsuario = request.getParameter("direccion-usuario");
+                    String telefonoUsuario = request.getParameter("telefono-usuario");
 
-
-                    usuarios.setNombreUsuario(NombreUsuario);
-                    usuarios.setApellidoUsuario(ApellidoUsuario);
-                    usuarios.setDireccionUsuario(DireccionUsuario);
-                    usuarios.setTelefonoUsuario(TelefonoUsuario);
+                    usuarios.setNombreUsuario(nombreUsuario);
+                    usuarios.setApellidoUsuario(apellidoUsuario);
+                    usuarios.setDireccionUsuario(direccionUsuario);
+                    usuarios.setTelefonoUsuario(telefonoUsuario);
 
                     usuariosDAO.agregar(usuarios);
 
                     response.sendRedirect("Controlador?menu=Usuarios&accion=Listar");
                     break;
-                case "Eliminar":
-                    codUsuario = Integer.parseInt(request.getParameter("id"));
-                    usuariosDAO.eliminar(codUsuario);
-                    response.sendRedirect("Controlador?menu=Usuarios&accion=Listar");
-                    break;
-                case "Cargar":
-                    codUsuario = Integer.parseInt(request.getParameter("id"));
-                    Usuarios usuarioSeleccionada = usuariosDAO.listarId(codUsuario);
-                    request.setAttribute("usuarioSeleccionada", usuarioSeleccionada);
-                    request.getRequestDispatcher("Controlador?menu=Usuarios&accion=Listar").forward(request, response);
-                    break;
-                case "Actualizar":
-                    codUsuario = Integer.parseInt(request.getParameter("codigo-usuario"));
-                    String nombreActualizar = request.getParameter("nombre-usuario");
-                    String apellidoActualizar = request.getParameter("apellido-usuario");
-                    String direccionActualizar = request.getParameter("direccion-usuario");
-                    String numeroActualizar = request.getParameter("telefono-usuario");
-                    
-                    usuarios.setCodigoUsuario(codUsuario);
-                    usuarios.setNombreUsuario(nombreActualizar);
-                    usuarios.setApellidoUsuario(apellidoActualizar);
-                    usuarios.setDireccionUsuario(direccionActualizar);
-                    usuarios.setTelefonoUsuario(numeroActualizar);
 
-
-                    usuariosDAO.actualizar(usuarios);
-
-                    response.sendRedirect("Controlador?menu=Usuarios&accion=Listar");
-                    break;
-                case "Buscar":
-                    String idParam = request.getParameter("id");
-                    if (idParam != null && !idParam.isEmpty()) {
-                        try {
-                            int idBuscar = Integer.parseInt(idParam);
-                            Usuarios usuarioEncontrada = usuariosDAO.listarId(idBuscar);
-                            List<Usuarios> listaEncontrada = new ArrayList<>();
-                            if (usuarioEncontrada != null && usuarioEncontrada.getCodigoUsuario() != null) {
-                                listaEncontrada.add(usuarioEncontrada);
-                            }
-                            request.setAttribute("Usuarios", listaEncontrada);
-                        } catch (NumberFormatException e) {
-                            request.setAttribute("Usuarios", usuariosDAO.listar());
-                        }
-                    } else {
-                        request.setAttribute("Usuarios", usuariosDAO.listar());
-                    }
-                    request.getRequestDispatcher("usuario.jsp").forward(request, response);
-                    break;
                 default:
                     List<Usuarios> lista = usuariosDAO.listar();
                     request.setAttribute("usuarios", lista);
                     request.getRequestDispatcher("usuario.jsp").forward(request, response);
-                    break;
             }
             request.getRequestDispatcher("usuario.jsp").forward(request, response);
         } else if (menu.equals("Facturas")) {
