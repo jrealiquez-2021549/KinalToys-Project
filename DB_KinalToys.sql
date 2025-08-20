@@ -1,14 +1,27 @@
-Drop database if exists DB_KinalToys;
+-- Drop database if exists DB_KinalToys;
 create database DB_KinalToys;
 use DB_KinalToys;
 
-create table Usuarios (
-	codigoUsuario int auto_increment,
-	nombreUsuario varchar(50),
-	apellidoUsuario varchar(60),
-	direccionUsuario varchar(100),
-	telefonoUsuario varchar(9),
-	primary key PK_codigoUsuario (codigoUsuario)
+create table Clientes (
+	codigoCliente int auto_increment,
+	nombreCliente varchar(50) not null,
+	apellidoCliente varchar(60) not null,
+	direccionCliente varchar(100),
+	telefonoCliente varchar(9),
+    dpiCliente varchar(15) not null unique,
+	primary key PK_codigoCliente (codigoCliente)
+);
+
+create table Empleados (
+	codigoEmpleado int auto_increment,
+	nombreEmpleado varchar(50),
+	apellidoEmpleado varchar(60),
+	direccionEmpleado varchar(100),
+	telefonoEmpleado varchar(9),
+	cargo varchar(50),
+	salario decimal(10,2),
+	dpiEmpleado varchar(15) unique,
+	primary key PK_codigoEmpleado (codigoEmpleado)
 );
 
 create table Facturas (
@@ -16,10 +29,10 @@ create table Facturas (
 	fechaEmision datetime,
     metodoPago enum('Efectivo', 'Credito'),
     total decimal(10,2),
-	codigoUsuario int,
+	codigoCliente int,
 	primary key PK_codigoFactura (codigoFactura),
-	constraint FK_Factura_Usuario foreign key (codigoUsuario)
-		references Usuarios (codigoUsuario)
+	constraint FK_Factura_Cliente foreign key (codigoCliente)
+		references Clientes (codigoCliente)
 );
 
 create table Noticias (
@@ -55,14 +68,22 @@ create table Juguetes (
 
 create table Cuentas (
 	codigoCuenta int auto_increment,
+    rol enum('Cliente', 'Empleado') default 'Cliente',
     nombreCuenta varchar(50),
     correoCuenta varchar(100),
     contrasenaCuenta varchar(50),
     fotoCuenta longblob,
-    codigoUsuario int,
+    codigoCliente int,
+    codigoEmpleado int,
     primary key PK_codigoCuenta (codigoCuenta),
-    constraint FK_Cuenta_Usuario foreign key (codigoUsuario)
-		references Usuarios (codigoUsuario)
+    constraint FK_Cuenta_Cliente foreign key (codigoCliente)
+		references Clientes (codigoCliente),
+	constraint FK_Cuenta_Empleado foreign key (codigoEmpleado)
+		references Empleados (codigoEmpleado),
+	constraint CHK_UnicaRelacion check (
+        (codigoCliente is not null and codigoEmpleado is null) or
+        (codigoCliente is null and codigoEmpleado is not null)
+    )
 );
 
 create table Carritos (
@@ -70,10 +91,10 @@ create table Carritos (
     fechaCreacion datetime,
     estado enum('Activo', 'Comprado'),
 	total decimal(10,2),
-    codigoUsuario int,
+    codigoCliente int,
     primary key PK_codigoCarrito (codigoCarrito),
-	constraint FK_Carrito_Usuario foreign key (codigoUsuario) 
-		references Usuarios (codigoUsuario)
+	constraint FK_Carrito_Cliente foreign key (codigoCliente) 
+		references Clientes (codigoCliente)
 );
 
 
@@ -91,66 +112,149 @@ create table DetallesCarritos (
 		references Juguetes (codigoJuguete)
 );
 
--- PROCEDIMIENTOS ALMACENADOS (USUARIOS) -------------------------
--- AGREGAR USUARIO
-Delimiter $$
-create procedure sp_AgregarUsuario (
-	in nombre varchar(50),
-	in apellido varchar(60),
-	in direccion varchar(100),
-	in telefono varchar(9))
+-- PROCEDIMIENTOS ALMACENADOS (CLIENTES) -------------------------
+-- AGREGAR CLIENTE
+Delimiter $
+create procedure sp_AgregarClientes (
+    in nombre varchar(50),
+    in apellido varchar(60),
+    in direccion varchar(100),
+    in telefono varchar(9),
+    in dpi varchar(15))
 begin
-	insert into Usuarios (nombreUsuario, apellidoUsuario, direccionUsuario, telefonoUsuario)
-	values (nombre, apellido, direccion, telefono);
-end$$
+    insert into Clientes (nombreCliente, apellidoCliente, direccionCliente, telefonoCliente, dpiCliente)
+    values (nombre, apellido, direccion, telefono, dpi);
+end$
 Delimiter ;
-call sp_AgregarUsuario('Carlos', 'Mejía', 'Zona 10, Guatemala', '45981230');
-call sp_AgregarUsuario('Andrea', 'Gómez', 'Zona 5, Guatemala', '55678921');
+call sp_AgregarClientes('Carlos', 'Mejía', 'Zona 10, Guatemala', '45981230', '1234567890123');
+call sp_AgregarClientes('Andrea', 'Gómez', 'Zona 5, Guatemala', '55678921', '9876543210987');
 
--- LISTAR USUARIOS
+-- LISTAR CLIENTES
 Delimiter $$
-create procedure sp_ListarUsuarios ()
+create procedure sp_ListarClientes ()
 begin
-	select * from Usuarios;
+    select c.codigoCliente, c.nombreCliente, c.apellidoCliente, c.direccionCliente, c.telefonoCliente, c.dpiCliente 
+    from Clientes c;
 end$$
 Delimiter ;
-call sp_ListarUsuarios();
+call sp_ListarClientes();
 
--- ELIMINAR USUARIO
+-- ELIMINAR CLIENTE
 Delimiter $$
-create procedure sp_EliminarUsuario (
-	in codUsuario int)
+create procedure sp_EliminarCliente (
+    in codCliente int)
 begin
-	delete from Usuarios where codigoUsuario = codUsuario;
+    delete from Clientes where codigoCliente = codCliente;
 end$$
 Delimiter ;
-call sp_EliminarUsuario(2);
 
--- BUSCAR USUARIO
+-- BUSCAR CLIENTE
 Delimiter $$
-create procedure sp_BuscarUsuario (
-	in codUsuario int)
+create procedure sp_BuscarCliente (
+    in codCliente int)
 begin
-	select * from Usuarios where codigoUsuario = codUsuario;
+    select c.codigoCliente, c.nombreCliente, c.apellidoCliente, c.direccionCliente, c.telefonoCliente, c.dpiCliente 
+    from Clientes c 
+    where c.codigoCliente = codCliente;
 end$$
 Delimiter ;
-call sp_BuscarUsuario(1);
+call sp_BuscarCliente(1);
 
--- EDITAR USUARIO
-Delimiter $$
-create procedure sp_EditarUsuario (
-	in codUsuario int,
-	in nombre varchar(50),
-	in apellido varchar(60),
-	in direccion varchar(100),
-	in telefono varchar(9))
+-- EDITAR CLIENTE
+Delimiter $
+create procedure sp_EditarCliente (
+    in codCliente int,
+    in nombre varchar(50),
+    in apellido varchar(60),
+    in direccion varchar(100),
+    in telefono varchar(9),
+    in dpi varchar(15))
 begin
-	update Usuarios set nombreUsuario = nombre, apellidoUsuario = apellido,
-		direccionUsuario = direccion, telefonoUsuario = telefono
-			where codigoUsuario = codUsuario;
+    update Clientes c
+    set c.nombreCliente = nombre, 
+        c.apellidoCliente = apellido,
+        c.direccionCliente = direccion, 
+        c.telefonoCliente = telefono,
+        c.dpiCliente = dpi
+    where c.codigoCliente = codCliente;
+end$
+Delimiter ;
+call sp_EditarCliente(1, 'Carlos', 'Mejía', 'Zona 14, Guatemala', '12345678', '1111111111111');
+
+-- PROCEDIMIENTOS ALMACENADOS (EMPLEADOS) -------------------------
+-- AGREGAR EMPLEADO
+Delimiter $
+create procedure sp_AgregarEmpleados (
+    in nombre varchar(50),
+    in apellido varchar(60),
+    in direccion varchar(100),
+    in telefono varchar(9),
+    in cargo varchar(50),
+    in salario decimal(10,2),
+    in dpi varchar(15))
+begin
+    insert into Empleados (nombreEmpleado, apellidoEmpleado, direccionEmpleado, telefonoEmpleado, cargo, salario, dpiEmpleado)
+    values (nombre, apellido, direccion, telefono, cargo, salario, dpi);
+end$
+Delimiter ;
+call sp_AgregarEmpleados('Edvin leonel', 'Cujcuj', 'Zona 1, Guatemala', '12345678', 'Gerente', 5000.00, '1');
+
+-- LISTAR EMPLEADOS
+Delimiter $$
+create procedure sp_ListarEmpleados ()
+begin
+    select e.codigoEmpleado, 
+    e.nombreEmpleado, 
+    e.apellidoEmpleado,
+    e.direccionEmpleado,
+    e.telefonoEmpleado, 
+    e.cargo, e.salario, 
+    e.dpiEmpleado 
+    from Empleados e;
 end$$
 Delimiter ;
-call sp_EditarUsuario(1, 'Carlos', 'Mejía', 'Zona 14, Guatemala', '12345678');
+call sp_ListarEmpleados();
+
+-- ELIMINAR EMPLEADO
+Delimiter $$
+create procedure sp_EliminarEmpleado (
+    in codEmpleado int)
+begin
+    delete from Empleados where e.codigoEmpleado = codEmpleado;
+end$$
+Delimiter ;
+
+-- BUSCAR EMPLEADO
+Delimiter $$
+create procedure sp_BuscarEmpleado (
+    in codEmpleado int)
+begin
+    select e.codigoEmpleado, e.nombreEmpleado, e.apellidoEmpleado, e.direccionEmpleado, e.telefonoEmpleado, e.cargo, e.salario, e.dpiEmpleado from Empleados e where e.codigoEmpleado = codEmpleado;
+end$$
+Delimiter ;
+call sp_BuscarEmpleado(1);
+
+-- EDITAR EMPLEADO
+Delimiter $$
+create procedure sp_EditarEmpleado (
+    in codEmpleado int,
+    in nombre varchar(50),
+    in apellido varchar(60),
+    in direccion varchar(100),
+    in telefono varchar(9),
+    in cargo varchar(50),
+    in salario decimal(10,2))
+begin
+    update Empleados e
+    set e.nombreEmpleado = nombre, 
+        e.apellidoEmpleado = apellido,
+        e.direccionEmpleado = direccion, 
+        e.telefonoEmpleado = telefono,
+        e.cargo = cargo,
+        e.salario = salario
+    where e.codigoEmpleado = codEmpleado;
+end$$
+Delimiter ;
 
 -- PROCEDIMIENTOS ALMACENADOS (FACTURAS) -------------------------
 -- AGREGAR FACTURA
@@ -159,10 +263,10 @@ create procedure sp_AgregarFactura (
 	in fecha datetime,
 	in metodo enum('Efectivo', 'Credito'),
 	in totalFactura decimal(10,2),
-	in codUsuario int)
+	in codCliente int)
 begin
-	insert into Facturas (fechaEmision, metodoPago, total, codigoUsuario)
-	values (fecha, metodo, totalFactura, codUsuario);
+	insert into Facturas (fechaEmision, metodoPago, total, codigoCliente)
+	values (fecha, metodo, totalFactura, codCliente);
 end$$
 Delimiter ;
 call sp_AgregarFactura('2023-06-15 11:30:00', 'Efectivo', 250.75, 1);
@@ -204,10 +308,10 @@ create procedure sp_EditarFactura (
 	in fecha datetime,
 	in metodo enum('Efectivo', 'Credito'),
 	in totalFactura decimal(10,2),
-	in codUsuario int)
+	in codCliente int)
 begin
 	update Facturas set fechaEmision = fecha, metodoPago = metodo,
-		total = totalFactura, codigoUsuario = codUsuario
+		total = totalFactura, codigoCliente = codCliente
 	where codigoFactura = codFactura;
 end$$
 Delimiter ;
@@ -406,19 +510,20 @@ call sp_EditarJuguete(1, 'Batman Deluxe', 160.00, 'Figuras', 'DC Comics', 25, 1)
 -- AGREGAR CUENTA
 Delimiter $$
 create procedure sp_AgregarCuenta (
-	in nombre varchar(50),
-	in correo varchar(100),
-	in contrasena varchar(50),
+	in nomb varchar(50),
+	in corr varchar(100),
+	in contra varchar(50),
     in fotCuenta longblob,
-	in codUsuario int)
+	in codClie int,
+    in codEmple int,
+    in rolCuenta enum('Cliente', 'Empleado'))
 begin
-	insert into Cuentas (nombreCuenta, correoCuenta, contrasenaCuenta, fotoCuenta, codigoUsuario)
-	values (nombre, correo, contrasena, fotCuenta, codUsuario);
+	insert into Cuentas (nombreCuenta, correoCuenta, contrasenaCuenta, fotoCuenta, codigoCliente, codigoEmpleado, rol)
+	values (nomb, corr, contra, fotCuenta, codClie, codEmple, rolCuenta);
 end$$
 Delimiter ;
-call sp_AgregarCuenta('Aquino', 'jaquino@gmail.com', '123', load_file('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/perfil.jpg'), 1);
-call sp_AgregarCuenta('Proxy549', 'proxy549@gmail.com', 'admin', load_file('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/perfil2.png'), 1);
-call sp_AgregarCuenta('Caelia1980', 'caelia80@gmail.com', 'admin', load_file('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/perfil3.jpg'), 1);
+call sp_AgregarCuenta('Aquino', 'jaquino@gmail.com', '123', load_file('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/perfil.jpg'), 1, NULL, 'Cliente');
+call sp_AgregarCuenta('Caelia', 'caelia@gmail.com', 'admin', load_file('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/perfil2.png'), NULL, 1, 'Empleado');
 
 -- LISTAR CUENTAS
 Delimiter $$
@@ -437,7 +542,6 @@ begin
 	delete from Cuentas where codigoCuenta = codCuenta;
 end$$
 Delimiter ;
-call sp_EliminarCuenta(3);
 
 -- BUSCAR COMPRA
 Delimiter $$
@@ -457,14 +561,14 @@ create procedure sp_EditarCuenta (
 	in correo varchar(100),
 	in contrasena varchar(50),
     in fotCuenta longblob,
-	in codUsuario int)
+	in codCliente int)
 begin
 	update Cuentas 
 	set nombreCuenta = nombre, 
 		correoCuenta = correo, 
 		contrasenaCuenta = contrasena, 
         fotoCuenta = fotCuenta,
-		codigoUsuario = codUsuario
+		codigoCliente = codCliente
 	where codigoCuenta = codCuenta;
 end$$
 Delimiter ;
@@ -477,15 +581,43 @@ create procedure sp_EditarCuenta (
 	in nombre varchar(50),
 	in correo varchar(100),
     in fotCuenta longblob,
-	in codUsuario int)
+	in codClie int,
+    in codEmple int,
+    in rolCuenta enum('Cliente', 'Empleado'))
 begin
-	update Cuentas 
-	set nombreCuenta = nombre, 
-		correoCuenta = correo,  
+	update Cuentas
+	set nombreCuenta = nombre,
+		correoCuenta = correo,
         fotoCuenta = fotCuenta,
-		codigoUsuario = codUsuario
+		codigoCliente = codClie,
+        codigoEmpleado = codEmple,
+        rol = rolCuenta
 	where codigoCuenta = codCuenta;
 end$$
+Delimiter ;
+
+Delimiter $$
+create procedure sp_ValidarCuentas(
+    in p_email varchar(100),
+    in p_password varchar(50),
+    in p_dpi varchar(15)
+)
+begin
+    select 
+        c.codigoCuenta,
+        c.rol,
+        c.nombreCuenta,
+        c.correoCuenta,
+        c.contrasenaCuenta,
+        c.fotoCuenta,
+        c.codigoCliente,
+        c.codigoEmpleado
+    from Cuentas as c
+    left join Clientes as cl on c.codigoCliente = cl.codigoCliente
+    left join Empleados as em on c.codigoEmpleado = em.codigoEmpleado
+    where c.correoCuenta = p_email and c.contrasenaCuenta = p_password
+    and (cl.dpiCliente = p_dpi or em.dpiEmpleado = p_dpi);
+end $$
 Delimiter ;
 
 -- PROCEDIMIENTOS ALMACENADOS (CARRITOS) -------------------------
@@ -495,10 +627,10 @@ create procedure sp_AgregarCarrito (
 	in fecha datetime,
 	in estadoCarrito enum('Activo', 'Comprado'),
 	in totalCarrito decimal(10,2),
-	in codUsuario int)
+	in codCliente int)
 begin
-	insert into Carritos (fechaCreacion, estado, total, codigoUsuario)
-	values (fecha, estadoCarrito, totalCarrito, codUsuario);
+	insert into Carritos (fechaCreacion, estado, total, codigoCliente)
+	values (fecha, estadoCarrito, totalCarrito, codCliente);
 end$$
 Delimiter ;
 call sp_AgregarCarrito('2023-06-20 09:00:00', 'Activo', 300.00, 1);
@@ -540,11 +672,11 @@ create procedure sp_EditarCarrito (
 	in fecha datetime,
 	in estadoCarrito enum('Activo', 'Comprado'),
 	in totalCarrito decimal(10,2),
-	in codUsuario int)
+	in codCliente int)
 begin
 	update Carritos set fechaCreacion = fecha,
 		estado = estadoCarrito, total = totalCarrito,
-		codigoUsuario = codUsuario
+		codigoCliente = codCliente
 	where codigoCarrito = codCarrito;
 end$$
 Delimiter ;
@@ -619,23 +751,6 @@ begin
 end$$
 Delimiter ;
 call sp_EditarDetalleCarrito(1, 3, 450.00, 30.00, 1, 1);
-
--- Buscar DetallesCarrito por medio de codigo
-Delimiter $$
-create procedure sp_ListarDetallesCarritosPorCodigo (
-	in codDetalle int)
-begin
-	select 
-        codigoDetalleC,
-        cantidad,
-        subTotal,
-        descuentoAplicado,
-        codigoCarrito,
-        codigoJuguete
-    from DetallesCarritos
-    where codigoDetalleC = codDetalle;
-end$$
-Delimiter ;
 
 select * from Cuentas where correoCuenta = "jrealiquez@gmail.com" and contrasenaCuenta =1980;
 SELECT fotoCuenta FROM Cuentas WHERE codigoCuenta = 1;

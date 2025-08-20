@@ -127,7 +127,7 @@ public class Controlador extends HttpServlet {
                     String fechaEmisionStr = request.getParameter("fecha-emision");
                     String metodoPagoStr = request.getParameter("metodo-pago");
                     String totalStr = request.getParameter("total");
-                    String codigoUsuarioStr = request.getParameter("codigo-usuario");
+                    String codigoClienteStr = request.getParameter("codigo-cliente");
 
                     // Convertir fecha de String a LocalDateTime (agregar hora actual)
                     LocalDateTime fechaEmision = LocalDateTime.parse(fechaEmisionStr + "T00:00:00");
@@ -137,12 +137,12 @@ public class Controlador extends HttpServlet {
 
                     // Convertir String a BigDecimal
                     BigDecimal total = new BigDecimal(totalStr);
-                    int codigoUsuario = Integer.parseInt(codigoUsuarioStr);
+                    int codigoCliente = Integer.parseInt(codigoClienteStr);
 
                     facturas.setFechaEmision(fechaEmision);
                     facturas.setMetodoPago(metodoPago);
                     facturas.setTotal(total);
-                    facturas.setCodigoUsuario(codigoUsuario);
+                    facturas.setCodigoCliente(codigoCliente);
 
                     facturasDAO.agregar(facturas);
 
@@ -164,7 +164,7 @@ public class Controlador extends HttpServlet {
                     String fechaActualizarStr = request.getParameter("fecha-emision");
                     String metodoActualizarStr = request.getParameter("metodo-pago");
                     String totalActualizarStr = request.getParameter("total");
-                    int codigoUserActualizar = Integer.parseInt(request.getParameter("codigo-usuario"));
+                    int codigoUserActualizar = Integer.parseInt(request.getParameter("codigo-cliente"));
 
                     // Convertir fecha de String a LocalDateTime
                     LocalDateTime fechaActualizar = LocalDateTime.parse(fechaActualizarStr + "T00:00:00");
@@ -179,7 +179,7 @@ public class Controlador extends HttpServlet {
                     facturas.setFechaEmision(fechaActualizar);
                     facturas.setMetodoPago(metodoActualizar);
                     facturas.setTotal(totalActualizar);
-                    facturas.setCodigoUsuario(codigoUserActualizar);
+                    facturas.setCodigoCliente(codigoUserActualizar);
 
                     facturasDAO.actualizar(facturas);
 

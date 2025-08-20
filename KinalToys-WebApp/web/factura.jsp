@@ -103,8 +103,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="codigo-usuario"><strong>Código de Usuario:</strong></label>
-                        <input type="number" id="codigo-usuario" name="codigo-usuario" placeholder="Ej. 1" required value="${facturaSeleccionada.codigoUsuario}" />
+                        <label for="codigo-cliente"><strong>Código de Cliente:</strong></label>
+                        <input type="number" id="codigo-cliente" name="codigo-cliente" placeholder="Ej. 1" required value="${facturaSeleccionada.codigoCliente}" />
                     </div>
 
                     <div class="crud-buttons">
@@ -133,7 +133,7 @@
                                 <th>Fecha Emisión</th>
                                 <th>Método de Pago</th>
                                 <th>Total</th>
-                                <th>Código Usuario</th>
+                                <th>Código Cliente</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -144,7 +144,7 @@
                                     <td>${factura.fechaEmision}</td>
                                     <td>${factura.metodoPago}</td>
                                     <td>${factura.total}</td>
-                                    <td>${factura.codigoUsuario}</td>
+                                    <td>${factura.codigoCliente}</td>
                                     <td>
                                         <a href="Controlador?menu=Facturas&accion=Cargar&id=${factura.codigoFactura}" class="btn-crud">Editar</a>
                                         <a href="Controlador?menu=Facturas&accion=Eliminar&id=${factura.codigoFactura}" class="btn-crud">Eliminar</a>

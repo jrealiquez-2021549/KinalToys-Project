@@ -29,8 +29,8 @@ public class Facturas implements Serializable {
     private MetodoPago metodoPago;
     @Column(name = "total")
     private BigDecimal total;
-    @Column(name = "codigoUsuario")
-    private Integer codigoUsuario;
+    @Column(name = "codigoCliente")
+    private Integer codigoCliente;
     
     public Facturas() {
     }
@@ -74,16 +74,16 @@ public class Facturas implements Serializable {
         this.total = total;
     }
 
-    public Integer getCodigoUsuario() {
-        return codigoUsuario;
+    public Integer getCodigoCliente() {
+        return codigoCliente;
     }
 
-    public void setCodigoUsuario(Integer codigoUsuario) {
-        this.codigoUsuario = codigoUsuario;
+    public void setCodigoCliente(Integer codigoCliente) {
+        this.codigoCliente = codigoCliente;
     }
 
     @Override
     public String toString() {
-        return "Facturas{" + "codigoFactura=" + codigoFactura + ", fechaEmision=" + fechaEmision + ", metodoPago=" + metodoPago + ", total=" + total + ", codigoUsuario=" + codigoUsuario + '}';
+        return "Facturas{" + "codigoFactura=" + codigoFactura + ", fechaEmision=" + fechaEmision + ", metodoPago=" + metodoPago + ", total=" + total + ", codigoCliente=" + codigoCliente + '}';
     }
 }

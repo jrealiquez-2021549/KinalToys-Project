@@ -38,7 +38,7 @@ public class FacturasDAO {
                     factura.setMetodoPago(MetodoPago.valueOf(metodoPagoStr));
                 }
                 factura.setTotal(rs.getBigDecimal(4));
-                factura.setCodigoUsuario(rs.getInt(5));
+                factura.setCodigoCliente(rs.getInt(5));
                 listaFacturas.add(factura);
             }
         } catch (Exception e) {
@@ -56,7 +56,7 @@ public class FacturasDAO {
             // Convertir enum a String
             ps.setString(2, factura.getMetodoPago().name());
             ps.setBigDecimal(3, factura.getTotal());
-            ps.setInt(4, factura.getCodigoUsuario());
+            ps.setInt(4, factura.getCodigoCliente());
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -85,7 +85,7 @@ public class FacturasDAO {
                     factura.setMetodoPago(MetodoPago.valueOf(metodoPagoStr));
                 }
                 factura.setTotal(rs.getBigDecimal(4));
-                factura.setCodigoUsuario(rs.getInt(5));
+                factura.setCodigoCliente(rs.getInt(5));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -104,7 +104,7 @@ public class FacturasDAO {
             // Convertir enum a String
             ps.setString(3, factura.getMetodoPago().name());
             ps.setBigDecimal(4, factura.getTotal());
-            ps.setInt(5, factura.getCodigoUsuario());
+            ps.setInt(5, factura.getCodigoCliente());
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
