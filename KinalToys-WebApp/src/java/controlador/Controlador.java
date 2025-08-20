@@ -293,53 +293,127 @@ public class Controlador extends HttpServlet {
                     request.getRequestDispatcher("noticia.jsp").forward(request, response);
             }
 
-        } else if (menu.equals("Proveedores")) {
-            if (accion == null) {
-                accion = "Listar";
-            }
-            switch (accion) {
-                case "Listar":
-                    try {
-                        List<Proveedores> listaProveedores = proveedoresDAO.listar();
-                        request.setAttribute("proveedores", listaProveedores);
+       } else if (menu.equals("Proveedores")) {
+                if (accion == null) {
+                    accion = "Listar";
+                }
+
+                switch (accion) {
+                    case "Listar":
+                        try {
+                            List<Proveedores> listaProveedores = proveedoresDAO.listar();
+                            request.setAttribute("proveedores", listaProveedores);
+                            request.getRequestDispatcher("/proveedor.jsp").forward(request, response);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        break;
+
+                    case "Agregar":
+                        String nombreProv = request.getParameter("nombre-proveedor");
+                        String telefonoProv = request.getParameter("telefono-proveedor");
+                        String correoProv = request.getParameter("correo-proveedor");
+                        String direccionProv = request.getParameter("direccion-proveedor");
+
+                        Proveedores proveedores = new Proveedores();
+                        proveedores.setNombreProveedor(nombreProv);
+                        proveedores.setTelefonoProveedor(telefonoProv);
+                        proveedores.setCorreoProveedor(correoProv);
+                        proveedores.setDireccionProveedor(direccionProv);
+
+                        int resultadoAgregar = proveedoresDAO.agregar(proveedores);
+                        if (resultadoAgregar > 0) {
+                            request.setAttribute("mensaje", "Proveedor agregado exitosamente");
+                        } else {
+                            request.setAttribute("error", "Error al agregar el proveedor");
+                        }
+                        response.sendRedirect("Controlador?menu=Proveedores&accion=Listar");
+                        break;
+
+                    case "Editar":
+                        String codigoEditarParam = request.getParameter("codigoProveedor");
+                        if (codigoEditarParam == null || codigoEditarParam.trim().isEmpty()) {
+                            System.out.println("ERROR: codigoProveedor para editar es null o vacío");
+                            response.sendRedirect("Controlador?menu=Proveedores&accion=Listar");
+                            return;
+                        }
+
+                        codProveedores = Integer.parseInt(codigoEditarParam);
+                        System.out.println("DEBUG - Editando proveedor ID: " + codProveedores);
+
+                        Proveedores p = proveedoresDAO.listarCodigoProveedor(codProveedores);
+                        if (p == null) {
+                            System.out.println("ERROR: No se encontró proveedor con ID: " + codProveedores);
+                            response.sendRedirect("Controlador?menu=Proveedores&accion=Listar");
+                            return;
+                        }
+
+                        List<Proveedores> listaProveedoresEditar = proveedoresDAO.listar();
+
+                        request.setAttribute("proveedorSeleccionado", p);
+                        request.setAttribute("proveedores", listaProveedoresEditar);
                         request.getRequestDispatcher("/proveedor.jsp").forward(request, response);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    break;
-                case "Agregar":
-                    String nombreProv = request.getParameter("nombre-proveedor");
-                    String telefonoProv = request.getParameter("telefono-proveedor");
-                    String correoProv = request.getParameter("correo-proveedor");
-                    String direccionProv = request.getParameter("direccion-proveedor");
+                        break;
 
-                    Proveedores proveedores = new Proveedores();
-                    proveedores.setNombreProveedor(nombreProv);
-                    proveedores.setTelefonoProveedor(telefonoProv);
-                    proveedores.setCorreoProveedor(correoProv);
-                    proveedores.setDireccionProveedor(direccionProv);
+                    case "Actualizar":
+                        codProveedores = Integer.parseInt(request.getParameter("codigoProveedor"));
+                        String nombreActualizar = request.getParameter("nombre-proveedor");
+                        String telefonoActualizar = request.getParameter("telefono-proveedor");
+                        String correoActualizar = request.getParameter("correo-proveedor");
+                        String direccionActualizar = request.getParameter("direccion-proveedor");
 
-                    proveedoresDAO.agregar(proveedores);
-                    response.sendRedirect("Controlador?menu=Proveedores&accion=Listar");
-                    break;
+                        Proveedores proveedorActualizar = new Proveedores();
+                        proveedorActualizar.setCodigoProveedor(codProveedores);
+                        proveedorActualizar.setNombreProveedor(nombreActualizar);
+                        proveedorActualizar.setTelefonoProveedor(telefonoActualizar);
+                        proveedorActualizar.setCorreoProveedor(correoActualizar);
+                        proveedorActualizar.setDireccionProveedor(direccionActualizar);
 
-                case "Editar":
-                    System.out.println("LIST");
-                    break;
-                case "Actualizar":
-                    System.out.println("LIST");
-                    break;
-                case "Eliminar":
-                    System.out.println("LIST");
-                    break;
-                case "Cargar":
-                    System.out.println("LIST");
-                    break;
-                case "Buscar":
-                    System.out.println("LIST");
-                    break;
-                default:
-            }
+                        int resultadoActualizar = proveedoresDAO.actualizar(proveedorActualizar);
+                        if (resultadoActualizar > 0) {
+                            request.setAttribute("mensaje", "Proveedor actualizado exitosamente");
+                        } else {
+                            request.setAttribute("error", "Error al actualizar el proveedor");
+                        }
+                        response.sendRedirect("Controlador?menu=Proveedores&accion=Listar");
+                        break;
+
+                    case "Eliminar":
+                        codProveedores = Integer.parseInt(request.getParameter("codigoProveedor"));
+                        int resultadoEliminar = proveedoresDAO.eliminar(codProveedores);
+                        if (resultadoEliminar > 0) {
+                            request.setAttribute("mensaje", "Proveedor eliminado exitosamente");
+                        } else {
+                            request.setAttribute("error", "Error al eliminar el proveedor");
+                        }
+                        response.sendRedirect("Controlador?menu=Proveedores&accion=Listar");
+                        break;
+
+                    case "Buscar":
+                        String idParam = request.getParameter("id");
+                        if (idParam != null && !idParam.isEmpty()) {
+                            try {
+                                int idBuscar = Integer.parseInt(idParam);
+                                Proveedores proveedorEncontrado = proveedoresDAO.listarCodigoProveedor(idBuscar);
+                                List<Proveedores> listaEncontrada = new ArrayList<>();
+                                if (proveedorEncontrado != null && proveedorEncontrado.getCodigoProveedor() != 0) {
+                                    listaEncontrada.add(proveedorEncontrado);
+                                    request.setAttribute("proveedorSeleccionado", proveedorEncontrado);
+                                }
+                                request.setAttribute("proveedores", listaEncontrada);
+                            } catch (NumberFormatException e) {
+                                request.setAttribute("proveedores", proveedoresDAO.listar());
+                            }
+                        } else {
+                            request.setAttribute("proveedores", proveedoresDAO.listar());
+                        }
+                        request.getRequestDispatcher("proveedor.jsp").forward(request, response);
+                        break;
+
+                    default:
+                        response.sendRedirect("Controlador?menu=Proveedores&accion=Listar");
+                        break;
+                    } 
         } else if (menu.equals("Juguetes")) {
 
             switch (accion) {
