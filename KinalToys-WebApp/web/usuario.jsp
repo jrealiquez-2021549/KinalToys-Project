@@ -54,10 +54,11 @@
                         <li><a href="Controlador?menu=Principal">Inicio</a></li>
                         <li><a href="Controlador?menu=Usuarios&accion=Listar">Usuarios</a></li>
                         <li><a href="Controlador?menu=Facturas&accion=Listar">Facturas</a></li>
-                        <li><a href="Controlador?menu=Noticias">Noticias</a></li>
-                        <li><a href="Controlador?menu=Proveedores">Proveedores</a></li>
+                        <li><a href="Controlador?menu=Noticias&accion=Listar">Noticias</a></li>
+                        <li><a href="Controlador?menu=Proveedores&accion=Listar">Proveedores</a></li>
                         <li><a href="Controlador?menu=Juguetes&accion=Listar">Juguetes</a></li>
                         <li><a href="Controlador?menu=Cuentas&accion=Listar">Cuentas</a></li>
+                        <li><a href="Controlador?menu=Empleados&accion=Listar">Emplados</a></li>
                         <li><a href="Controlador?menu=Carritos&accion=Listar">Carritos</a></li>
                         <li><a href="Controlador?menu=DetallesCarritos&accion=Listar">Detalles Carritos</a></li>
                     </ul>
