@@ -161,6 +161,10 @@
                             <p>Juguetes</p>
                             <a href="Controlador?menu=Juguetes&accion=Listar"><span>Ingresar</span></a>
                         </div>
+                        <div class="card-category empeados-bg">
+                            <p>Empleados</p>
+                            <a href="Controlador?menu=Empleados&accion=Listar"><span>Ingresar</span></a>
+                        </div>
                         <div class="card-category cuentas-bg">
                             <p>Cuentas</p>
                             <a href="Controlador?menu=Cuentas&accion=Listar"><span>Ingresar</span></a>

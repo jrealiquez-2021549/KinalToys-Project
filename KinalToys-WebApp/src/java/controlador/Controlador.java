@@ -160,7 +160,7 @@ public class Controlador extends HttpServlet {
                     facturasDAO.eliminar(codFactura);
                     response.sendRedirect("Controlador?menu=Facturas&accion=Listar");
                     break;
-                case "Editar":
+                case "Cargar":
                     codFactura = Integer.parseInt(request.getParameter("id"));
                     Facturas facturaSeleccionada = facturasDAO.listarId(codFactura);
                     request.setAttribute("facturaSeleccionada", facturaSeleccionada);
