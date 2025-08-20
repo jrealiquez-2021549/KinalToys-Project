@@ -17,7 +17,7 @@ public class CuentasDAO extends Conexion {
     public Cuentas validar(String email, String password) {
         // Se mantiene el método para el login antiguo si lo necesitas, pero se recomienda usar el nuevo con DPI
         Cuentas cuentas = new Cuentas();
-        String sql = "select * from Cuentas where correoCuenta = ? and contrasenaCuenta = ?";
+        String sql = "call sp_validarCuentas(?,?,?)";
         try {
             con = Conexion();
             ps = con.prepareCall(sql);

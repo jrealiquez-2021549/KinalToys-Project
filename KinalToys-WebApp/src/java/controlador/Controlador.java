@@ -24,6 +24,8 @@ import modelo.Carritos;
 import modelo.CarritosDAO;
 import modelo.DetallesCarritos;
 import modelo.DetallesCarritosDAO;
+import modelo.Empleados;
+import modelo.EmpleadosDAO;
 import modelo.Juguetes;
 import modelo.JuguetesDAO;
 import modelo.Noticias;
@@ -59,6 +61,11 @@ public class Controlador extends HttpServlet {
     JuguetesDAO jugueteDAO = new JuguetesDAO();
     Juguetes juguete = new Juguetes();
     int codJuguete;
+    
+    Empleados empleado = new Empleados();
+    EmpleadosDAO empleadoDAO = new EmpleadosDAO();
+    int codEmpleadoActualizar;
+            
     UsuariosDAO usuariosDAO = new UsuariosDAO();
     Usuarios usuarios = new Usuarios();
     int codUsuario;
@@ -153,7 +160,7 @@ public class Controlador extends HttpServlet {
                     facturasDAO.eliminar(codFactura);
                     response.sendRedirect("Controlador?menu=Facturas&accion=Listar");
                     break;
-                case "Cargar":
+                case "Editar":
                     codFactura = Integer.parseInt(request.getParameter("id"));
                     Facturas facturaSeleccionada = facturasDAO.listarId(codFactura);
                     request.setAttribute("facturaSeleccionada", facturaSeleccionada);
@@ -210,7 +217,131 @@ public class Controlador extends HttpServlet {
                     request.getRequestDispatcher("factura.jsp").forward(request, response);
                     break;
             }
-        } else if (menu.equals("Noticias")) {
+        } else if ("Empleados".equals(menu)) {
+            try {
+                if (accion == null) {
+                    accion = "Listar";
+                }
+
+                switch (accion) {
+                    case "Listar":
+                        List<Empleados> listaEmpleado = empleadoDAO.listar();
+                        request.setAttribute("empleados", listaEmpleado);
+                        request.getRequestDispatcher("empleados.jsp").forward(request, response);
+                        return;
+
+                    case "Agregar":
+                        String DPI = request.getParameter("txtDPIEmpleado");
+                        String nombre = request.getParameter("txtNombre");
+                        String apellido = request.getParameter("txtApellido");
+                        String direccion = request.getParameter("txtDireccion");
+                        String telefono = request.getParameter("txtTelefono");
+                        String cargo = request.getParameter("txtCargo");
+                        String salarioStr = request.getParameter("txtSalario");
+
+                        double salario = 0.0;
+                        if (salarioStr != null && !salarioStr.isEmpty()) {
+                            try {
+                                salario = Double.parseDouble(salarioStr);
+                            } catch (NumberFormatException e) {
+                                System.out.println("Error al convertir salario: " + e.getMessage());
+                            }
+                        }
+
+                        empleado.setNombreEmpleado(nombre);
+                        empleado.setApellidoEmpleado(apellido);
+                        empleado.setDireccionEmpleado(direccion);
+                        empleado.setTelefonoEmpleado(telefono);
+                        empleado.setCargo(cargo);
+                        empleado.setSalario(salario);
+                        empleado.setDpiEmpleado(DPI);
+
+                        empleadoDAO.agregar(empleado);
+
+                        response.sendRedirect("Controlador?menu=Empleados&accion=Listar");
+                        return;
+
+                    case "Editar":
+                        System.out.println("Entro a editar de Empleado");
+                        int codEmpleadoEditar = Integer.parseInt(request.getParameter("codigoEmpleado"));
+                        Empleados empleadoEditar = empleadoDAO.listarId(codEmpleadoEditar);
+
+                        request.setAttribute("empleado", empleadoEditar);
+                        request.getRequestDispatcher("Controlador?menu=Empleados&accion=Listar").forward(request, response);
+                        return;
+
+                    case "Actualizar":
+                        codEmpleadoActualizar = Integer.parseInt(request.getParameter("txtCodigoEmpleado"));
+                        String nombreActualizar = request.getParameter("txtNombre");
+                        String apellidoActualizar = request.getParameter("txtApellido");
+                        String direccionActualizar = request.getParameter("txtDireccion");
+                        String telefonoActualizar = request.getParameter("txtTelefono");
+                        String cargoActualizar = request.getParameter("txtCargo");
+                        String salarioActualizarStr = request.getParameter("txtSalario");
+                        String DPIActualizar = request.getParameter("txtDPIEmpleado");
+
+                        double salarioActualizar = 0.0;
+                        if (salarioActualizarStr != null && !salarioActualizarStr.isEmpty()) {
+                            try {
+                                salarioActualizar = Double.parseDouble(salarioActualizarStr);
+                            } catch (NumberFormatException e) {
+                                System.out.println("Error al convertir salario: " + e.getMessage());
+                            }
+                        }
+
+                        empleado.setCodigoEmpleado(codEmpleadoActualizar);
+                        empleado.setNombreEmpleado(nombreActualizar);
+                        empleado.setApellidoEmpleado(apellidoActualizar);
+                        empleado.setDireccionEmpleado(direccionActualizar);
+                        empleado.setTelefonoEmpleado(telefonoActualizar);
+                        empleado.setCargo(cargoActualizar);
+                        empleado.setSalario(salarioActualizar);
+                        empleado.setDpiEmpleado(DPIActualizar);
+
+                        empleadoDAO.actualizar(empleado);
+
+                        response.sendRedirect("Controlador?menu=Empleados&accion=Listar");
+                        return;
+
+                    case "Eliminar":
+                        int codEmpleadoEliminar = Integer.parseInt(request.getParameter("codigoEmpleado"));
+                        empleadoDAO.eliminar(codEmpleadoEliminar);
+
+                        response.sendRedirect("Controlador?menu=Empleados&accion=Listar");
+                        return;
+
+                    case "Buscar":
+                        String idBuscar = request.getParameter("txtid");
+                        if (idBuscar != null && !idBuscar.isEmpty()) {
+                            try {
+                                int id = Integer.parseInt(idBuscar);
+                                Empleados empEncontrado = empleadoDAO.listarId(id);
+                                List<Empleados> listaBuscar = new ArrayList<>();
+                                if (empEncontrado != null && empEncontrado.getCodigoEmpleado() != null) {
+                                    listaBuscar.add(empEncontrado);
+                                }
+                                request.setAttribute("empleados", listaBuscar);
+                            } catch (NumberFormatException e) {
+                                request.setAttribute("empleados", empleadoDAO.listar());
+                            }
+                        } else {
+                            request.setAttribute("empleados", empleadoDAO.listar());
+                        }
+
+                        request.getRequestDispatcher("empleados.jsp").forward(request, response);
+                        return;
+
+                    default:
+                        request.setAttribute("empleados", empleadoDAO.listar());
+                        request.getRequestDispatcher("empleados.jsp").forward(request, response);
+                        return;
+                }
+
+            } catch (Exception e) {
+                System.out.println("Error en controlador de Empleados: " + e.getMessage());
+                e.printStackTrace();
+            }
+        }else if (menu.equals("Noticias")) {
             switch (accion) {
                 case "Listar":
                     List<Noticias> listaNoticias = noticiasDAO.listar();
