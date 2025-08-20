@@ -76,11 +76,9 @@
             <section class="users-section container">
                 <h1 class="users-title">Cuentas</h1>
 
-                <!-- Formulario para agregar/editar/actualizar -->
                 <form class="users-form" action="Controlador?menu=Cuentas" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="codigo-cuenta"><strong>Código de Cuenta:</strong></label>
-                        <!-- Este campo se usará para la actualización, y será de solo lectura -->
                         <input type="text" id="codigo-cuenta" name="codigo-cuenta" placeholder="Autogenerado" readonly value="${cuentaSeleccionada.codigoCuenta}" />
                     </div>
 
@@ -96,21 +94,38 @@
 
                     <div class="form-group">
                         <label for="contrasena-cuenta"><strong>Contraseña:</strong></label>
-                        <input type="password" id="contrasena-cuenta" name="contrasena-cuenta" placeholder="Ej. miClave123" required value="${cuentaSeleccionada.contrasenaCuenta}" 
-                            <c:if test="${cuentaSeleccionada != null}">
-                                disabled
-                            </c:if>
-                        />
+                        <c:if test="${cuentaSeleccionada != null}">
+                            <input type="password" id="contrasena-cuenta" name="contrasena-cuenta" 
+                                   value="${cuentaSeleccionada.contrasenaCuenta}" readonly />
+                        </c:if>
+                        <c:if test="${cuentaSeleccionada == null}">
+                            <input type="password" id="contrasena-cuenta" name="contrasena-cuenta" 
+                                   placeholder="Ej. miClave123" required />
+                        </c:if>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="rol-select"><strong>Rol de la cuenta:</strong></label>
+                        <select id="rol-select" name="rol" required>
+                            <option value="" disabled selected>Selecciona un rol</option>
+                            <option value="Cliente" <c:if test="${cuentaSeleccionada.rol eq 'Cliente'}">selected</c:if>>Cliente</option>
+                            <option value="Empleado" <c:if test="${cuentaSeleccionada.rol eq 'Empleado'}">selected</c:if>>Empleado</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="codigo-cliente"><strong>Código de Cliente:</strong></label>
+                        <input type="number" id="codigo-cliente" name="codigo-cliente" placeholder="Solo para Clientes" value="${cuentaSeleccionada.codigoCliente}" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="codigo-empleado"><strong>Código de Empleado:</strong></label>
+                        <input type="number" id="codigo-empleado" name="codigo-empleado" placeholder="Solo para Empleados" value="${cuentaSeleccionada.codigoEmpleado}" />
                     </div>
 
                     <div class="form-group">
                         <label for="foto-cuenta"><strong>Foto de Cuenta: (Máximo de 3MB)</strong></label>
                         <input type="file" id="foto-cuenta" name="foto-cuenta" />
-                    </div>
-
-                    <div class="form-group">
-                        <label for="codigo-usuario"><strong>Código de Usuario:</strong></label>
-                        <input type="number" id="codigo-usuario" name="codigo-usuario" placeholder="Ej. 1" required value="${cuentaSeleccionada.codigoUsuario}" />
                     </div>
 
                     <div class="crud-buttons">
@@ -119,7 +134,6 @@
                     </div>
                 </form>
 
-                <!-- Nuevo contenedor para el formulario de búsqueda, con espacio y estilo -->
                 <div class="search-container">
                     <form class="search-form" action="Controlador" method="GET">
                         <input type="hidden" name="menu" value="Cuentas" />
@@ -130,16 +144,17 @@
                     </form>
                 </div>
 
-                <!-- Tabla de Cuentas -->
                 <div class="table-wrapper">
                     <table class="users-table">
                         <thead>
                             <tr>
                                 <th>Código Cuenta</th>
+                                <th>Rol</th>
                                 <th>Nombre Cuenta</th>
                                 <th>Correo</th>
                                 <th>Foto</th>
-                                <th>Código Usuario</th>
+                                <th>Código Cliente</th>
+                                <th>Código Empleado</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -147,6 +162,7 @@
                             <c:forEach var="cuenta" items="${cuentas}">
                                 <tr>
                                     <td>${cuenta.codigoCuenta}</td>
+                                    <td>${cuenta.rol}</td>
                                     <td>${cuenta.nombreCuenta}</td>
                                     <td>${cuenta.correoCuenta}</td>
                                     <td>
@@ -154,7 +170,8 @@
                                             <img src="CargarImagen?id=${cuenta.codigoCuenta}" alt="Foto de perfil" width="50" height="50"/>
                                         </c:if>
                                     </td>
-                                    <td>${cuenta.codigoUsuario}</td>
+                                    <td>${cuenta.codigoCliente}</td>
+                                    <td>${cuenta.codigoEmpleado}</td>
                                     <td>
                                         <a href="Controlador?menu=Cuentas&accion=Cargar&id=${cuenta.codigoCuenta}" class="btn-crud">Editar</a>
                                         <a href="Controlador?menu=Cuentas&accion=Eliminar&id=${cuenta.codigoCuenta}" class="btn-crud">Eliminar</a>
@@ -266,6 +283,28 @@
                     alert('Informe enviado correctamente ?');
                 });
             });
+            
+            document.addEventListener('DOMContentLoaded', function() {
+            const rolSelect = document.getElementById('rol-select');
+            const codigoClienteInput = document.getElementById('codigo-cliente');
+            const codigoEmpleadoInput = document.getElementById('codigo-empleado');
+
+            function manejarCampos() {
+                if (rolSelect.value === 'Cliente') {
+                    codigoClienteInput.disabled = false;
+                    codigoEmpleadoInput.value = '';
+                    codigoEmpleadoInput.disabled = true;
+                } else if (rolSelect.value === 'Empleado') {
+                    codigoEmpleadoInput.disabled = false;
+                    codigoClienteInput.value = '';
+                    codigoClienteInput.disabled = true;
+                } else {
+                    codigoClienteInput.disabled = false;
+                    codigoEmpleadoInput.disabled = false;
+                }
+            }
+
+            rolSelect.addEventListener('change', manejarCampos);
         </script>
 
     </body>

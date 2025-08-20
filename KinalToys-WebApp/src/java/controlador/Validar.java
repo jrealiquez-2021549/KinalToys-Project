@@ -68,14 +68,33 @@ public class Validar extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String accion = request.getParameter("accion");
         if (accion.equalsIgnoreCase("Ingresar")) {
+            String dpi = request.getParameter("dpi");
             String email = request.getParameter("email");
             String password = request.getParameter("password");
-            cuentas = cuentasDAO.validar(email, password);
-            if (cuentas.getCorreoCuenta() != null) {
+
+            // La línea que podría generar la excepción es la siguiente,
+            // si el método validar del DAO devuelve un objeto nulo.
+            cuentas = cuentasDAO.validar(dpi, email, password);
+
+            // Verificamos si la cuenta existe antes de intentar obtener su rol
+            if (cuentas != null && cuentas.getCorreoCuenta() != null) {
                 HttpSession session = request.getSession();
                 session.setAttribute("cuentas", cuentas);
-                request.getRequestDispatcher("Controlador?menu=Principal").forward(request, response);
+
+                String rol = cuentas.getRol();
+
+                if ("Empleado".equalsIgnoreCase(rol)) {
+                    // Asegúrate de que este archivo exista
+                    request.getRequestDispatcher("principal-admin.jsp").forward(request, response);
+                } else if ("Cliente".equalsIgnoreCase(rol)) {
+                    // Asegúrate de que este archivo exista
+                    request.getRequestDispatcher("principal-usuario.jsp").forward(request, response);
+                } else {
+                    // Si el rol no es reconocido o es nulo, redirigimos al login
+                    request.getRequestDispatcher("index.jsp").forward(request, response);
+                }
             } else {
+                // Si la validación falla (cuentas es nulo o el correo es nulo), volvemos al login
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             }
         } else {
