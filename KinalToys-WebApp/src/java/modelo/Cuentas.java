@@ -1,4 +1,3 @@
-
 package modelo;
 import java.io.Serializable;
 import javax.persistence.Column;
@@ -16,6 +15,9 @@ public class Cuentas implements Serializable {
     @Column(name = "codigoCuenta")
     private int codigoCuenta;
 
+    @Column(name = "rol", columnDefinition = "ENUM('Cliente', 'Empleado')")
+    private String rol;
+
     @Column(name = "nombreCuenta")
     private String nombreCuenta;
 
@@ -28,19 +30,38 @@ public class Cuentas implements Serializable {
     @Column(name = "fotoCuenta")
     private byte[] fotoCuenta;
     
-    @Column(name = "codigoUsuario")
-    private Integer codigoUsuario;
+    @Column(name = "codigoCliente")
+    private Integer codigoCliente;
+    
+    @Column(name = "codigoEmpleado")
+    private Integer codigoEmpleado;
+
+    // Aquí he agregado el campo del DPI para que se pueda manejar desde el modelo
+    @Column(name = "dpiCliente", insertable = false, updatable = false)
+    private String dpiCliente;
+
+    @Column(name = "dpiEmpleado", insertable = false, updatable = false)
+    private String dpiEmpleado;
     
     public Cuentas() {
         
     }
-
+    
+    // Getters y Setters
     public int getCodigoCuenta() {
         return codigoCuenta;
     }
 
     public void setCodigoCuenta(int codigoCuenta) {
         this.codigoCuenta = codigoCuenta;
+    }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
     }
 
     public String getNombreCuenta() {
@@ -75,16 +96,40 @@ public class Cuentas implements Serializable {
         this.fotoCuenta = fotoCuenta;
     }
 
-    public Integer getCodigoUsuario() {
-        return codigoUsuario;
+    public Integer getCodigoCliente() {
+        return codigoCliente;
     }
 
-    public void setCodigoUsuario(Integer codigoUsuario) {
-        this.codigoUsuario = codigoUsuario;
+    public void setCodigoCliente(Integer codigoCliente) {
+        this.codigoCliente = codigoCliente;
     }
 
+    public Integer getCodigoEmpleado() {
+        return codigoEmpleado;
+    }
+
+    public void setCodigoEmpleado(Integer codigoEmpleado) {
+        this.codigoEmpleado = codigoEmpleado;
+    }
+    
+    public String getDpiCliente() {
+        return dpiCliente;
+    }
+
+    public void setDpiCliente(String dpiCliente) {
+        this.dpiCliente = dpiCliente;
+    }
+
+    public String getDpiEmpleado() {
+        return dpiEmpleado;
+    }
+
+    public void setDpiEmpleado(String dpiEmpleado) {
+        this.dpiEmpleado = dpiEmpleado;
+    }
+    
     @Override
     public String toString() {
-        return "Cuentas{" + "codigoCuenta=" + codigoCuenta + ", nombreCuenta=" + nombreCuenta + ", correoCuenta=" + correoCuenta + ", contrasenaCuenta=" + contrasenaCuenta + ", fotoCuenta=" + fotoCuenta + ", codigoUsuario=" + codigoUsuario + '}';
+        return "Cuentas{" + "codigoCuenta=" + codigoCuenta + ", rol=" + rol + ", nombreCuenta=" + nombreCuenta + ", correoCuenta=" + correoCuenta + ", contrasenaCuenta=" + contrasenaCuenta + ", fotoCuenta=" + fotoCuenta + ", codigoCliente=" + codigoCliente + ", codigoEmpleado=" + codigoEmpleado + ", dpiCliente=" + dpiCliente + ", dpiEmpleado=" + dpiEmpleado + '}';
     }
 }

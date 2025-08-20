@@ -510,36 +510,47 @@ public class Controlador extends HttpServlet {
                     request.getRequestDispatcher("cuenta.jsp").forward(request, response);
                     break;
                 case "Agregar":
+                    String rol = request.getParameter("rol"); // Nuevo: Obtener el rol del formulario
                     String nombreCuenta = request.getParameter("nombre-cuenta");
                     String correoCuenta = request.getParameter("correo-cuenta");
                     String contrasenaCuenta = request.getParameter("contrasena-cuenta");
+                    String codigoClienteParam = request.getParameter("codigo-cliente"); // Nuevo: Parámetro para Cliente
+                    String codigoEmpleadoParam = request.getParameter("codigo-empleado"); // Nuevo: Parámetro para Empleado
+                    
+                    Integer codigoCliente = null;
+                    Integer codigoEmpleado = null;
 
+                    // Validar y asignar los códigos según el rol
+                    if ("Cliente".equalsIgnoreCase(rol) && codigoClienteParam != null && !codigoClienteParam.isEmpty()) {
+                        codigoCliente = Integer.parseInt(codigoClienteParam);
+                    } else if ("Empleado".equalsIgnoreCase(rol) && codigoEmpleadoParam != null && !codigoEmpleadoParam.isEmpty()) {
+                        codigoEmpleado = Integer.parseInt(codigoEmpleadoParam);
+                    }
+                    
                     byte[] fotoBytes = null;
                     Part filePart = request.getPart("foto-cuenta");
                     if (filePart != null && filePart.getSize() > 0) {
-                        InputStream fotoCuentaInputStream = filePart.getInputStream();
-                        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-                        int nRead;
-                        byte[] data = new byte[1024];
-                        while ((nRead = fotoCuentaInputStream.read(data, 0, data.length)) != -1) {
-                            buffer.write(data, 0, nRead);
+                        try (InputStream fotoCuentaInputStream = filePart.getInputStream();
+                             ByteArrayOutputStream buffer = new ByteArrayOutputStream()) {
+                            int nRead;
+                            byte[] data = new byte[1024];
+                            while ((nRead = fotoCuentaInputStream.read(data, 0, data.length)) != -1) {
+                                buffer.write(data, 0, nRead);
+                            }
+                            buffer.flush();
+                            fotoBytes = buffer.toByteArray();
                         }
-                        buffer.flush();
-                        fotoBytes = buffer.toByteArray();
-                        fotoCuentaInputStream.close();
-                        buffer.close();
                     }
 
-                    int codigoUsuario = Integer.parseInt(request.getParameter("codigo-usuario"));
-
+                    cuentas.setRol(rol);
                     cuentas.setNombreCuenta(nombreCuenta);
                     cuentas.setCorreoCuenta(correoCuenta);
                     cuentas.setContrasenaCuenta(contrasenaCuenta);
                     cuentas.setFotoCuenta(fotoBytes);
-                    cuentas.setCodigoUsuario(codigoUsuario);
+                    cuentas.setCodigoCliente(codigoCliente);
+                    cuentas.setCodigoEmpleado(codigoEmpleado);
 
                     cuentasDAO.agregar(cuentas);
-
                     response.sendRedirect("Controlador?menu=Cuentas&accion=Listar");
                     break;
                 case "Eliminar":
@@ -557,31 +568,48 @@ public class Controlador extends HttpServlet {
                     codCuenta = Integer.parseInt(request.getParameter("codigo-cuenta"));
                     String nombre = request.getParameter("nombre-cuenta");
                     String correo = request.getParameter("correo-cuenta");
-                    int codigoUser = Integer.parseInt(request.getParameter("codigo-usuario"));
+                    String rolActualizar = request.getParameter("rol");
+                    String codClienteActualizar = request.getParameter("codigo-cliente");
+                    String codEmpleadoActualizar = request.getParameter("codigo-empleado");
 
+                    Integer codigoClienteAct = null;
+                    Integer codigoEmpleadoAct = null;
+                    
+                    if ("Cliente".equalsIgnoreCase(rolActualizar) && codClienteActualizar != null && !codClienteActualizar.isEmpty()) {
+                        codigoClienteAct = Integer.parseInt(codClienteActualizar);
+                    } else if ("Empleado".equalsIgnoreCase(rolActualizar) && codEmpleadoActualizar != null && !codEmpleadoActualizar.isEmpty()) {
+                        codigoEmpleadoAct = Integer.parseInt(codEmpleadoActualizar);
+                    }
+                    
+                    Cuentas cuentaExistente = cuentasDAO.listarId(codCuenta);
+                    String contrasena = cuentaExistente.getContrasenaCuenta();
+                    
                     byte[] fotoActualizar = null;
                     Part fotoPart = request.getPart("foto-cuenta");
                     if (fotoPart != null && fotoPart.getSize() > 0) {
-                        InputStream fotoInputStream = fotoPart.getInputStream();
-                        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-                        int nRead;
-                        byte[] data = new byte[1024];
-                        while ((nRead = fotoInputStream.read(data, 0, data.length)) != -1) {
-                            buffer.write(data, 0, nRead);
+                        try (InputStream fotoInputStream = fotoPart.getInputStream();
+                             ByteArrayOutputStream buffer = new ByteArrayOutputStream()) {
+                            int nRead;
+                            byte[] data = new byte[1024];
+                            while ((nRead = fotoInputStream.read(data, 0, data.length)) != -1) {
+                                buffer.write(data, 0, nRead);
+                            }
+                            buffer.flush();
+                            fotoActualizar = buffer.toByteArray();
                         }
-                        buffer.flush();
-                        fotoActualizar = buffer.toByteArray();
                     } else {
-                        Cuentas cuentaExistente = cuentasDAO.listarId(codCuenta);
                         fotoActualizar = cuentaExistente.getFotoCuenta();
                     }
-
+                    
                     cuentas.setCodigoCuenta(codCuenta);
                     cuentas.setNombreCuenta(nombre);
                     cuentas.setCorreoCuenta(correo);
+                    cuentas.setContrasenaCuenta(contrasena);
+                    cuentas.setRol(rolActualizar);
                     cuentas.setFotoCuenta(fotoActualizar);
-                    cuentas.setCodigoUsuario(codigoUser);
-
+                    cuentas.setCodigoCliente(codigoClienteAct);
+                    cuentas.setCodigoEmpleado(codigoEmpleadoAct);
+                    
                     cuentasDAO.actualizar(cuentas, fotoActualizar);
 
                     response.sendRedirect("Controlador?menu=Cuentas&accion=Listar");

@@ -24,13 +24,21 @@ public class CargarImagen extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("image/jpeg"); // O el tipo de imagen adecuado
+
         int id = Integer.parseInt(request.getParameter("id"));
         CuentasDAO cuentasDAO = new CuentasDAO();
+
         try {
-            Cuentas cuenta = cuentasDAO.listarPorId(id); // Necesitas un nuevo método en tu DAO
-            byte[] foto = cuenta.getFotoCuenta();
-            response.getOutputStream().write(foto);
+            // Usamos el nuevo método para obtener solo la foto
+            byte[] foto = cuentasDAO.listarFotoPorId(id);
+
+            if (foto != null && foto.length > 0) {
+                response.setContentType("image/jpeg"); // O el tipo de imagen adecuado (png, gif, etc.)
+                response.getOutputStream().write(foto);
+            } else {
+                // Manejar el caso de que la foto no exista, por ejemplo, sirviendo una imagen por defecto
+                response.sendError(HttpServletResponse.SC_NOT_FOUND); 
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
