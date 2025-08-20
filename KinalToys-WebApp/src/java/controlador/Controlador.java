@@ -20,6 +20,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashSet;
 import modelo.Carritos;
 import modelo.CarritosDAO;
 import modelo.DetallesCarritos;
@@ -85,35 +86,83 @@ public class Controlador extends HttpServlet {
         if (menu.equals("Principal")) {
             request.getRequestDispatcher("principal-admin.jsp").forward(request, response);
         } else if (menu.equals("Usuarios")) {
-            
-             
+           
             switch (accion) {
                 case "Listar":
                     List<Usuarios> listaUsuarios = usuariosDAO.listar();
-                    request.setAttribute("usuarios", listaUsuarios);
+                    request.setAttribute("Usuarios", listaUsuarios);
                     request.getRequestDispatcher("usuario.jsp").forward(request, response);
                     break;
-
                 case "Agregar":
-                    String nombreUsuario = request.getParameter("nombre-usuario");
-                    String apellidoUsuario = request.getParameter("apellido-usuario");
-                    String direccionUsuario = request.getParameter("direccion-usuario");
-                    String telefonoUsuario = request.getParameter("telefono-usuario");
+                   
+                    String NombreUsuario = request.getParameter("nombre-usuario");
+                    String ApellidoUsuario = request.getParameter("Apellido-usuario");
+                    String DireccionUsuario = request.getParameter("Direccion-usuario");
+                    String TelefonoUsuario = request.getParameter("Telefono-usuario");
 
-                    usuarios.setNombreUsuario(nombreUsuario);
-                    usuarios.setApellidoUsuario(apellidoUsuario);
-                    usuarios.setDireccionUsuario(direccionUsuario);
-                    usuarios.setTelefonoUsuario(telefonoUsuario);
+
+                    usuarios.setNombreUsuario(NombreUsuario);
+                    usuarios.setApellidoUsuario(ApellidoUsuario);
+                    usuarios.setDireccionUsuario(DireccionUsuario);
+                    usuarios.setTelefonoUsuario(TelefonoUsuario);
 
                     usuariosDAO.agregar(usuarios);
 
                     response.sendRedirect("Controlador?menu=Usuarios&accion=Listar");
                     break;
+                case "Eliminar":
+                    codUsuario = Integer.parseInt(request.getParameter("id"));
+                    usuariosDAO.eliminar(codUsuario);
+                    response.sendRedirect("Controlador?menu=Usuarios&accion=Listar");
+                    break;
+                case "Cargar":
+                    codUsuario = Integer.parseInt(request.getParameter("id"));
+                    Usuarios usuarioSeleccionada = usuariosDAO.listarId(codUsuario);
+                    request.setAttribute("usuarioSeleccionada", usuarioSeleccionada);
+                    request.getRequestDispatcher("Controlador?menu=Usuarios&accion=Listar").forward(request, response);
+                    break;
+                case "Actualizar":
+                    codUsuario = Integer.parseInt(request.getParameter("codigo-usuario"));
+                    String nombreActualizar = request.getParameter("nombre-usuario");
+                    String apellidoActualizar = request.getParameter("apellido-usuario");
+                    String direccionActualizar = request.getParameter("direccion-usuario");
+                    String numeroActualizar = request.getParameter("telefono-usuario");
+                   
+                    usuarios.setCodigoUsuario(codUsuario);
+                    usuarios.setNombreUsuario(nombreActualizar);
+                    usuarios.setApellidoUsuario(apellidoActualizar);
+                    usuarios.setDireccionUsuario(direccionActualizar);
+                    usuarios.setTelefonoUsuario(numeroActualizar);
 
+
+                    usuariosDAO.actualizar(usuarios);
+
+                    response.sendRedirect("Controlador?menu=Usuarios&accion=Listar");
+                    break;
+                case "Buscar":
+                    String idParam = request.getParameter("id");
+                    if (idParam != null && !idParam.isEmpty()) {
+                        try {
+                            int idBuscar = Integer.parseInt(idParam);
+                            Usuarios usuarioEncontrada = usuariosDAO.listarId(idBuscar);
+                            List<Usuarios> listaEncontrada = new ArrayList<>();
+                            if (usuarioEncontrada != null && usuarioEncontrada.getCodigoUsuario() != null) {
+                                listaEncontrada.add(usuarioEncontrada);
+                            }
+                            request.setAttribute("Usuarios", listaEncontrada);
+                        } catch (NumberFormatException e) {
+                            request.setAttribute("Usuarios", usuariosDAO.listar());
+                        }
+                    } else {
+                        request.setAttribute("Usuarios", usuariosDAO.listar());
+                    }
+                    request.getRequestDispatcher("usuario.jsp").forward(request, response);
+                    break;
                 default:
                     List<Usuarios> lista = usuariosDAO.listar();
                     request.setAttribute("usuarios", lista);
                     request.getRequestDispatcher("usuario.jsp").forward(request, response);
+                    break;
             }
             request.getRequestDispatcher("usuario.jsp").forward(request, response);
         } else if (menu.equals("Facturas")) {
@@ -166,7 +215,6 @@ public class Controlador extends HttpServlet {
                     String totalActualizarStr = request.getParameter("total");
                     int codigoUserActualizar = Integer.parseInt(request.getParameter("codigo-usuario"));
 
-                    // Convertir fecha de String a LocalDateTime
                     LocalDateTime fechaActualizar = LocalDateTime.parse(fechaActualizarStr + "T00:00:00");
 
                     // Convertir String a enum MetodoPago
@@ -255,6 +303,7 @@ public class Controlador extends HttpServlet {
                         e.printStackTrace();
                     }
                     break;
+
                 case "Agregar":
                     String nombreProv = request.getParameter("nombre-proveedor");
                     String telefonoProv = request.getParameter("telefono-proveedor");
@@ -267,27 +316,100 @@ public class Controlador extends HttpServlet {
                     proveedores.setCorreoProveedor(correoProv);
                     proveedores.setDireccionProveedor(direccionProv);
 
-                    proveedoresDAO.agregar(proveedores);
+                    int resultadoAgregar = proveedoresDAO.agregar(proveedores);
+                    if (resultadoAgregar > 0) {
+                        request.setAttribute("mensaje", "Proveedor agregado exitosamente");
+                    } else {
+                        request.setAttribute("error", "Error al agregar el proveedor");
+                    }
                     response.sendRedirect("Controlador?menu=Proveedores&accion=Listar");
                     break;
 
                 case "Editar":
-                    System.out.println("LIST");
+                    String codigoEditarParam = request.getParameter("codigoProveedor");
+                    if (codigoEditarParam == null || codigoEditarParam.trim().isEmpty()) {
+                        System.out.println("ERROR: codigoProveedor para editar es null o vacío");
+                        response.sendRedirect("Controlador?menu=Proveedores&accion=Listar");
+                        return;
+                    }
+
+                    codProveedores = Integer.parseInt(codigoEditarParam);
+                    System.out.println("DEBUG - Editando proveedor ID: " + codProveedores);
+
+                    Proveedores p = proveedoresDAO.listarCodigoProveedor(codProveedores);
+                    if (p == null) {
+                        System.out.println("ERROR: No se encontró proveedor con ID: " + codProveedores);
+                        response.sendRedirect("Controlador?menu=Proveedores&accion=Listar");
+                        return;
+                    }
+
+                    List<Proveedores> listaProveedores = proveedoresDAO.listar();
+
+                    request.setAttribute("proveedorSeleccionado", p);
+                    request.setAttribute("proveedores", listaProveedores);
+                    request.getRequestDispatcher("/proveedor.jsp").forward(request, response);
                     break;
+
                 case "Actualizar":
-                    System.out.println("LIST");
+                    codProveedores = Integer.parseInt(request.getParameter("codigoProveedor"));
+                    String nombreActualizar = request.getParameter("nombre-proveedor");
+                    String telefonoActualizar = request.getParameter("telefono-proveedor");
+                    String correoActualizar = request.getParameter("correo-proveedor");
+                    String direccionActualizar = request.getParameter("direccion-proveedor");
+
+                    Proveedores proveedorActualizar = new Proveedores();
+                    proveedorActualizar.setCodigoProveedor(codProveedores);
+                    proveedorActualizar.setNombreProveedor(nombreActualizar);
+                    proveedorActualizar.setTelefonoProveedor(telefonoActualizar);
+                    proveedorActualizar.setCorreoProveedor(correoActualizar);
+                    proveedorActualizar.setDireccionProveedor(direccionActualizar);
+
+                    int resultadoActualizar = proveedoresDAO.actualizar(proveedorActualizar);
+                    if (resultadoActualizar > 0) {
+                        request.setAttribute("mensaje", "Proveedor actualizado exitosamente");
+                    } else {
+                        request.setAttribute("error", "Error al actualizar el proveedor");
+                    }
+                    response.sendRedirect("Controlador?menu=Proveedores&accion=Listar");
                     break;
+
                 case "Eliminar":
-                    System.out.println("LIST");
+                    codProveedores = Integer.parseInt(request.getParameter("codigoProveedor"));
+                    int resultadoEliminar = proveedoresDAO.eliminar(codProveedores);
+                    if (resultadoEliminar > 0) {
+                        request.setAttribute("mensaje", "Proveedor eliminado exitosamente");
+                    } else {
+                        request.setAttribute("error", "Error al eliminar el proveedor");
+                    }
+                    response.sendRedirect("Controlador?menu=Proveedores&accion=Listar");
                     break;
-                case "Cargar":
-                    System.out.println("LIST");
+
+               case "Buscar":
+                    String idParam = request.getParameter("id");
+                    if (idParam != null && !idParam.isEmpty()) {
+                        try {
+                            int idBuscar = Integer.parseInt(idParam);
+                            Proveedores proveedorEncontrado = proveedoresDAO.listarCodigoProveedor(idBuscar);
+                            List<Proveedores> listaEncontrada = new ArrayList<>();
+                            if (proveedorEncontrado != null && proveedorEncontrado.getCodigoProveedor() != 0) {
+                                listaEncontrada.add(proveedorEncontrado);
+                            }
+                            request.setAttribute("proveedores", listaEncontrada);
+                        } catch (NumberFormatException e) {
+                            request.setAttribute("proveedores", proveedoresDAO.listar());
+                        }
+                    } else {
+                        request.setAttribute("proveedores", proveedoresDAO.listar());
+                    }
+                    request.getRequestDispatcher("proveedor.jsp").forward(request, response);
                     break;
-                case "Buscar":
-                    System.out.println("LIST");
-                    break;
+
+
                 default:
+                    response.sendRedirect("Controlador?menu=Proveedores&accion=Listar");
+                    break;
             }
+
         } else if (menu.equals("Juguetes")) {
 
             switch (accion) {
