@@ -370,13 +370,59 @@ public class Controlador extends HttpServlet {
 
                     break;
                 case "Editar":
-                    System.out.println("LIST");
-                    break;
+                    int idEditar = Integer.parseInt(request.getParameter("codigoJuguete"));
+                    Juguetes jugueteSeleccionado = jugueteDAO.listarId(idEditar);
+                    request.setAttribute("jugueteSeleccionado", jugueteSeleccionado);
+                    List<Juguetes> listaJuguetesEditar = jugueteDAO.listarJu();
+                    request.setAttribute("juguetes", listaJuguetesEditar);
+                    request.getRequestDispatcher("juguete.jsp").forward(request, response);
+                    return;
+
                 case "Actualizar":
-                    System.out.println("LIST");
+                    codJuguete = Integer.parseInt(request.getParameter("codigoJuguete"));
+                    String nombreju = request.getParameter("nombre-juguete");
+                    String precioju = request.getParameter("precio-juguete");
+                    String categoriaju = request.getParameter("categoria-juguete");
+                    String marcaju = request.getParameter("marca-juguete");
+                    int stockju = Integer.parseInt(request.getParameter("stock-juguete"));
+                    int codigonoticiaju = Integer.parseInt(request.getParameter("codigo-noticia"));
+                    Juguetes juguete = new Juguetes();
+                    juguete.setCodigoJuguete(codJuguete);
+                    juguete.setNombreJuguete(nombreju);
+                    juguete.setPrecio(new BigDecimal(precioju));
+                    juguete.setCategoria(categoriaju);
+                    juguete.setMarca(marcaju);
+                    juguete.setStock(stockju);
+                    juguete.setCodigoNoticia(codigonoticiaju);
+                    jugueteDAO.actualizar(juguete);
+
+                    request.getSession().setAttribute("mensaje", "Se actualizó correctamente");
+                    request.getRequestDispatcher("Controlador?menu=Juguetes&accion=Listar").forward(request, response);
                     break;
                 case "Eliminar":
-                    System.out.println("LIST");
+                    codJuguete = Integer.parseInt(request.getParameter("codigoJuguete"));
+                    jugueteDAO.eliminar(codJuguete);
+                    request.getRequestDispatcher("Controlador?menu=Juguetes&accion=Listar").forward(request, response);
+                    break;
+
+                case "Buscar":
+                    String idParam = request.getParameter("id");
+                    if (idParam != null && !idParam.isEmpty()) {
+                        try {
+                            int idBuscar = Integer.parseInt(idParam);
+                            Juguetes jugueteEncontrada = jugueteDAO.listarId(idBuscar);
+                            List<Juguetes> listaEncontrada = new ArrayList<>();
+                            if (jugueteEncontrada != null && jugueteEncontrada.getCodigoJuguete() != null) {
+                                listaEncontrada.add(jugueteEncontrada);
+                            }
+                            request.setAttribute("juguetes", listaEncontrada);
+                        } catch (NumberFormatException e) {
+                            request.setAttribute("juguetes", jugueteDAO.listarJu());
+                        }
+                    } else {
+                        request.setAttribute("juguetes", jugueteDAO.listarJu());
+                    }
+                    request.getRequestDispatcher("juguete.jsp").forward(request, response);
                     break;
                 default:
 
@@ -557,7 +603,7 @@ public class Controlador extends HttpServlet {
                 switch (accion) {
                     case "Listar":
                         try {
-                            
+
                             List<DetallesCarritos> listaDetalles = detallesCarritosDAO.listar();
                             request.setAttribute("detallesCarritos", listaDetalles);
                             request.getRequestDispatcher("/detalles-carritos.jsp").forward(request, response);
@@ -596,7 +642,7 @@ public class Controlador extends HttpServlet {
                         DetallesCarritos dc = detallesCarritosDAO.listaCodigoDetallesCarritos(codDetalles);
                         System.out.println(codDetalles);
                         request.setAttribute("detalle", dc);
-                        request.getRequestDispatcher("Controlador?menu=DetallesCarritos&accion=Listar").forward(request,response);
+                        request.getRequestDispatcher("Controlador?menu=DetallesCarritos&accion=Listar").forward(request, response);
                         break;
 
                     case "Actualizar":
@@ -629,12 +675,12 @@ public class Controlador extends HttpServlet {
 
                     case "Eliminar":
                         System.out.println("entro en eliminar");
-                        codDetalles = Integer.parseInt(request.getParameter("codigoDetalle")); 
+                        codDetalles = Integer.parseInt(request.getParameter("codigoDetalle"));
                         System.out.println("Código a eliminar: " + codDetalles);
                         detallesCarritosDAO.eliminar(codDetalles);
                         response.sendRedirect("Controlador?menu=DetallesCarritos&accion=Listar");
                         break;
-                    
+
                     case "Buscar":
                         String idS = request.getParameter("txtid");
                         if (idS != null && !idS.isEmpty()) {
