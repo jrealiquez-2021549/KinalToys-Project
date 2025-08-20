@@ -220,9 +220,12 @@ Delimiter $$
 create procedure sp_EliminarEmpleado (
     in codEmpleado int)
 begin
-    delete from Empleados where e.codigoEmpleado = codEmpleado;
+    delete from Empleados e where e.codigoEmpleado = codEmpleado;
 end$$
 Delimiter ;
+
+
+
 
 -- BUSCAR EMPLEADO
 Delimiter $$
@@ -234,6 +237,25 @@ end$$
 Delimiter ;
 call sp_BuscarEmpleado(1);
 
+-- buscar empleado por medio de codigo
+Delimiter $$
+create procedure sp_ListarEmpleadoPorCodigo(in codEmpleado int)
+begin
+    select 
+        codigoEmpleado,
+        nombreEmpleado,
+        apellidoEmpleado,
+        direccionEmpleado,
+        telefonoEmpleado,
+        cargo,
+        salario,
+        dpiEmpleado
+    from Empleados
+    where codigoEmpleado = codEmpleado;
+end $$
+Delimiter ;
+call sp_ListarEmpleadoPorCodigo(1);
+
 -- EDITAR EMPLEADO
 Delimiter $$
 create procedure sp_EditarEmpleado (
@@ -243,7 +265,8 @@ create procedure sp_EditarEmpleado (
     in direccion varchar(100),
     in telefono varchar(9),
     in cargo varchar(50),
-    in salario decimal(10,2))
+    in salario decimal(10,2),
+    in dpi varchar(15))
 begin
     update Empleados e
     set e.nombreEmpleado = nombre, 
@@ -251,7 +274,8 @@ begin
         e.direccionEmpleado = direccion, 
         e.telefonoEmpleado = telefono,
         e.cargo = cargo,
-        e.salario = salario
+        e.salario = salario,
+        e.dpiEmpleado = dpi
     where e.codigoEmpleado = codEmpleado;
 end$$
 Delimiter ;
@@ -524,6 +548,7 @@ end$$
 Delimiter ;
 call sp_AgregarCuenta('Aquino', 'jaquino@gmail.com', '123', load_file('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/perfil.jpg'), 1, NULL, 'Cliente');
 call sp_AgregarCuenta('Caelia', 'caelia@gmail.com', 'admin', load_file('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/perfil2.png'), NULL, 1, 'Empleado');
+call sp_AgregarCuenta('leo', 'cujcuj@gmail.com', '1', load_file('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/perfil2.png'), NULL, 1, 'Empleado');
 
 -- LISTAR CUENTAS
 Delimiter $$

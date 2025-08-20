@@ -1,17 +1,23 @@
+<%-- 
+    Document   : empleado
+    Created on : 12/08/2025, 18:10:53
+    Author     : edvin
+--%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Kinal Toy's (Men˙ Principal)</title>
-        <!-- Icons -->
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Empleados</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <!-- Icono -->
-        <link rel="icon" href="img/kinal toys.png">
-        <!-- CSS -->
+        <link rel="stylesheet" href="css/detalle-carrito.css">
         <link rel="stylesheet" href="css/principal.css">
         <link rel="stylesheet" href="css/crud.css">
+        <link rel="icon" href="img/kinal toys.png">
         <link rel="stylesheet" href="css/administrador.css">
+        
     </head>
     <body>
         <header>
@@ -57,7 +63,7 @@
                         <li><a href="Controlador?menu=Proveedores&accion=Listar">Proveedores</a></li>
                         <li><a href="Controlador?menu=Juguetes&accion=Listar">Juguetes</a></li>
                         <li><a href="Controlador?menu=Cuentas&accion=Listar">Cuentas</a></li>
-                        <li><a href="Controlador?menu=Empleados&accion=Listar">Emplados</a></li>
+                        <li><a href="Controlador?menu=Empleados&accion=Listar">Empleados</a></li>
                         <li><a href="Controlador?menu=Carritos&accion=Listar">Carritos</a></li>
                         <li><a href="Controlador?menu=DetallesCarritos&accion=Listar">Detalles Carritos</a></li>
                     </ul>
@@ -72,108 +78,101 @@
             </div>
         </header>
 
-        <main class="main-content">
-            <section class="container container-dashboard">
-                <!-- LADO IZQUIERDO: Lista de tareas -->
-                <div class="dashboard-left">
-                    <h2 class="heading-1">Lista de Tareas a Realizar</h2>
+        <main class="main-users">
+            <section class="users-section container">
+                <h1 class="users-title">Empleados</h1>
+               
+                <!-- Formulario para agregar/editar empleado -->
+                <form action="Controlador?menu=Empleados" method="POST" class="formulario-detalle">
+                     <input type="hidden" name="txtCodigoEmpleado" value="${empleado.codigoEmpleado}" />
+                    <div class="form-row">
+                        
 
-                    <form id="task-form" class="task-form">
-                        <ul class="task-list">
-                            <li>
-                                <label>
-                                    <input type="checkbox" class="task-checkbox" />
-                                    Registrar nuevo usuario
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="checkbox" class="task-checkbox" />
-                                    Revisar facturas pendientes
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="checkbox" class="task-checkbox" />
-                                    Publicar nueva noticia
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="checkbox" class="task-checkbox" />
-                                    Actualizar stock de juguetes
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="checkbox" class="task-checkbox" />
-                                    Revisar cuentas de usuarios
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="checkbox" class="task-checkbox" />
-                                    Agregar proveedor nuevo
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="checkbox" class="task-checkbox" />
-                                    Revisar carritos activos
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="checkbox" class="task-checkbox" />
-                                    Detallar compras recientes
-                                </label>
-                            </li>
-                        </ul>
+                        <label>Nombre:
+                            <input type="text" name="txtNombre" value="${empleado.nombreEmpleado}" placeholder="Ej. Leonel" required>
+                        </label>
+                        <label>Apellido:
+                            <input type="text" name="txtApellido" value="${empleado.apellidoEmpleado}" placeholder="Ej. P√©rez" required>
+                        </label>
+                    </div>
 
-                        <div class="task-summary">
-                            <p><strong>Tareas Completadas:</strong> <span id="completed-count">0</span> / 8</p>
+                    <div class="form-row">
+                        <label>Direcci√≥n:
+                            <input type="text" name="txtDireccion" value="${empleado.direccionEmpleado}" placeholder="Ej. Zona 1, Ciudad" required>
+                        </label>
+                        <label>Tel√©fono:
+                            <input type="tel" name="txtTelefono" value="${empleado.telefonoEmpleado}" placeholder="Ej. 123456789" pattern="[0-9]{8,15}" required>
+                        </label>
+                        
+                    </div>
+                    
+                    <div class="form-row">
+                        <label>Cargo:
+                            <input type="text" name="txtCargo" value="${empleado.cargo}" placeholder="Ej. Gerente" required>
+                        </label>
+                        <label>Salario:
+                            <input type="number" step="0.01" name="txtSalario" value="${empleado.salario}" placeholder="Ej. 5999.99" required>
+                        </label>
+                    </div>
+                        
+
+                    <div class="form-row">
+                        <label>DPI:
+                            <input type="number" name="txtDPIEmpleado" value="${empleado.dpiEmpleado}" placeholder="Ej. 1234567890101" required>
+                        </label>
+                    </div>
+
+                    <div class="crud-buttons">
+                        <button class="btn-crud" type="submit" name="accion" value="Agregar">Agregar</button>
+                        <button class="btn-crud" type="submit" name="accion" value="Actualizar">Actualizar</button>
+                    </div>
+                </form>
+
+                <div class="search-container">
+                    <form class="search-form" action="Controlador" method="GET">
+                        <input type="hidden" name="menu" value="Empleados" />
+                        <div class="search-buttons">
+                            <button class="btn-crud" type="submit" name="accion" value="Buscar">Buscar</button>
+                            <input type="text" class="input-search" placeholder="Buscar por ID..." name="txtid" />
                         </div>
-
-                        <button type="submit" class="btn-submit-report">Enviar Informe</button>
                     </form>
                 </div>
 
-                <!-- LADO DERECHO: Botones como categorÌas -->
-                <div class="dashboard-right">
-                    <div class="container-cruds">
-                        <div class="card-category usuarios-bg">
-                            <p>Usuarios</p>
-                            <a href="Controlador?menu=Usuarios"><span>Ingresar</span></a>
-                        </div>
-                        <div class="card-category facturas-bg">
-                            <p>Facturas</p>
-                            <a href="Controlador?menu=Facturas&accion=Listar"><span>Ingresar</span></a>
-                        </div>
-                        <div class="card-category noticias-bg">
-                            <p>Noticias</p>
-                            <a href="Controlador?menu=Noticias"><span>Ingresar</span></a>
-                        </div>
-                        <div class="card-category proveedores-bg">
-                            <p>Proveedores</p>
-                            <a href="Controlador?menu=Proveedores"><span>Ingresar</span></a>
-                        </div>
-                        <div class="card-category juguetes-bg">
-                            <p>Juguetes</p>
-                            <a href="Controlador?menu=Juguetes&accion=Listar"><span>Ingresar</span></a>
-                        </div>
-                        <div class="card-category cuentas-bg">
-                            <p>Cuentas</p>
-                            <a href="Controlador?menu=Cuentas&accion=Listar"><span>Ingresar</span></a>
-                        </div>
-                        <div class="card-category carritos-bg">
-                            <p>Carritos</p>
-                            <a href="Controlador?menu=Carritos&accion=Listar""><span>Ingresar</span></a>
-                        </div>
-                        <div class="card-category detalles-bg">
-                            <p>Detalles Carritos</p>
-                            <a href="Controlador?menu=DetallesCarritos&accion=Listar"><span>Ingresar</span></a>
-                        </div>
-                    </div>
+                <!-- Tabla de empleados -->
+                <div class="table-wrapper">
+                    <table class="users-table">
+                        <thead>
+                            <tr>
+                                <th>C√≥digo Empleado</th>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Direcci√≥n</th>
+                                <th>Tel√©fono</th>
+                                <th>Cargo</th>
+                                <th>Salario</th>
+                                <th>DPI</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:forEach var="emp" items="${empleados}">
+                                <tr>
+                                    <td>${emp.codigoEmpleado}</td>
+                                    <td>${emp.nombreEmpleado}</td>
+                                    <td>${emp.apellidoEmpleado}</td>
+                                    <td>${emp.direccionEmpleado}</td>
+                                    <td>${emp.telefonoEmpleado}</td>
+                                    <td>${emp.cargo}</td>
+                                    <td>${emp.salario}</td>
+                                    <td>${emp.dpiEmpleado}</td>
+                                    <td>
+                                        <a class="btn-crud" href="Controlador?menu=Empleados&accion=Editar&codigoEmpleado=${emp.codigoEmpleado}">Editar</a>
+                                        <a class="btn-crud" href="Controlador?menu=Empleados&accion=Eliminar&codigoEmpleado=${emp.codigoEmpleado}">Eliminar</a>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
                 </div>
             </section>
         </main>
@@ -182,13 +181,13 @@
             <div class="container container-footer">
                 <div class="menu-footer">
                     <div class="contact-info">
-                        <p class="title-footer">InformaciÛn de Contacto</p>
+                        <p class="title-footer">Informaci√≥n de Contacto</p>
                         <ul>
                             <li>
-                                DirecciÛn: 71 Pennington Lane Vernon Rockville, CT
+                                Direcci√≥n: 71 Pennington Lane Vernon Rockville, CT
                                 06066
                             </li>
-                            <li>TelÈfono: 123-456-7890</li>
+                            <li>Tel√©fono: 123-456-7890</li>
                             <li>Fax: 55555300</li>
                             <li>EmaiL: baristas@support.com</li>
                         </ul>
@@ -210,54 +209,53 @@
                             </span>
                         </div>
                     </div>
-
+ 
                     <div class="information">
-                        <p class="title-footer">InformaciÛn</p>
+                        <p class="title-footer">Informaci√≥n</p>
                         <ul>
                             <li><a href="#">Acerca de Nosotros</a></li>
-                            <li><a href="#">InformaciÛn Delivery</a></li>
+                            <li><a href="#">Informaci√≥n Delivery</a></li>
                             <li><a href="#">Politicas de Privacidad</a></li>
-                            <li><a href="#">TÈrminos y condiciones</a></li>
-                            <li><a href="#">Contact·nos</a></li>
+                            <li><a href="#">T√©rminos y condiciones</a></li>
+                            <li><a href="#">Contact√°nos</a></li>
                         </ul>
                     </div>
-
+ 
                     <div class="my-account">
                         <p class="title-footer">Mi cuenta</p>
-
+ 
                         <ul>
                             <li><a href="cuenta-admin.jsp">Mi cuenta</a></li>
                             <li><a href="#">Historial de ordenes</a></li>
                             <li><a href="#">Lista de deseos</a></li>
-                            <li><a href="#">BoletÌn</a></li>
+                            <li><a href="#">Bolet√≠n</a></li>
                             <li><a href="#">Reembolsos</a></li>
                         </ul>
                     </div>
-
+ 
                     <div class="newsletter">
-                        <p class="title-footer">BoletÌn informativo</p>
-
+                        <p class="title-footer">Bolet√≠n informativo</p>
+ 
                         <div class="content">
                             <p>
-                                SuscrÌbete a nuestros boletines ahora y mantente al
-                                dÌa con nuevas colecciones y ofertas exclusivas.
+                                Suscr√≠bete a nuestros boletines ahora y mantente al
+                                d√≠a con nuevas colecciones y ofertas exclusivas.
                             </p>
-                            <input type="email" placeholder="Ingresa el correo aquÌ...">
-                            <button>SuscrÌbete</button>
+                            <input type="email" placeholder="Ingresa el correo aqu√≠...">
+                            <button>Suscr√≠bese</button>
                         </div>
                     </div>
                 </div>
-
+ 
                 <div class="copyright">
                     <p>
                         Kinal Toy's &copy; 2025
                     </p>
-
+ 
                     <img src="img/payment.png" alt="Pagos">
                 </div>
             </div>
         </footer>
-
         <script>
             document.addEventListener('DOMContentLoaded', () => {
                 const checkboxes = document.querySelectorAll('.task-checkbox');
@@ -279,4 +277,4 @@
             });
         </script>
     </body>
-</html>
+</html> 
