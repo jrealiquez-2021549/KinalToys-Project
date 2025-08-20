@@ -74,89 +74,101 @@
             <section class="users-section container">
                 <h1 class="users-title">Juguetes</h1>
 
-                <form id="form-juguete" action="Controlador" method="POST" class="users-form">
+                <form action="Controlador" method="POST" class="users-form">
                     <input type="hidden" name="menu" value="Juguetes"/>
+                    <input type="hidden" name="codigoJuguete" value="${jugueteSeleccionado.codigoJuguete}"/>
 
-                    <form class="users-form">
-                        <div class="form-group">
-                            <label for="nombre-juguete"><strong>Nombre Juguete:</strong></label>
-                            <input type="text" id="nombre-juguete" name="nombre-juguete" placeholder="Ej. Carrito Hot Wheels" required />
+                    <div class="form-group">
+                        <label for="nombre-juguete"><strong>Nombre Juguete:</strong></label>
+                        <input type="text" id="nombre-juguete" name="nombre-juguete" placeholder="Ej. Carrito Hot Wheels" 
+                               value="${jugueteSeleccionado.nombreJuguete}" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="precio-juguete"><strong>Precio:</strong></label>
+                        <input type="number" step="0.01" id="precio-juguete" name="precio-juguete" placeholder="Ej. 199.99" 
+                               value="${jugueteSeleccionado.precio}" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="categoria-juguete"><strong>Categoría:</strong></label>
+                        <input type="text" id="categoria-juguete" name="categoria-juguete" placeholder="Ej. Vehículos" 
+                               value="${jugueteSeleccionado.categoria}" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="marca-juguete"><strong>Marca:</strong></label>
+                        <input type="text" id="marca-juguete" name="marca-juguete" placeholder="Ej. Mafex" 
+                               value="${jugueteSeleccionado.marca}" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="stock-juguete"><strong>Stock:</strong></label>
+                        <input type="number" id="stock-juguete" name="stock-juguete" placeholder="Ej. 50" 
+                               value="${jugueteSeleccionado.stock}" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="codigo-noticia"><strong>Código Noticia:</strong></label>
+                        <input type="number" id="codigo-noticia" name="codigo-noticia" placeholder="Ej. 1" 
+                               value="${jugueteSeleccionado.codigoNoticia}" required />
+                    </div>
+
+                    <div class="crud-buttons">
+                        <button type="submit" name="accion" value="Agregar" class="btn-crud">Agregar</button>
+                        <button type="submit" name="accion" value="Actualizar" class="btn-crud">Actualizar</button>
+                    </div>
+                </form>
+
+                <div class="search-container">
+                    <form class="search-form" action="Controlador" method="POST">
+                        <input type="hidden" name="menu" value="Juguetes" />
+                        <div class="search-buttons">
+                            <button class="btn-crud" name="accion" value="Buscar">Buscar</button>
+                            <input type="text" class="input-search" placeholder="Buscar por ID..." name="id" />
                         </div>
-
-                        <div class="form-group">
-                            <label for="precio-juguete"><strong>Precio:</strong></label>
-                            <input type="number" step="0.01" id="precio-juguete" name="precio-juguete" placeholder="Ej. 199.99" required />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="categoria-juguete"><strong>Categoría:</strong></label>
-                            <input type="text" id="categoria-juguete" name="categoria-juguete" placeholder="Ej. Vehículos" required />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="marca-juguete"><strong>Marca:</strong></label>
-                            <input type="text" id="marca-juguete" name="marca-juguete" placeholder="Ej. Mafex" required />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="stock-juguete"><strong>Stock:</strong></label>
-                            <input type="number" id="stock-juguete" name="stock-juguete" placeholder="Ej. 50" required />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="codigo-noticia"><strong>Código Noticia:</strong></label>
-                            <input type="number" id="codigo-noticia" name="codigo-noticia" placeholder="Ej. 1" required />
-                        </div>
-
-                        <div class="crud-buttons">
-                            <button type="submit" form="form-juguete" name="accion" value="Agregar" class="btn-crud">Agregar</button>
-                            <button type="submit" form="form-juguete" name="accion" value="Actualizar" class="btn-crud">Actualizar</button>
-                        </div>
-
                     </form>
+                </div>
 
-                    <div class="table-wrapper">
-                        <table class="users-table">
-                            <thead>
+                <div class="table-wrapper">
+                    <table class="users-table">
+                        <thead>
+                            <tr>
+                                <th>Código Juguete</th>
+                                <th>Nombre</th>
+                                <th>Precio</th>
+                                <th>Categoría</th>
+                                <th>Marca</th>
+                                <th>Stock</th>
+                                <th>Código Noticia</th>
+                                <th>Acciones</th>
+
+                            </tr>
+                        </thead>
+                        <tbody id="detalle-juguete">
+
+                            <c:forEach var ="juguete" items="${juguetes}">
+
                                 <tr>
-                                    <th>Código Juguete</th>
-                                    <th>Nombre</th>
-                                    <th>Precio</th>
-                                    <th>Categoría</th>
-                                    <th>Marca</th>
-                                    <th>Stock</th>
-                                    <th>Código Noticia</th>
-                                    <th>Acciones</th>
+                                    <td>${juguete.getCodigoJuguete()}</td>
+                                    <td>${juguete.getNombreJuguete()}</td>
+                                    <td>${juguete.getPrecio()}</td>
+                                    <td>${juguete.getCategoria()}</td>
+                                    <td>${juguete.getMarca()}</td>
+                                    <td>${juguete.getStock()}</td>
+                                    <td>${juguete.getCodigoNoticia()}</td>
 
+                                    <td>                                       
+                                        <a href="Controlador?menu=Juguetes&accion=Editar&codigoJuguete=${juguete.getCodigoJuguete()}" class="btn-crud">Editar</a>                                            
+                                        <a href="Controlador?menu=Juguetes&accion=Eliminar&codigoJuguete=${juguete.getCodigoJuguete()}" class="btn-crud">Eliminar</a>                                            
                                 </tr>
-                            </thead>
-                            <tbody id="detalle-juguete">
-
-                                <c:forEach var ="juguete" items="${juguetes}">
-
-                                    <tr>
-                                        <td>${juguete.getCodigoJuguete()}</td>
-                                        <td>${juguete.getNombreJuguete()}</td>
-                                        <td>${juguete.getPrecio()}</td>
-                                        <td>${juguete.getCategoria()}</td>
-                                        <td>${juguete.getMarca()}</td>
-                                        <td>${juguete.getStock()}</td>
-                                        <td>${juguete.getCodigoNoticia()}</td>
-
-                                        <td>                                       
-
-                                            <button type="submit" form="form-carrito" name="accion" value="Eliminar" class="btn-crud">Eliminar</button>
-                                            <button type="submit" form="form-carrito" name="accion" value="Actualizar" class="btn-crud">Actualizar</button>
-
-                                        </td>
-                                    </tr>
-                                </c:forEach>
-                            </tbody>
-                        </table>
-                    </div>
+                            </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
 
 
-                    </div>
+                </div>
             </section>
         </main> 
 
