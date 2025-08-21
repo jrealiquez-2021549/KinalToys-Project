@@ -707,6 +707,24 @@ end$$
 Delimiter ;
 call sp_EditarCarrito(1, '2023-06-20 09:30:00', 'Comprado', 320.00, 1);
 
+-- Para el boton de editar
+Delimiter $$
+create procedure sp_listarCodigoCarrito(
+    in p_codigoCarrito int
+)
+Begin
+    select 
+        codigoCarrito,
+        fechaCreacion,
+        estado,
+        total,
+        codigoCliente
+    from Carritos
+    where codigoCarrito = p_codigoCarrito;
+end$$
+Delimiter ;
+call sp_listarCodigoCarrito(1);
+
 -- PROCEDIMIENTOS ALMACENADOS (DETALLESCARRITOS) -------------------------
 -- AGREGAR DETALLE CARRITO
 Delimiter $$

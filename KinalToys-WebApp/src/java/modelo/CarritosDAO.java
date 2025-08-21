@@ -35,7 +35,7 @@ public class CarritosDAO {
                 cr.setFechaCreacion(rs.getTimestamp(2).toLocalDateTime());
                 cr.setEstado(rs.getString(3));
                 cr.setTotal(rs.getDouble(4));
-                cr.setCodigoUsuario(rs.getInt(5));
+                cr.setCodigoCliente(rs.getInt(5));
                 listarCarritos.add(cr);
             }
         } catch (Exception e) {
@@ -52,11 +52,63 @@ public class CarritosDAO {
             ps.setTimestamp(1, Timestamp.valueOf(cr.getFechaCreacion()));
             ps.setString(2, cr.getEstado());
             ps.setBigDecimal(3, new BigDecimal(cr.getTotal()));
-            ps.setInt(4, cr.getCodigoUsuario());
+            ps.setInt(4, cr.getCodigoCliente());
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return resp;
+    }
+
+    public Carritos listarCodigoCarrito(int id) {
+        // Instanciar un objeto de tipo Carrito
+        Carritos car = new Carritos();
+        String sql = "{call sp_listarCodigoCarrito(?)}";
+        try {
+            con = cn.Conexion();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                car.setCodigoCarrito(rs.getInt(1));
+                car.setFechaCreacion(rs.getTimestamp(2).toLocalDateTime());
+                car.setEstado(rs.getString(3));
+                car.setTotal(rs.getDouble(4));
+                car.setCodigoCliente(rs.getInt(5));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return car;
+    }
+
+    public int actualizar(Carritos car) {
+        String sql = "{call sp_EditarCarrito(?, ?, ?, ?, ?)}";
+        try {
+            con = cn.Conexion();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, car.getCodigoCarrito());
+            ps.setTimestamp(2, Timestamp.valueOf(car.getFechaCreacion()));
+            ps.setString(3, car.getEstado());
+            ps.setBigDecimal(4, new BigDecimal(car.getTotal()));
+            ps.setInt(5, car.getCodigoCliente());
+            resp = ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return resp;
+    }
+
+    public void eliminar(int id) {
+        String sql = "{call sp_EliminarCarrito(?)}";
+        try {
+            con = cn.Conexion();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

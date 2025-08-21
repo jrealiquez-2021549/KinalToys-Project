@@ -32,7 +32,7 @@
 
                     <div class="container-user">
                         <div class="user-menu">
-                            <img src="CuentaFoto" class="profile-pic" alt="Foto de Perfil">
+                            <i class="fa-solid fa-user"></i>
                             <ul class="user-dropdown">
                                 <li><a href="cuenta-admin.jsp">Mi cuenta</a></li>
                                 <li><a href="#">Cambiar cuenta</a></li>
@@ -58,7 +58,6 @@
                         <li><a href="Controlador?menu=Proveedores&accion=Listar">Proveedores</a></li>
                         <li><a href="Controlador?menu=Juguetes&accion=Listar">Juguetes</a></li>
                         <li><a href="Controlador?menu=Cuentas&accion=Listar">Cuentas</a></li>
-                        <li><a href="Controlador?menu=Empleados&accion=Listar">Emplados</a></li>
                         <li><a href="Controlador?menu=Carritos&accion=Listar">Carritos</a></li>
                         <li><a href="Controlador?menu=DetallesCarritos&accion=Listar">Detalles Carritos</a></li>
                     </ul>
@@ -79,35 +78,39 @@
 
                 <form id="form-carrito" action="Controlador" method="POST" class="users-form">
                     <input type="hidden" name="menu" value="Carritos"/>
+                    <input type="hidden" name="codigo-carrito" value="${carritoSeleccionado.codigoCarrito}"/>
 
                     <div class="form-group">
                         <label for="fecha-creacion"> <strong> Fecha de Creación</strong></label>
-                        <input type="datetime-local" id="fecha-creacion" name="fecha-creacion" required />
+                        <input type="datetime-local" id="fecha-creacion" name="fecha-creacion" 
+                               value="${carritoSeleccionado != null ? carritoSeleccionado.fechaCreacion.toString().replace(' ', 'T').substring(0, 16) : ''}" 
+                               required />
                     </div>
 
                     <div class="form-group">
                         <label for="estado"><strong>Estado:</strong></label>
                         <select id="estado" name="estado" required>
                             <option value="">Seleccione</option>
-                            <option value="Activo">Activo</option>
-                            <option value="Comprado">Comprado</option>
+                            <option value="Activo" ${carritoSeleccionado.estado == 'Activo' ? 'selected' : ''}>Activo</option>
+                            <option value="Comprado" ${carritoSeleccionado.estado == 'Comprado' ? 'selected' : ''}>Comprado</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label for="total"> <strong>Total (Q)</strong></label>
                         <input type="number" id="total" name="total" step="0.01" min="0" placeholder="Ej. 599.99"
-                               required />
+                               value="${carritoSeleccionado.total}" required />
                     </div>
 
                     <div class="form-group">
-                        <label for="codigo-usuario"> <strong>Código de Usuario</strong></label>
-                        <input type="number" id="codigo-usuario" name="codigo-usuario" placeholder="Ej. 1" required />
+                        <label for="codigo-cliente"> <strong>Código de Cliente</strong></label>
+                        <input type="number" id="codigo-cliente" name="codigo-cliente"
+                               placeholder="Ej. 1" value="${carritoSeleccionado.codigoCliente}" required />
                     </div>
 
                     <div class="crud-buttons">
-                        <button type="submit" form="form-carrito" name="accion" value="Agregar" class="btn-crud">Agregar</button>
-                        <button type="submit" form="form-carrito" name="accion" value="Actualizar" class="btn-crud">Actualizar</button>
+                        <button type="submit" class="btn-crud" name="accion" value="Agregar">Agregar</button>
+                        <button type="submit" class="btn-crud" name="accion" value="Actualizar">Actualizar</button>
                     </div>
 
                     <c:if test="${not empty mensaje}">
@@ -118,7 +121,7 @@
                 <!-- Nuevo contenedor para el formulario de búsqueda, con espacio y estilo -->
                 <div class="search-container">
                     <form class="search-form" action="Controlador" method="GET">
-                        <input type="hidden" name="menu" value="Facturas" />
+                        <input type="hidden" name="menu" value="Carritos" />
                         <div class="search-buttons">
                             <button class="btn-crud" name="accion" value="Buscar">Buscar</button>
                             <input type="text" class="input-search" placeholder="Buscar por ID..." name="id" />
@@ -134,7 +137,7 @@
                                 <th>Fecha de Creación</th>
                                 <th>Estado</th>
                                 <th>Total (Q)</th>
-                                <th>Código Usuario</th>
+                                <th>Código Cliente</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -145,10 +148,10 @@
                                     <td>${carrito.fechaCreacion}</td>
                                     <td>${carrito.estado}</td>
                                     <td>${carrito.total}</td>
-                                    <td>${carrito.codigoUsuario}</td>
+                                    <td>${carrito.codigoCliente}</td>
                                     <td>
-                                        <button type="submit" form="form-carrito" name="accion" value="Eliminar" class="btn-crud">Eliminar</button>
-                                        <button type="submit" form="form-carrito" name="accion" value="Actualizar" class="btn-crud">Actualizar</button>
+                                        <a href="Controlador?menu=Carritos&accion=Cargar&codigoCarrito=${carrito.codigoCarrito}" class="btn-crud">Editar</a>
+                                        <a href="Controlador?menu=Carritos&accion=Eliminar&codigoCarrito=${carrito.codigoCarrito}" class="btn-crud" onclick="return confirm('¿Está seguro de eliminar este carrito?')">Eliminar</a>
                                     </td>
                                 </tr>
                             </c:forEach>
